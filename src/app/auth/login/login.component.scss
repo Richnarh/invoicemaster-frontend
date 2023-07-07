@@ -1,0 +1,35 @@
+
+.login-logo {
+    border-radius: 5%;
+    padding: 0.5rem;
+    border-bottom: 1px solid #D6AB42;
+    &:hover{
+        box-shadow: 2px 4px 3px #D6AB42;
+    }
+}
+
+img{
+    width: 75%;
+}
+
+.login-title{
+    font-weight: 900;
+    border-radius: 5%;
+    font-size: 14px !important;
+    border-bottom: 1px solid #edd19e;
+}
+
+main{
+    background-image: url("../../../assets/img/login1.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: "Asap", sans-serif;
+    font-size: 14px !important;
+    height: 100vh;
+}
+
+input,i{
+    font-size: 12px !important;
+}
+  
+  

@@ -1,0 +1,47 @@
+<main>
+    <div class="container">
+        <div class="d-flex justify-content-center py-4">
+          <a href="https://dolphindoors.com/" target="_blank" class="login-logo d-flex align-items-center w-auto">
+            <img src="https://home.dolphindoors.com/img/logo2.png" alt="Dolphindoors LTD">
+          </a>
+        </div>
+      <section class="section register d-flex flex-column align-items-center justify-content-center py-4">
+        <div class="container" style="padding-top: 3%;">
+          <div class="row justify-content-center">
+            <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+                <div class="d-flex justify-content-center py-4">
+                    <span class="logo d-flex align-items-center w-auto">
+                        <span title="Inventory Software" class="login-title">Invoicemaster - LOGIN</span>
+                    </span>
+                </div>
+              <div class="card mb-3" *blockUI="'loading'">
+                <div class="card-body">
+                  <form class="row g-3" [formGroup]="loginForm" (ngSubmit)="loginSubmit()">
+                    <div class="col-12 pt-4">
+                        <label class="form-label text-secondary">Email Address</label>
+                        <div class="input-group has-validation">
+                            <span class="input-group-text" id="inputGroupPrepend"><i class="fa fa-user"></i></span>
+                            <input type="text" class="form-control" formControlName="emailAddress" required="true" placeholder="Email Address"/>
+                          </div>
+                          <small class="text-danger font-weight-bold">{{emailValidator()}}</small>
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label text-secondary">Password</label>
+                        <div class="input-group has-validation">
+                            <span class="input-group-text"><i class="fa fa-lock"></i></span>
+                            <input type="password" formControlName="password" name="password" class="form-control" id="yourUsername" required="true" placeholder="Password"/>
+                          </div>
+                          <small class="text-danger font-weight-bold">{{passwordValidator()}}</small>
+                    </div>
+                    <div class="col-12">
+                        <button [disabled]="!loginForm.valid" class="btn btn-primary btn-sm w-100" type="submit">Login <i class="fa fa-sign-in"></i></button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>

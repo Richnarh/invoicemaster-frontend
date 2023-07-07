@@ -1,0 +1,12 @@
+*{
+    font-size: 18px !important;
+}
+.app-card {
+    border-radius: 5%;
+    padding: 0.5rem;
+    border-bottom: 1px solid #D6AB42;
+    &:hover{
+        box-shadow: 1px 3px 2px #D6AB42;
+    }
+}
+
