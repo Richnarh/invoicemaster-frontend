@@ -1,0 +1,97 @@
+<app-page-title [pageTitle]="pageTitle"></app-page-title>
+<div class="card">
+    <div class="card-body">
+        <ul class="nav nav-tabs nav-tabs-bordered" id="borderedTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#bordered-home"
+                    type="button" role="tab" aria-controls="home" aria-selected="true">Payment Info</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#bordered-profile"
+                    type="button" role="tab" aria-controls="profile" aria-selected="false">Delivery Info</button>
+            </li>
+        </ul>
+        <div class="tab-content pt-2" id="borderedTabContent">
+            <div class="tab-pane fade show active" id="bordered-home" role="tabpanel" aria-labelledby="home-tab">
+                <form [formGroup]="searchForm" (ngSubmit)="searchPayment()">
+                <div class="row-field mb-3">
+                        <div>
+                            <span>Status</span>
+                            <select class="control-field mx-1" formControlName="paymentStatus">
+                                <option *ngFor="let payment of paymentStatusList" value={{payment?.id}}>{{payment?.itemName}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="mx-2">
+                            <span>From: </span>
+                            <input class="mx-1 control-field" type="date" formControlName="fromDate">
+                        </div>
+                        <div>
+                            <span>To: </span>
+                            <input class="mx-1 control-field" type="date" formControlName="toDate">
+                        </div>
+    
+                        <div class="mx-2">
+                            <button class="btn btn-light btn-sm btn-border mx-2" type="submit"><i class="fa fa-search"></i>Search</button>
+                            <button class="btn btn-secondary btn-sm"><i class="fa fa-remove" (click)="clear()"></i>Clear</button>
+                        </div>
+                        <div>
+                            <label class="faded-shade py-1">Count: {{paymentDataList ? paymentDataList.length : 0}}</label>
+                        </div>
+                        <div>
+                            <label class="faded-shade py-1">Total Amt: {{sumTotalAmount ? (sumTotalAmount | number) : 0}}</label>
+                        </div>
+                    </div>
+                </form>
+
+                <div>
+                    <table class="table table-striped">
+                        <thead class="table-bordered table-light">
+                            <tr>
+                                <th scope="col">Date</th>
+                                <th scope="col">Client/Invoice No.</th>
+                                <th scope="col">Total Amount</th>
+                                <th scope="col">Partial Amount</th>
+                                <th scope="col">Amount Left</th>
+                                <th scope="col">Print</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let payment of paymentDataList; let i = index">
+                                <td>{{payment.valueDate}}</td>
+                                <td>{{payment.clientName +'-'+ payment.proformaInvoice}}</td>
+                                <td>{{payment.totalAmount | number}}</td>
+                                <td>{{payment.partialAmountPaid | number}}</td>
+                                <td>{{(payment.totalAmount - payment.partialAmountPaid) | number}}</td>
+                                <td><button type="button" class="btn btn-sm btn-secondary">Waybill</button></td>
+                                <td>
+                                    <div class="dropdown float-end">
+                                        <button class="btn btn-secondary btn-sm dropdown-toggle btn-border" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                          Choose...
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                          <li><a href="javascript:void(0)" class="dropdown-item" type="button"><i class="fa fa-envelope"></i> SMS</a></li>
+                                          <li><a href="javascript:void(0)" class="dropdown-item" type="button" data-bs-toggle="modal" (click)="editPaymentStatus(payment.id)" data-bs-target="#disablebackdrop"><i class="fa fa-edit"></i>Edit</a></li>
+                                          <li><a href="javascript:void(0)" class="dropdown-item text-danger" type="button"><i class="fa fa-remove"></i>Delete</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="bordered-profile" role="tabpanel" aria-labelledby="profile-tab">
+                Nesciunt totam et. Consequuntur magnam aliquid eos nulla dolor iure eos quia. Accusantium distinctio
+                omnis et atque fugiat. Itaque doloremque aliquid sint quasi quia distinctio similique. Voluptate nihil
+                recusandae mollitia dolores. Ut laboriosam voluptatum dicta.
+            </div>
+        </div>
+    </div>
+    <app-payment-status 
+        [paymentStatusList]="paymentStatusList" 
+        [paymentDataId]="paymentDataId" 
+        [paymentStatus]="paymentStatus">
+    </app-payment-status>
+</div>

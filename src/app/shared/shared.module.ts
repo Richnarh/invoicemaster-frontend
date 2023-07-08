@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { FooterComponent } from './footer/footer.component';
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { RouterModule } from "@angular/router";
+import { PageTitleComponent } from "./page-title/page-title.component";
 
 
 
@@ -10,15 +13,22 @@ import { FooterComponent } from './footer/footer.component';
   declarations: [
     HeaderComponent,
     SidebarComponent,
-    FooterComponent
+    FooterComponent,
+    PageTitleComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule,
   ],
   exports:[
+    FormsModule,
+    ReactiveFormsModule,
     SidebarComponent,
     HeaderComponent, 
-    FooterComponent
+    FooterComponent,
+    PageTitleComponent,
   ]
 })
 export class SharedModule { }
