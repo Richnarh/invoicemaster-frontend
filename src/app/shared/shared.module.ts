@@ -6,6 +6,8 @@ import { FooterComponent } from './footer/footer.component';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { PageTitleComponent } from "./page-title/page-title.component";
+import { SafePipe } from "./pipes/SafePipe";
+import { PdfViewerComponent } from "./pdf-viewer/pdf-viewer.component";
 
 
 
@@ -14,7 +16,9 @@ import { PageTitleComponent } from "./page-title/page-title.component";
     HeaderComponent,
     SidebarComponent,
     FooterComponent,
-    PageTitleComponent
+    PageTitleComponent,
+    PdfViewerComponent,
+    SafePipe
   ],
   imports: [
     CommonModule,
@@ -29,6 +33,8 @@ import { PageTitleComponent } from "./page-title/page-title.component";
     HeaderComponent, 
     FooterComponent,
     PageTitleComponent,
+    PdfViewerComponent,
+    SafePipe
   ]
 })
 export class SharedModule { }

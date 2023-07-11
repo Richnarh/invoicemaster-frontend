@@ -1,0 +1,13 @@
+<div class="modal fade" id="report" tabindex="-1">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{pdfTitle}}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <iframe type="text/pdf" width="1100" height="560" [src]="pdf | safe"></iframe>
+            </div>
+        </div>
+    </div>
+</div>

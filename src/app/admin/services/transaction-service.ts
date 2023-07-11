@@ -17,6 +17,9 @@ export class TransactionService {
   findById(paymentDataId:string):Observable<any>{
     return this.http.get<ApiResponse<any>>(`${env.endpoint}/payment/${paymentDataId}`);
   }
+  report(paymentDataId:string):Observable<any>{
+    return this.http.get<ApiResponse<any>>(`${env.endpoint}/payment/${paymentDataId}/report`);
+  }
   updatePaymentStatus(paymentStatus:string, paymentDataId:string):Observable<any>{
     return this.http.put<ApiResponse<any>>(`${env.endpoint}/payment/${paymentStatus}/${paymentDataId}`,{});
   }

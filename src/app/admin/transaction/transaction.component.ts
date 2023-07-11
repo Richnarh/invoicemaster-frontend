@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { PaymentData } from "src/app/dto/PaymentData";
 import { TransactionService } from "./../services/transaction-service";
 import { LookupService } from "src/app/services/lookup.service";
@@ -6,6 +6,7 @@ import { LookupItem } from "src/app/dto/LookupItem";
 import { firstValueFrom } from "rxjs";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { EventProxyService } from "src/app/services/event-proxy.service";
+import { PdfViewerComponent } from "../../shared/pdf-viewer/pdf-viewer.component";
 
 @Component({
   selector: 'app-transaction',
@@ -13,6 +14,9 @@ import { EventProxyService } from "src/app/services/event-proxy.service";
   styleUrls: ['./transaction.component.scss']
 })
 export class TransactionComponent implements OnInit{
+  @ViewChild(PdfViewerComponent, { static: false })
+  private pdfViewer:PdfViewerComponent;
+
   pageTitle:string = "Transactions";
   paymentDataId:string;
   paymentStatus:string;
@@ -52,6 +56,11 @@ export class TransactionComponent implements OnInit{
     this.paymentDataList = result.data;
     this.sumTotalAmount = 0.0;
     this.paymentDataList.filter(total => this.sumTotalAmount += total.totalAmount);
+  }
+
+  async generateWaybill(data:PaymentData){
+    const report = await firstValueFrom(this.transactionService.report(data.id));
+    this.pdfViewer.waybillPdf(report.data, data);
   }
 
   initSearchForm(){
