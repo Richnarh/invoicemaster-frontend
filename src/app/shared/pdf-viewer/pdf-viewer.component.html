@@ -6,7 +6,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <iframe type="text/pdf" width="1100" height="560" [src]="pdf | safe"></iframe>
+                <iframe type="text/pdf" width="1100" height="560" [src]="pdf | safe:'resourceUrl'"></iframe>
             </div>
         </div>
     </div>
