@@ -14,11 +14,14 @@ export class LookupService {
 
   // ENTITIES
   jobRole():Observable<any>{
-    return this.http.get<ApiResponse<LookupItem>>(`${env.lookupEndpoint}/job-role`,);
+    return this.http.get<ApiResponse<LookupItem>>(`${env.lookupEndpoint}/job-role`);
   }
 
   // ENUMS
   paymentStatus():Observable<any>{
-    return this.http.get<ApiResponse<LookupItem>>(`${env.lookupEndpoint}/payment-status`,);
+    return this.http.get<ApiResponse<LookupItem>>(`${env.lookupEndpoint}/payment-status`);
+  }
+  deliveryStatus():Observable<any>{
+    return this.http.get<ApiResponse<LookupItem>>(`${env.lookupEndpoint}/delivery-status`);
   }
 }

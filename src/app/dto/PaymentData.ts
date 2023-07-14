@@ -8,6 +8,7 @@ export interface PaymentData extends Base{
    proformaInvoiceId:string;
    paymentMethod:string;
    deliveryStatus:string;
+   deliveryAdress:string;
    paymentStatus:string;
    partialAmountPaid:number;
    totalAmount:number;

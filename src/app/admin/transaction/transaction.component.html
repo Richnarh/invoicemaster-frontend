@@ -12,7 +12,7 @@
             </li>
         </ul>
         <div class="tab-content pt-2" id="borderedTabContent">
-            <div class="tab-pane fade show active" id="bordered-home" role="tabpanel" aria-labelledby="home-tab">
+            <div *blockUI="'loading'" class="tab-pane fade show active" id="bordered-home" role="tabpanel" aria-labelledby="home-tab">
                 <form [formGroup]="searchForm" (ngSubmit)="searchPayment()">
                 <div class="row-field mb-3">
                         <div>
@@ -32,14 +32,14 @@
                         </div>
     
                         <div class="mx-2">
-                            <button class="btn btn-light btn-sm btn-border mx-2" type="submit"><i class="fa fa-search"></i>Search</button>
-                            <button class="btn btn-secondary btn-sm"><i class="fa fa-remove" (click)="clear()"></i>Clear</button>
+                            <button class="btn btn-light btn-sm btn-border mx-2" type="submit"><i class="fa fa-check-circle"></i>&nbsp;Search</button>
+                            <button class="btn btn-secondary btn-sm" type="button" (click)="clear()"><i class="fa fa-remove"></i>&nbsp;Clear</button>
                         </div>
-                        <div>
-                            <label class="faded-shade py-1">Count: {{paymentDataList ? paymentDataList.length : 0}}</label>
+                        <div class="pt-0">
+                            <label class="faded-shade pb-2">Count: {{paymentDataList ? paymentDataList.length : 0}}</label>
                         </div>
-                        <div>
-                            <label class="faded-shade py-1">Total Amt: {{sumTotalAmount ? (sumTotalAmount | number) : 0}}</label>
+                        <div class="pt-0">
+                            <label class="faded-shade pb-2">Total Amt: {{sumTotalAmount ? (sumTotalAmount | number) : 0}}</label>
                         </div>
                     </div>
                 </form>
@@ -50,19 +50,19 @@
                             <tr>
                                 <th scope="col">Date</th>
                                 <th scope="col">Client/Invoice No.</th>
-                                <th scope="col">Total Amount</th>
-                                <th scope="col">Partial Amount</th>
-                                <th scope="col">Amount Left</th>
-                                <th scope="col">Action</th>
+                                <th class="text-end" scope="col">Total Amount</th>
+                                <th class="text-end" scope="col">Partial Amount</th>
+                                <th class="text-end" scope="col">Amount Left</th>
+                                <th class="text-end" scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let payment of paymentDataList; let i = index">
                                 <td>{{payment.valueDate}}</td>
                                 <td>{{payment.clientName +'-'+ payment.proformaInvoice}}</td>
-                                <td>{{payment.totalAmount | number}}</td>
-                                <td>{{payment.partialAmountPaid | number}}</td>
-                                <td>{{(payment.totalAmount - payment.partialAmountPaid) | number}}</td>
+                                <td class="text-end">{{payment.totalAmount | number}}</td>
+                                <td class="text-end">{{payment.partialAmountPaid | number}}</td>
+                                <td class="text-end">{{(payment.totalAmount - payment.partialAmountPaid) | number}}</td>
                                 <td>
                                     <div class="dropdown float-end">
                                         <button class="btn btn-secondary btn-sm dropdown-toggle btn-border" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -70,9 +70,9 @@
                                         </button>
                                         <ul class="dropdown-menu">
                                           <li><a href="javascript:void(0)" class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#report" (click)="generateWaybill(payment)"><i class="fa fa-print"></i> Waybill</a></li>
-                                          <li><a href="javascript:void(0)" class="dropdown-item" type="button"><i class="fa fa-envelope"></i> SMS</a></li>
+                                          <!-- <li><a href="javascript:void(0)" class="dropdown-item" type="button"><i class="fa fa-envelope"></i> SMS</a></li> -->
                                           <li><a href="javascript:void(0)" class="dropdown-item" type="button" data-bs-toggle="modal" (click)="editPaymentStatus(payment.id)" data-bs-target="#disablebackdrop"><i class="fa fa-edit"></i>Edit</a></li>
-                                          <li><a href="javascript:void(0)" class="dropdown-item text-danger" type="button"><i class="fa fa-remove"></i>Delete</a></li>
+                                          <li><a href="javascript:void(0)" class="dropdown-item text-danger" type="button" (click)="deletePaymentData(payment.id)"><i class="fa fa-remove"></i>Delete</a></li>
                                         </ul>
                                     </div>
                                 </td>
@@ -81,10 +81,44 @@
                     </table>
                 </div>
             </div>
-            <div class="tab-pane fade" id="bordered-profile" role="tabpanel" aria-labelledby="profile-tab">
-                Nesciunt totam et. Consequuntur magnam aliquid eos nulla dolor iure eos quia. Accusantium distinctio
-                omnis et atque fugiat. Itaque doloremque aliquid sint quasi quia distinctio similique. Voluptate nihil
-                recusandae mollitia dolores. Ut laboriosam voluptatum dicta.
+            <div *blockUI="'loading'" class="tab-pane fade" id="bordered-profile" role="tabpanel" aria-labelledby="profile-tab">
+                <div class="row-field mb-3">
+                    <div>
+                        <span>Status</span>
+                        <select class="control-field mx-1" [(ngModel)]="deliveryStatus">
+                            <option *ngFor="let delivery of deliveryStatusList" value={{delivery?.id}}>{{delivery?.itemName}}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="mx-2">
+                        <button class="btn btn-light btn-sm btn-border mx-2" type="button" (click)="fetchByDeliveryStatus()"><i class="fa fa-check-circle"></i>&nbsp;Search</button>
+                    </div>
+                    <div class="pt-0">
+                        <label class="faded-shade pb-2">Count: {{paymentDataDeliveryList ? paymentDataDeliveryList.length : 0}}</label>
+                    </div>
+                </div>
+                <div>
+                    <table class="table table-bordered table-striped">
+                        <thead class="table-light">
+                            <tr>
+                                <th scope="col">Date</th>
+                                <th scope="col">Client</th>
+                                <th scope="col">Delivery Address</th>
+                                <th class="text-end" scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let delivery of paymentDataDeliveryList; let i = index">
+                                <td>{{delivery.valueDate}}</td>
+                                <td>{{delivery.clientName}}</td>
+                                <td>{{delivery.deliveryAdress}}</td>
+                                <td *ngIf="delivery.deliveryStatus === 'Pending delivery'"><button class="btn btn-primary btn-sm float-end" type="button" (click)="updateDeliveryStatus(delivery.id)"><i class="fa fa-check-circle"></i>&nbsp;Update to delivered</button></td>
+                                <td *ngIf="delivery.deliveryStatus === 'Fully delivered'" class="text-end "><span class="text-success fw-bold">FULLY_DELIVERED</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

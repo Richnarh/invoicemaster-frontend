@@ -14,8 +14,8 @@ export class PdfViewerComponent{
     this.pdfTitle = paymentData.clientName +"-"+paymentData.proformaInvoice +" (Waybill Report)";
     this.pdf = "data:application/pdf;base64,"+data;
   }
-  viewPdf(data:any, param?:any){
-    this.pdfTitle = param == undefined ? "Report" : param;
+  invoicePdf(data:any){
+    this.pdfTitle = "Report";
     this.pdf = "data:application/pdf;base64,"+data;
   }
 }

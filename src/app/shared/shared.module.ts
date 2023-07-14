@@ -8,6 +8,7 @@ import { RouterModule } from "@angular/router";
 import { PageTitleComponent } from "./page-title/page-title.component";
 import { SafePipe } from "./pipes/SafePipe";
 import { PdfViewerComponent } from "./pdf-viewer/pdf-viewer.component";
+import { BlockUIModule } from "ng-block-ui";
 
 
 
@@ -25,9 +26,11 @@ import { PdfViewerComponent } from "./pdf-viewer/pdf-viewer.component";
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
+    BlockUIModule.forRoot()
   ],
   exports:[
     FormsModule,
+    BlockUIModule,
     ReactiveFormsModule,
     SidebarComponent,
     HeaderComponent, 
