@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { PaymentData } from "src/app/dto/PaymentData";
+import { PaymentData } from "src/app/dto/Payload";
 import { ApiResponse, ApiResponse2 } from "src/app/utils/apiResponse";
 import { environment as env } from "src/environments/environment"
 

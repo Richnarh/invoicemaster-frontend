@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { PaymentData } from "src/app/dto/PaymentData";
+import { PaymentData } from "src/app/dto/Payload";
 
 @Component({
   selector: 'app-pdf-viewer',

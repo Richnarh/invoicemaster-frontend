@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { PaymentData } from "src/app/dto/PaymentData";
 import { TransactionService } from "./../services/transaction-service";
 import { LookupService } from "src/app/services/lookup.service";
 import { LookupItem } from "src/app/dto/LookupItem";
@@ -9,6 +8,7 @@ import { PdfViewerComponent } from "../../shared/pdf-viewer/pdf-viewer.component
 import { BlockUI, NgBlockUI } from "ng-block-ui";
 import { ToastService } from "src/app/utils/toast-service";
 import { SweetMessage } from "src/app/utils/sweet-message";
+import { PaymentData } from "src/app/dto/Payload";
 
 @Component({
   selector: 'app-transaction',
@@ -112,6 +112,11 @@ export class TransactionComponent implements OnInit{
 
   clear(){
     this.searchForm.reset();
+    this.paymentDataList = [];
     this.searchForm.patchValue({});
+  }
+  clearDelivery(){
+    this.deliveryStatus = "";
+    this.paymentDataDeliveryList = [];
   }
 }

@@ -1,0 +1,89 @@
+<app-page-title [pageTitle]="pageTitle"></app-page-title>
+<div class="card">
+    <div class="card-header">{{pageTitle}} Setup</div>
+    <div *ngIf="pageView.listView">
+        <div class="clearfix">
+            <div class="float-end">
+            <a href="javascript:void(0)" class="mx-3" title="New Branch" (click)="initBranch()"><i class="fa fa-plus-circle fa-3x"></i></a>
+            </div>
+        </div>
+        <div class="p-2">
+            <table class="table table-bordered table-striped">
+                <thead class="table-light">
+                    <tr>
+                        <th scope="col">Code</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Profile</th>
+                        <th scope="col">Tel. No.</th>
+                        <th class="text-end" scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let branch of branchList; let i = index">
+                        <td>{{branch.branchCode}}</td>
+                        <td>{{branch.branchName}}</td>
+                        <td>{{branch.gpsAddress}}</td>
+                        <td>{{branch.companyProfile}}</td>
+                        <td>{{branch.telephoneNo}}</td>
+                        <td>
+                            <div class="dropdown float-end">
+                                <button class="btn btn-secondary btn-sm dropdown-toggle btn-border" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                  Choose...
+                                </button>
+                                <ul class="dropdown-menu">
+                                  <li><a href="javascript:void(0)" class="dropdown-item" type="button" data-bs-toggle="modal" (click)="editBranch(branch)"><i class="fa fa-edit"></i>Edit</a></li>
+                                  <li><a href="javascript:void(0)" class="dropdown-item text-danger" type="button" (click)="deleteBranch(branch.id)"><i class="fa fa-remove"></i>Delete</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+      </div>
+
+    <div *ngIf="pageView.createView">
+    <div class="card-body">
+        <form class="pt-2" [formGroup]="companyBranchForm" (ngSubmit)="save()">
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label">Branch Code</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" formControlName="branchCode">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label">Branch Name <span class="text-danger">*</span></label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" formControlName="branchName">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label">Telephone No.</label>
+              <div class="col-sm-10">
+                <input type="tel" class="form-control" formControlName="telephoneNo">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label">Profile</label>
+              <div class="col-sm-10">
+                <select class="form-control" formControlName="companyProfileId">
+                    <option value="" disabled>Choose...</option>
+                    <option selected *ngFor="let profile of companyProfileList" value={{profile?.id}}>{{profile?.itemName}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label">GPS Address</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" formControlName="gpsAddress">
+              </div>
+            </div>
+            <div class="text-center">
+              <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-check-circle"></i> Save Changes</button>
+              <button type="reset" class="btn btn-danger btn-sm float-end" (click)="closePage()"><i class="fa fa-times"></i> Close Page</button>
+            </div>
+          </form>
+    </div>
+</div>
+</div>
