@@ -33,4 +33,13 @@ export class LookupService {
   units(){
     return this.http.get<ApiResponse2<LookupItem>>(`${env.lookupEndpoint}/units`);
   }
+  currency(){
+    return this.http.get<ApiResponse2<LookupItem>>(`${env.lookupEndpoint}/currency`);
+  }
+  status(){
+    return this.http.get<ApiResponse2<LookupItem>>(`${env.lookupEndpoint}/status`);
+  }
+  accessLevel(){
+    return this.http.get<ApiResponse2<LookupItem>>(`${env.lookupEndpoint}/access-level`);
+  }
 }

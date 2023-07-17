@@ -1,0 +1,120 @@
+<app-page-title [pageTitle]="pageTitle"></app-page-title>
+<div class="card">
+    <div class="card-header">Register new employee</div>
+    <div *ngIf="pageView.listView">
+        <div class="clearfix">
+            <div class="float-end">
+            <a href="javascript:void(0)" class="mx-3" title="New Branch" (click)="initUser()"><i class="fa fa-plus-circle fa-3x"></i></a>
+            </div>
+        </div>
+        <div class="p-2">
+            <table class="table table-bordered table-striped">
+                <thead class="table-light">
+                    <tr>
+                        <th scope="col">Code</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Profile</th>
+                        <th scope="col">Tel. No.</th>
+                        <th class="text-end" scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of employeeList; let i = index">
+                        <td>{{user.fullname}}</td>
+                        <td>{{user.fullname}}</td>
+                        <td>{{user.phoneNumber}}</td>
+                        <td>{{user.email}}</td>
+                        <td>{{user.status}}</td>
+                        <td>{{user.accessLevel}}</td>
+                        <td>
+                            <div class="dropdown float-end">
+                                <button class="btn btn-secondary btn-sm dropdown-toggle btn-border" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                  Choose...
+                                </button>
+                                <ul class="dropdown-menu">
+                                  <li><a href="javascript:void(0)" class="dropdown-item" type="button" data-bs-toggle="modal" (click)="editUser(user)"><i class="fa fa-edit"></i>Edit</a></li>
+                                  <li><a href="javascript:void(0)" class="dropdown-item text-danger" type="button" (click)="deleteUser(user.id)"><i class="fa fa-remove"></i>Delete</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+      </div>
+
+    <div *ngIf="pageView.createView">
+    <div class="card-body">
+        <form class="pt-2" [formGroup]="userForm" (ngSubmit)="save()">
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label">Full Name <span class="text-danger fw-bold">*</span></label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" formControlName="fullname">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label">Email Address <span class="text-danger">*</span></label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" formControlName="email">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label">Phone No. <span class="text-danger">*</span></label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" formControlName="phoneNumber">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label">Status</label>
+              <div class="col-sm-10">
+                <select class="control-field w-100" formControlName="status">
+                  <option value="" disabled>Choose...</option>
+                  <option selected *ngFor="let status of statusList" value={{status?.id}}>{{status?.itemName}}</option>
+              </select>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label">Access Level </label>
+              <div class="col-sm-10">
+                <select class="control-field w-100" formControlName="accessLevel">
+                    <option value="" disabled>Choose...</option>
+                    <option selected *ngFor="let access of accessLevelList" value={{access?.id}}>{{access?.itemName}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label">Frame Size</label>
+              <div class="col-sm-10">
+                <select class="control-field w-100" formControlName="frame">
+                    <option value="" disabled>Choose...</option>
+                    <option selected *ngFor="let frame of frameList" value={{frame?.id}}>{{frame?.itemName}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label">Height</label>
+              <div class="col-sm-10">
+                <select class="control-field w-100" formControlName="height">
+                    <option value="" disabled>Choose...</option>
+                    <option selected *ngFor="let height of heightList" value={{height?.id}}>{{height?.itemName}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label">Height</label>
+              <div class="col-sm-10">
+                <select class="control-field w-100" formControlName="width">
+                    <option value="" disabled>Choose...</option>
+                    <option selected *ngFor="let width of widthList" value={{width?.id}}>{{width?.itemName}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="text-center">
+              <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-check-circle"></i> Save Changes</button>
+              <button type="reset" class="btn btn-danger btn-sm float-end" (click)="closePage()"><i class="fa fa-times"></i> Close Page</button>
+            </div>
+          </form>
+    </div>
+</div>
+</div>

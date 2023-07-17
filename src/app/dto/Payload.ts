@@ -34,3 +34,40 @@ export interface CompanyBranch extends Base{
     companyProfile:string;
     companyProfileId:string;
 }
+
+export interface CompanyProfile extends Base{
+    currency:string;
+    website:string;
+    companyEmail:string;
+    tinNo:string;
+}
+
+export interface User extends Base{
+    sessionId:string;
+    companyBranch:string;
+    companyBranchId:string;
+    userId:string;
+    fullname:string;
+    phoneNumber:string;
+    email:string;
+    status:string;
+    accessLevel:string;
+    frame:string;
+    height:string;
+    width:string;
+    password:string;
+    appVersion:string;
+    appModuleList:AppModule[];
+}
+
+export interface AppModule{
+    moduleId:string;
+    moduleName:string;
+    userPageData:UserPage[];
+}
+
+export interface UserPage{
+    pageId:string;
+    pageName:string;
+    userActivePage:boolean;
+}

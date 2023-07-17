@@ -9,6 +9,8 @@ import { AdminLayoutComponent } from '../layouts/admin-layout/admin-layout.compo
 import { SharedModule } from "../shared/shared.module";
 import { PaymentStatusComponent } from './payment-status/payment-status.component';
 import { CompanyBranchComponent } from './company-branch/company-branch.component';
+import { CompanyProfileComponent } from './company-profile/company-profile.component';
+import { EmployeesComponent } from './employees/employees.component';
 
 
 @NgModule({
@@ -19,6 +21,8 @@ import { CompanyBranchComponent } from './company-branch/company-branch.componen
     TransactionComponent,
     PaymentStatusComponent,
     CompanyBranchComponent,
+    CompanyProfileComponent,
+    EmployeesComponent,
   ],
   imports: [
     CommonModule,

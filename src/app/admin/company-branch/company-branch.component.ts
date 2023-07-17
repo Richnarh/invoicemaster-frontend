@@ -46,7 +46,6 @@ export class CompanyBranchComponent implements OnInit{
       return;
     }
     let payload = this.companyBranchForm.value;
-    console.log("Form Data: ", payload)
     const result = await firstValueFrom(this.companyService.save(payload));
     if(result.success){
       if(result.data.id === payload.id){
