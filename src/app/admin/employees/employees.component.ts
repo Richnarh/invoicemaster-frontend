@@ -37,6 +37,7 @@ export class EmployeesComponent {
 
   async fetchEmployees() {
     const result = await firstValueFrom(this.companyService.employees());
+    console.log("employees: ", result);
     this.employeeList = result.data;
   }
   async initLookups(){

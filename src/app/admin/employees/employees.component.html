@@ -11,22 +11,21 @@
             <table class="table table-bordered table-striped">
                 <thead class="table-light">
                     <tr>
-                        <th scope="col">Code</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Address</th>
-                        <th scope="col">Profile</th>
-                        <th scope="col">Tel. No.</th>
+                        <th scope="col"></th>
+                        <th scope="col">Full Name</th>
+                        <th scope="col">Phone Number</th>
+                        <th scope="col">Email Address</th>
+                        <th scope="col">Status</th>
                         <th class="text-end" scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let user of employeeList; let i = index">
-                        <td>{{user.fullname}}</td>
+                        <td><i class="fa fa-info"></i></td>
                         <td>{{user.fullname}}</td>
                         <td>{{user.phoneNumber}}</td>
                         <td>{{user.email}}</td>
                         <td>{{user.status}}</td>
-                        <td>{{user.accessLevel}}</td>
                         <td>
                             <div class="dropdown float-end">
                                 <button class="btn btn-secondary btn-sm dropdown-toggle btn-border" type="button" data-bs-toggle="dropdown" aria-expanded="false">
