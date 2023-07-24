@@ -1,0 +1,106 @@
+<app-page-title [pageTitle]="pageTitle"></app-page-title>
+<div class="card">
+    <div class="card-header">Add new {{pageTitle}}</div>
+    <div *ngIf="pageView.listView">
+        <div class="clearfix">
+            <div class="float-end">
+            <a href="javascript:void(0)" class="mx-3" title="New Branch" (click)="initSalesLead()"><i class="fa fa-plus-circle fa-3x"></i></a>
+            </div>
+        </div>
+        <div class="p-2">
+            <table class="table table-bordered table-striped">
+                <thead class="table-light">
+                    <tr>
+                        <th scope="col">Code</th>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Surname</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Rate(%)teamst</th>
+                        <th class="text-end" scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let salesLead of salesLeadList; let i = index">
+                        <td>{{salesLead.leadCode}}</td>
+                        <td>{{salesLead.firstname}}</td>
+                        <td>{{salesLead.surname}}</td>
+                        <td>{{salesLead.phoneNumber}}</td>
+                        <td>{{salesLead.rate}}</td>
+                        <td>
+                            <div class="dropdown float-end">
+                                <button class="btn btn-secondary btn-sm dropdown-toggle btn-border" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                  Choose...
+                                </button>
+                                <ul class="dropdown-menu">
+                                  <li><a href="javascript:void(0)" class="dropdown-item" type="button" (click)="editSalesLead(salesLead)"><i class="fa fa-edit"></i>Edit</a></li>
+                                  <li><a href="javascript:void(0)" class="dropdown-item text-danger" type="button" (click)="deleteSalesLead(salesLead.id)"><i class="fa fa-remove"></i>Delete</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+      </div>
+      
+    <div *ngIf="pageView.createView">
+    <div class="card-body">
+        <form class="pt-2" [formGroup]="salesLeadForm" (ngSubmit)="save()">
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label">Lead Code <span class="fw-100 text-danger">*</span></label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" formControlName="leadCode">
+              </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">Firstname <span class="fw-100 text-danger">*</span></label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" formControlName="firstname">
+                </div>
+              </div>
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label">Surname <span class="fw-100 text-danger">*</span></label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" formControlName="surname">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label">Phone <span class="fw-100 text-danger">*</span></label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" formControlName="surname">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label">Rate <span class="fw-100 text-danger">*</span></label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" formControlName="rate">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label">Email Address</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" formControlName="emailAddress">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label">House Address</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" formControlName="houseAddress">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label">Emergency Contact</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" formControlName="emergencyContact">
+              </div>
+            </div>
+            
+            <div class="text-center">
+              <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-check-circle"></i> Save Changes</button>
+              <button type="reset" class="btn btn-secondary btn-sm mx-3" (click)="clearPage()"><i class="fa fa-timex"></i> Clear</button>
+              <button type="reset" class="btn btn-danger btn-sm float-end" (click)="closePage()"><i class="fa fa-times"></i> Close Page</button>
+            </div>
+          </form>
+    </div>
+</div>
+</div>

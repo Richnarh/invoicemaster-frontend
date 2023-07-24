@@ -71,3 +71,48 @@ export interface UserPage{
     pageName:string;
     userActivePage:boolean;
 }
+
+export interface Invoice extends Base{
+    issuedDate:Date;
+    expiryDate:Date;
+    client:string;
+    clientId:string;
+    quotationNumber:string;
+    totalAmount:number;
+    subTotalAmount:number;
+    modeOfPayment:string;
+    discountRate:number;
+    installationFee:number;
+    description:string;
+    converted:boolean;
+}
+
+export interface Inventory extends Base{
+    inventoryCode:string;
+    product:string;
+    productCode:string;
+    productType:string;
+    productId:string;
+    frameSize:number;
+    width:number;
+    height:number;
+    quantity:number;
+    sellingPrice:number;
+    unitPrice:number;
+    description:number;
+}
+
+export interface ProductType extends Base{
+    productTypeName:string;
+}
+
+export interface SalesLead extends Base{
+    firstname:string;
+    surname:string;
+    phoneNumber:string;
+    emailAddress:string;
+    leadCode:string;
+    houseAddress:string;
+    emergencyContact:string;
+    rate:number;
+}

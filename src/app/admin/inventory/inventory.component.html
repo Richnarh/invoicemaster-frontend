@@ -1,0 +1,111 @@
+<app-page-title [pageTitle]="pageTitle"></app-page-title>
+<div class="card">
+    <div class="card-header">Add new {{pageTitle}}</div>
+    <div *ngIf="pageView.listView">
+        <div class="clearfix">
+            <div class="float-end">
+            <a href="javascript:void(0)" class="mx-3" title="New Branch" (click)="initInventory()"><i class="fa fa-plus-circle fa-3x"></i></a>
+            </div>
+        </div>
+        <div class="p-2">
+            <table class="table table-bordered table-striped">
+                <thead class="table-light">
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Product Code</th>
+                        <th scope="col">Product</th>
+                        <th scope="col">Product Type</th>
+                        <th scope="col">Qty</th>
+                        <th scope="col">Selling Price</th>
+                        <th class="text-end" scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let inventory of inventoryList; let i = index">
+                        <td><i class="fa fa-info"></i></td>
+                        <td>{{inventory.productCode}}</td>
+                        <td>{{inventory.product}}</td>
+                        <td>{{inventory.productType}}</td>
+                        <td>{{inventory.quantity}}</td>
+                        <td>{{inventory.sellingPrice}}</td>
+                        <td>
+                            <div class="dropdown float-end">
+                                <button class="btn btn-secondary btn-sm dropdown-toggle btn-border" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                  Choose...
+                                </button>
+                                <ul class="dropdown-menu">
+                                  <li><a href="javascript:void(0)" class="dropdown-item" type="button" (click)="editInventory(inventory)"><i class="fa fa-edit"></i>Edit</a></li>
+                                  <li><a href="javascript:void(0)" class="dropdown-item text-danger" type="button" (click)="deleteInventory(inventory.id)"><i class="fa fa-remove"></i>Delete</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+      </div>
+      
+    <div *ngIf="pageView.createView">
+    <div class="card-body">
+        <form class="pt-2" [formGroup]="inventoryForm" (ngSubmit)="save()">
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label">Inventory Code</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" formControlName="inventoryCode">
+              </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">Product Name</label>
+                <div class="col-sm-10">
+                  <select class="control-field w-100" formControlName="productId">
+                    <option value="" disabled>Choose...</option>
+                    <option selected *ngFor="let product of products" value={{product?.id}}>{{product?.itemName}}</option>
+                </select>
+                </div>
+              </div>
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label">Frame Size</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" formControlName="frameSize">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label">Width</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" formControlName="width">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label">Height</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" formControlName="height">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label">Quantity</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" formControlName="quantity">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label">Selling Price</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" formControlName="sellingPrice">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label">Description</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" formControlName="description">
+              </div>
+            </div>
+            
+            <div class="text-center">
+              <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-check-circle"></i> Save Changes</button>
+              <button type="reset" class="btn btn-secondary btn-sm mx-3" (click)="clearPage()"><i class="fa fa-timex"></i> Clear</button>
+              <button type="reset" class="btn btn-danger btn-sm float-end" (click)="closePage()"><i class="fa fa-times"></i> Close Page</button>
+            </div>
+          </form>
+    </div>
+</div>
+</div>

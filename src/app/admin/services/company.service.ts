@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from '@angular/core';
-import { CompanyBranch, CompanyProfile, User } from "src/app/dto/Payload";
+import { CompanyBranch, CompanyProfile, SalesLead, User } from "src/app/dto/Payload";
 import { ApiResponse } from "src/app/utils/apiResponse";
 import { environment as env } from "src/environments/environment";
 
@@ -46,7 +46,26 @@ export class CompanyService {
   employees(){
     return this.http.get<ApiResponse<any>>(`${env.endpoint}/users/list`);
   }
+  updatePassword(userAccountId:string, password:string){
+    return this.http.put<ApiResponse<any>>(`${env.endpoint}/users/${userAccountId}/${password}`, {});
+  }
   deleteEmployee(profileId: string) {
     return this.http.delete<ApiResponse<any>>(`${env.endpoint}/users/${profileId}`);
   }
+
+  saveSalesLead(salesLead: SalesLead) {
+    if (!salesLead.id)
+      return this.http.post<ApiResponse<any>>(`${env.endpoint}/sales-lead`, salesLead);
+    else
+      return this.http.put<ApiResponse<any>>(`${env.endpoint}/sales-lead`, salesLead);
+  }
+  salesLeads(){
+    return this.http.get<ApiResponse<any>>(`${env.endpoint}/sales-lead/list`);
+  }
+  
+  deleteSalesLead(salesLeadId: string) {
+    return this.http.delete<ApiResponse<any>>(`${env.endpoint}/sales-lead/${salesLeadId}`);
+  }
+
+
 }

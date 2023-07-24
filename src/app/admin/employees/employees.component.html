@@ -32,7 +32,8 @@
                                   Choose...
                                 </button>
                                 <ul class="dropdown-menu">
-                                  <li><a href="javascript:void(0)" class="dropdown-item" type="button" data-bs-toggle="modal" (click)="editUser(user)"><i class="fa fa-edit"></i>Edit</a></li>
+                                  <li><a href="javascript:void(0)" class="dropdown-item" type="button" (click)="editUser(user)"><i class="fa fa-edit"></i>Edit</a></li>
+                                  <li><a href="javascript:void(0)" class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#disablebackdrop" (click)="updatePassword(user)"><i class="fa fa-key"></i>Update password</a></li>
                                   <li><a href="javascript:void(0)" class="dropdown-item text-danger" type="button" (click)="deleteUser(user.id)"><i class="fa fa-remove"></i>Delete</a></li>
                                 </ul>
                             </div>
@@ -42,6 +43,12 @@
             </table>
         </div>
       </div>
+
+      <app-change-password 
+          [fullname]="fullname" 
+          [emailAddress]="emailAddress"
+          [userId]="userId">
+    </app-change-password>
 
     <div *ngIf="pageView.createView">
     <div class="card-body">

@@ -11,6 +11,12 @@ import { PaymentStatusComponent } from './payment-status/payment-status.componen
 import { CompanyBranchComponent } from './company-branch/company-branch.component';
 import { CompanyProfileComponent } from './company-profile/company-profile.component';
 import { EmployeesComponent } from './employees/employees.component';
+import { ReverseInvoiceComponent } from './reverse-invoice/reverse-invoice.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { InventoryComponent } from './inventory/inventory.component';
+import { ProductComponent } from './product/product.component';
+import { ProductTypeComponent } from './product-type/product-type.component';
+import { SaleleadComponent } from './salelead/salelead.component';
 
 
 @NgModule({
@@ -23,6 +29,12 @@ import { EmployeesComponent } from './employees/employees.component';
     CompanyBranchComponent,
     CompanyProfileComponent,
     EmployeesComponent,
+    ReverseInvoiceComponent,
+    ChangePasswordComponent,
+    InventoryComponent,
+    ProductComponent,
+    ProductTypeComponent,
+    SaleleadComponent,
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,32 @@
+<div class="modal fade" id="disablebackdrop" style="background: #6677;" tabindex="-1" data-bs-backdrop="false">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title">Registrations</h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="p-2">
+                    <table class="table table-bordered table-striped">
+                        <thead class="table-light">
+                            <tr>
+                                <th scope="col">Branch Name</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Phone</th>
+                                <th class="text-end" scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let user of usersList; let i = index">
+                                <td>{{user.companyBranch}}</td>
+                                <td>{{user.fullname}}</td>
+                                <td>{{user.phoneNumber}}</td>
+                                <td><a href="javascript:void(0)">Login</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,11 +1,9 @@
-<app-header></app-header>
+<app-header [user]="user"></app-header>
 <app-sidebar></app-sidebar>
 <main id="main" class="main">
-    
-    
     <section class="section dashboard">
         <router-outlet></router-outlet>
     </section>
 </main>
 <!-- <div style="height: 48vh;"></div> -->
-<!-- <app-footer></app-footer> -->
+<!-- <app-footer [user]="user"></app-footer> -->

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { LookupService } from "src/app/services/lookup.service";
 import { PageView } from "src/app/utils/page-view";
@@ -14,8 +14,8 @@ import { SweetMessage } from "src/app/utils/sweet-message";
   templateUrl: './employees.component.html',
   styleUrls: ['./employees.component.scss']
 })
-export class EmployeesComponent {
-  pageTitle:string = "User Account";
+export class EmployeesComponent implements OnInit{
+  pageTitle:string = "User Accounts";
 
   pageView:PageView = PageView.listView();
   branchList:LookupItem[];
@@ -26,6 +26,9 @@ export class EmployeesComponent {
   widthList:LookupItem[];
   employeeList:User[];
   userForm:FormGroup;
+  fullname:string;
+  emailAddress:string;
+  userId:string;
   
   constructor(private fb:FormBuilder, private toast:ToastService, private companyService:CompanyService,private lookup:LookupService){}
 
@@ -53,6 +56,13 @@ export class EmployeesComponent {
     this.frameList = units.data;
     this.widthList = units.data;
   }
+  
+  updatePassword(user:User){
+    this.emailAddress = user.email;
+    this.fullname = user.fullname;
+    this.userId = user.id;
+  }
+
   async save() {
     if(this.userForm.invalid){
       this.toast.error("Please fill in requied");
@@ -82,6 +92,8 @@ export class EmployeesComponent {
     this.userForm.controls['height'].setValue(user.height);
     this.userForm.controls['width'].setValue(user.width);
     this.userForm.patchValue(user);
+
+    console.log("formData: ", this.userForm.value);
     this.pageView.resetToCreateView();
   }
   async deleteUser(userId:string) {

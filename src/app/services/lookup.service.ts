@@ -1,8 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ApiResponse, ApiResponse2 } from 'src/app/utils/apiResponse';
+import { ApiResponse2 } from 'src/app/utils/apiResponse';
 import { environment as env } from "src/environments/environment"
-import { Observable } from 'rxjs';
 import { LookupItem } from "../dto/LookupItem";
 
 @Injectable({
@@ -21,6 +20,12 @@ export class LookupService {
   }
   inventory(){
     return this.http.get<ApiResponse2<LookupItem>>(`${env.lookupEndpoint}/inventory`);
+  }
+  products(){
+    return this.http.get<ApiResponse2<LookupItem>>(`${env.lookupEndpoint}/products`);
+  }
+  productTypes(){
+    return this.http.get<ApiResponse2<LookupItem>>(`${env.lookupEndpoint}/product-type`);
   }
 
   // ENUMS

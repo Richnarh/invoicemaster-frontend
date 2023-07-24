@@ -21,11 +21,11 @@ export class RequestInterceptor implements HttpInterceptor{
         // console.log('token: ', token);
         if(token){
             const currentUser = this.storage.getLocalObject(LocalKeys.CurrenUser);
-            const employeeId = this.storage.getLocalObject(LocalKeys.EmployeeId);
+            const branchId = this.storage.getLocalObject(LocalKeys.CompanyBranchId);
 
-            const user = (currentUser) ? JSON.parse(currentUser) : null;
-            const userEmpId = employeeId != undefined ? JSON.parse(employeeId) : null;
-            requestClone = req.clone({setHeaders: { token: `${atob(token)}`, userAccountId:user?.id, employeeId:userEmpId}});
+            const user = currentUser ? JSON.parse(currentUser) : null;
+            const branch = branchId ? JSON.parse(branchId) : null;
+            requestClone = req.clone({setHeaders: { token: `${atob(token)}`, userAccountId:user?.id, branchId:branch}});
         
             // console.log('intercepted Request => ', requestClone);
         }

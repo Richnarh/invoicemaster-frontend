@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthModule } from "./auth/auth.module";
 import { RouterModule } from "@angular/router";
+import { RequestInterceptor } from "./services/request.interceptor";
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import { RouterModule } from "@angular/router";
     AuthModule,
     ToastrModule.forRoot(), 
   ],
-  providers: [],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

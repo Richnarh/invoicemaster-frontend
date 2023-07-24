@@ -34,6 +34,8 @@ export class AppSessionService {
     this.storage.setLocalObject(LocalKeys.SessionId, btoa(payload.sessionId));
     this.storage.setLocalObject(LocalKeys.CurrenUserId, JSON.stringify(payload.id));
     this.storage.setLocalObject(LocalKeys.CurrenUser, JSON.stringify(payload));
+    this.storage.setLocalObject(LocalKeys.CompanyBranchId, JSON.stringify(payload.companyBranchId));
+    this.storage.setLocalObject(LocalKeys.CompanyBranch, JSON.stringify(payload.companyBranch));
     // this.storage.setLocalObject(LocalKeys.userPageData, JSON.stringify(payload.appModuleList));
 
     this.currentUser = payload;

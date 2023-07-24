@@ -1,0 +1,36 @@
+<app-page-title [pageTitle]="pageTitle"></app-page-title>
+<div class="card">
+    <div class="card-body">
+        <div class="py-3">
+            <div class="row-field mb-3">
+                <div class="mx-2">
+                    <input type="text" class="control-field" [(ngModel)]="invoiceNo"/>
+                    <button class="btn btn-light btn-sm btn-border mx-2" type="button" (click)="search()"><i class="fa fa-check-circle"></i>&nbsp;Search</button>
+                    <button class="btn btn-secondary btn-sm" type="button" (click)="clear()"><i class="fa fa-remove"></i>&nbsp;Clear</button>
+                </div>
+            </div>
+            <div>
+                <table class="table table-bordered table-striped">
+                    <thead class="table-light">
+                        <tr>
+                            <th scope="col">Invoice No.</th>
+                            <th scope="col">Client</th>
+                            <th class="text-end" scope="col">Total Amount</th>
+                            <th class="text-end" scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let invoice of proformaInvoiceList; let i = index">
+                            <td>{{invoice.valueDate}}</td>
+                            <td>{{invoice.client}}</td>
+                            <td class="text-end">{{invoice.totalAmount | number}}</td>
+                            <td><button class="btn btn-danger btn-sm float-end" type="button"
+                                    (click)="reverse(invoice.id)"><i
+                                        class="fa fa-check-circle"></i>&nbsp;Reverse</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

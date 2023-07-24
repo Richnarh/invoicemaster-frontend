@@ -9,6 +9,7 @@ import { PageTitleComponent } from "./page-title/page-title.component";
 import { SafePipe } from "./pipes/SafePipe";
 import { PdfViewerComponent } from "./pdf-viewer/pdf-viewer.component";
 import { BlockUIModule } from "ng-block-ui";
+import { UserLoginComponent } from "./user-login/user-login.component";
 
 
 
@@ -19,7 +20,8 @@ import { BlockUIModule } from "ng-block-ui";
     FooterComponent,
     PageTitleComponent,
     PdfViewerComponent,
-    SafePipe
+    SafePipe,
+    UserLoginComponent
   ],
   imports: [
     CommonModule,
