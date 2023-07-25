@@ -1,0 +1,7 @@
+.invoice-td{
+    padding: 1em;
+    &:hover{
+        background-color: #f6f6f6;
+        cursor: pointer;
+    }
+}

@@ -53,6 +53,15 @@
     <div *ngIf="pageView.createView">
     <div class="card-body">
         <form class="pt-2" [formGroup]="userForm" (ngSubmit)="save()">
+          <div class="row mb-3">
+            <label class="col-sm-2 col-form-label">Branch <span class="text-danger fw-bold">*</span></label>
+            <div class="col-sm-10">
+              <select class="form-control" formControlName="companyBranchId">
+                  <option value="" disabled>Choose...</option>
+                  <option selected *ngFor="let branch of branchList" value={{branch?.id}}>{{branch?.itemName}}</option>
+              </select>
+            </div>
+          </div>
             <div class="row mb-3">
               <label class="col-sm-2 col-form-label">Full Name <span class="text-danger fw-bold">*</span></label>
               <div class="col-sm-10">

@@ -11,6 +11,8 @@ import { InventoryComponent } from "./inventory/inventory.component";
 import { ProductComponent } from "./product/product.component";
 import { ProductTypeComponent } from "./product-type/product-type.component";
 import { SaleleadComponent } from "./salelead/salelead.component";
+import { AppconfigComponent } from "./appconfig/appconfig.component";
+import { SalesLogComponent } from "./sales-log/sales-log.component";
 
 
 const routes: Routes = [
@@ -27,6 +29,8 @@ const routes: Routes = [
       { path: 'product', component: ProductComponent },
       { path: 'product-type', component: ProductTypeComponent },
       { path: 'saleslead', component: SaleleadComponent },
+      { path: 'appconfig', component: AppconfigComponent },
+      { path: 'saleslog', component: SalesLogComponent },
     ]
  }
 ];

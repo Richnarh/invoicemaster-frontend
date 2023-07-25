@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from '@angular/core';
-import { CompanyBranch, CompanyProfile, SalesLead, User } from "src/app/dto/Payload";
+import { AppConfig, CompanyBranch, CompanyProfile, SalesLead, User } from "src/app/dto/Payload";
 import { ApiResponse } from "src/app/utils/apiResponse";
 import { environment as env } from "src/environments/environment";
 
@@ -59,7 +59,10 @@ export class CompanyService {
     else
       return this.http.put<ApiResponse<any>>(`${env.endpoint}/sales-lead`, salesLead);
   }
-  salesLeads(){
+  findLeadById(salesLeadId:string){
+    return this.http.get<ApiResponse<any>>(`${env.endpoint}/sales-lead/${salesLeadId}`);
+  }
+  salesLeadList(){
     return this.http.get<ApiResponse<any>>(`${env.endpoint}/sales-lead/list`);
   }
   
@@ -67,5 +70,21 @@ export class CompanyService {
     return this.http.delete<ApiResponse<any>>(`${env.endpoint}/sales-lead/${salesLeadId}`);
   }
 
+  saveAppConfig(appConfig: AppConfig) {
+    if (!appConfig.id)
+      return this.http.post<ApiResponse<any>>(`${env.endpoint}/app-config`, appConfig);
+    else
+      return this.http.put<ApiResponse<any>>(`${env.endpoint}/app-config`, appConfig);
+  }
+  findAppConfigById(appConfigId:string){
+    return this.http.get<ApiResponse<any>>(`${env.endpoint}/app-config/${appConfigId}`);
+  }
+  appConfigList(){
+    return this.http.get<ApiResponse<any>>(`${env.endpoint}/app-config/list`);
+  }
+  
+  deleteAppConfig(appConfigId: string) {
+    return this.http.delete<ApiResponse<any>>(`${env.endpoint}/app-config/${appConfigId}`);
+  }
 
 }

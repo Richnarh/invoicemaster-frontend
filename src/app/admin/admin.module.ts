@@ -17,6 +17,8 @@ import { InventoryComponent } from './inventory/inventory.component';
 import { ProductComponent } from './product/product.component';
 import { ProductTypeComponent } from './product-type/product-type.component';
 import { SaleleadComponent } from './salelead/salelead.component';
+import { AppconfigComponent } from './appconfig/appconfig.component';
+import { SalesLogComponent } from './sales-log/sales-log.component';
 
 
 @NgModule({
@@ -35,6 +37,8 @@ import { SaleleadComponent } from './salelead/salelead.component';
     ProductComponent,
     ProductTypeComponent,
     SaleleadComponent,
+    AppconfigComponent,
+    SalesLogComponent,
   ],
   imports: [
     CommonModule,

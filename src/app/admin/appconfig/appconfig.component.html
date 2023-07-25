@@ -1,0 +1,44 @@
+<app-page-title [pageTitle]="pageTitle"></app-page-title>
+<div class="card">
+    <div class="card-header">{{pageTitle}} Setup</div>
+    <div class="p-3">
+        <form class="pt-2" [formGroup]="appConfigForm" (ngSubmit)="save()">
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label">Config Name <span class="text-danger fw-bold">*</span></label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" formControlName="configName">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label">Config Value<span class="text-danger fw-bold">*</span></label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" formControlName="configValue">
+              </div>
+            </div>
+              <button type="submit" class="btn btn-success btn-sm mx-2"><i class="fa fa-check-circle"></i> Save Changes</button>
+              <button class="btn btn-secondary btn-sm" type="button" (click)="clear()"><i class="fa fa-remove"></i>&nbsp;Clear</button>
+          </form>
+          <hr>
+        <div class="p-3">
+            <table class="table table-bordered">
+                <thead class="table-light">
+                    <tr>
+                        <th class="text-center" scope="col">Config Name</th>
+                        <th class="text-center" scope="col">Config Value</th>
+                        <th class="text-end" scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let appConfig of appConfigList; let i = index">
+                        <td class="text-center">{{appConfig.configName}}</td>
+                        <td class="text-center">{{appConfig.configValue}}</td>
+                        <td class="text-end">
+                            <button type="button" (click)="editAppConfig(appConfig)" class="btn btn-secondary btn-sm"><i class="fa fa-edit">&nbsp;Edit</i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

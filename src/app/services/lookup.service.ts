@@ -27,6 +27,9 @@ export class LookupService {
   productTypes(){
     return this.http.get<ApiResponse2<LookupItem>>(`${env.lookupEndpoint}/product-type`);
   }
+  employees(){
+    return this.http.get<ApiResponse2<LookupItem>>(`${env.lookupEndpoint}/employees`);
+  }
 
   // ENUMS
   paymentStatus(){

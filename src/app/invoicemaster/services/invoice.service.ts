@@ -19,4 +19,16 @@ export class InvoiceService {
   reverseInvoice(invoiceId:string):Observable<ApiResponse<any>>{
     return this.http.post<ApiResponse<any>>(`${env.endpoint}/invoice/${invoiceId}`, {});
   }
+  searchByDate(fromDate:Date, toDate:Date){
+    return this.http.get<ApiResponse<any>>(`${env.endpoint}/invoice?fromDate=${fromDate}&toDate=${toDate}`);
+  }
+  fetchInvoiceDetails(invoiceId: string){
+    return this.http.get<ApiResponse<any>>(`${env.endpoint}/invoice/${invoiceId}`);
+  }
+  searchByBranch(branchId: string){
+    return this.http.get<ApiResponse<any>>(`${env.endpoint}/invoice/search/${branchId}`);
+  }
+  searchByUser(userId: string){
+    return this.http.get<ApiResponse<any>>(`${env.endpoint}/invoice/search/${userId}/user`);
+  }
 }

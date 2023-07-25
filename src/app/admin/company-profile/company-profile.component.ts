@@ -39,7 +39,7 @@ export class CompanyProfileComponent implements OnInit{
   }
   async save(){
     if(this.profileForm.invalid){
-      this.toast.error("Please fill in requied");
+      this.toast.error("Please fill out required");
       return;
     }
     let payload = this.profileForm.value;
@@ -65,13 +65,13 @@ export class CompanyProfileComponent implements OnInit{
     this.pageView.resetToCreateView();
   }
   
-  async deleteProfile(branchId:string){
+  async deleteProfile(profileId:string){
     const confirm = await SweetMessage.deleteConfirm();
     if (!confirm.value) return;
-    const result = await firstValueFrom(this.companyService.deleteBranch(branchId));
+    const result = await firstValueFrom(this.companyService.deleteProfile(profileId));
     if(result.data){
       this.toast.success(result.message);
-      const found = this.profileList.findIndex(item => item.id === branchId);
+      const found = this.profileList.findIndex(item => item.id === profileId);
       if(found > -1){
         this.profileList.splice(found,1);
       }

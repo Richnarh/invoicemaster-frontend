@@ -87,6 +87,20 @@ export interface Invoice extends Base{
     converted:boolean;
 }
 
+export interface InvoiceItem extends Base{
+    itemCode:string;
+    inventory:string;
+    inventoryId:string;
+    productName:string;
+    productId:string;
+    quantity:number;
+    unitPrice:number;
+    subTotal:number;
+    description:string;
+    proformaInvoice:string;
+    proformaInvoiceId:string;
+}
+
 export interface Inventory extends Base{
     inventoryCode:string;
     product:string;
@@ -115,4 +129,10 @@ export interface SalesLead extends Base{
     houseAddress:string;
     emergencyContact:string;
     rate:number;
+}
+
+export interface AppConfig extends Base{
+    configName:string;
+    configValue:string;
+    configStatus:string;
 }

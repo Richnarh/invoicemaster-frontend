@@ -27,7 +27,7 @@ export class SaleleadComponent implements OnInit{
   }
 
   async fetchSaesLeads(){
-    const result = await firstValueFrom(this.companyService.salesLeads());
+    const result = await firstValueFrom(this.companyService.salesLeadList());
     this.salesLeadList = result.data;
   }
 
@@ -38,7 +38,7 @@ export class SaleleadComponent implements OnInit{
   }
   async save(){
     if(this.salesLeadForm.invalid){
-      this.toast.error("Please fill out requied");
+      this.toast.error("Please fill out required fields");
       return;
     }
     let payload = this.salesLeadForm.value;

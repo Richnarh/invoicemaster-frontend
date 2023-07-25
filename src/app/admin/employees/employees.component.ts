@@ -88,6 +88,7 @@ export class EmployeesComponent implements OnInit{
     this.userForm.patchValue({});
     this.userForm.controls['status'].setValue(user.status);
     this.userForm.controls['accessLevel'].setValue(user.accessLevel);
+    this.userForm.controls['companyBranchId'].setValue(user.companyBranchId);
     this.userForm.controls['frame'].setValue(user.frame);
     this.userForm.controls['height'].setValue(user.height);
     this.userForm.controls['width'].setValue(user.width);

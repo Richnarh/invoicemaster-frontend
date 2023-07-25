@@ -1,0 +1,92 @@
+<app-page-title [pageTitle]="pageTitle"></app-page-title>
+<hr>
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">From:</label>
+                <div class="col-sm-10">
+                  <input type="date" class="form-control" [(ngModel)]="fromDate">
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">To:</label>
+                <div class="col-sm-10">
+                  <input type="date" class="form-control" [(ngModel)]="toDate">
+                </div>
+              </div>
+              <div class="d-grid gap-2 mt-3">
+                <button class="btn btn-primary" (click)="searchByDate()" type="button"><i class="fa fa-search"></i>&emsp; Search</button>
+              </div>
+
+              <div class="py-2">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr class="text-center fw-bold">I N V O I C E</tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let invoice of invoiceList; let i = index">
+                            <td class="text-center invoice-td" (click)="fetchDetails(invoice.id)">{{invoice.quotationNumber}} - {{invoice.totalAmount}}</td>
+                        </tr>
+                    </tbody>
+                  </table>
+              </div>
+        </div>
+
+        <div class="col-md-9">
+            <div class="card">
+                <div class="card-header">Search Parameters</div>
+                <div class="card-body">
+                   <div class="py-2">
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">Branch</label>
+                        <div class="col-sm-10">
+                          <select class="control-field w-100" [(ngModel)]="branchId" (change)="searchByBranch($event)">
+                              <option value="" disabled>Choose...</option>
+                              <option selected *ngFor="let branch of branchList" value={{branch?.id}}>{{branch?.itemName}}</option>
+                          </select>
+                        </div>
+                      </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">Employees</label>
+                        <div class="col-sm-10">
+                          <select class="control-field w-100" [(ngModel)]="userId">
+                              <option value="" disabled>Choose...</option>
+                              <option selected *ngFor="let user of usersList" value={{user?.id}}>{{user?.itemName}}</option>
+                          </select>
+                        </div>
+                      </div>
+                      <hr>
+                      <button class="btn btn-primary"><i class="fa fa-search"></i>&emsp; Search</button>
+                      <button class="btn btn-secondary mx-2"><i class="fa fa-remove"></i>&emsp; Clear</button>
+                   </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header bg-secondary text-light">Search Parameters</div>
+                <div class="card-body">
+                   <div class="py-2">
+                    <table class="table table-bordered">
+                        <thead class="table-light">
+                            <tr>
+                                <th scope="col">Product</th>
+                                <th class="text-end" scope="col">Quantity</th>
+                                <th class="text-end" scope="col">Price</th>
+                                <th class="text-end" scope="col">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of invoiceItemList; let i = index">
+                                <td>{{item.productName}}</td>
+                                <td class="text-end">{{item.quantity}}</td>
+                                <td class="text-end">{{item.unitPrice | number}}</td>
+                                <td class="text-end">{{item.subTotal | number}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                   </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
