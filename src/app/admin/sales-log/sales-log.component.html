@@ -19,17 +19,18 @@
                 <button class="btn btn-primary" (click)="searchByDate()" type="button"><i class="fa fa-search"></i>&emsp; Search</button>
               </div>
 
-              <div class="py-2">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr class="text-center fw-bold">I N V O I C E</tr>
-                    </thead>
+              <div class="py-3">
+                <div class="text-center fw-bold"><u>I N V O I C E</u></div>
+                <input [(ngModel)]="filterText" type="text" class="control-field w-100" placeholder="Search...">
+              <div *blockUI="'loading'" class="invoice-table">
+                <table class="table">
                     <tbody>
-                        <tr *ngFor="let invoice of invoiceList; let i = index">
-                            <td class="text-center invoice-td" (click)="fetchDetails(invoice.id)">{{invoice.quotationNumber}} - {{invoice.totalAmount}}</td>
+                        <tr *ngFor="let invoice of invoiceList | filterFilter:filterText; let i = index">
+                            <td class="invoice-td" (click)="fetchDetails(invoice)">{{invoice.quotationNumber}} - {{invoice.totalAmount | number}}</td>
                         </tr>
                     </tbody>
                   </table>
+              </div>
               </div>
         </div>
 
@@ -50,20 +51,23 @@
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label">Employees</label>
                         <div class="col-sm-10">
-                          <select class="control-field w-100" [(ngModel)]="userId">
+                          <select class="control-field w-100" [(ngModel)]="userId" (change)="searchByUser($event)">
                               <option value="" disabled>Choose...</option>
                               <option selected *ngFor="let user of usersList" value={{user?.id}}>{{user?.itemName}}</option>
                           </select>
                         </div>
                       </div>
                       <hr>
-                      <button class="btn btn-primary"><i class="fa fa-search"></i>&emsp; Search</button>
-                      <button class="btn btn-secondary mx-2"><i class="fa fa-remove"></i>&emsp; Clear</button>
+                      <button class="btn btn-primary" (click)="searchByParam()"><i class="fa fa-search"></i>&emsp; Search</button>
+                      <button class="btn btn-secondary mx-2" (click)="clearSearch()"><i class="fa fa-remove"></i>&emsp; Clear</button>
                    </div>
                 </div>
             </div>
             <div class="card">
-                <div class="card-header bg-secondary text-light">Search Parameters</div>
+                <div class="card-header bg-header text-light">
+                  <span class="fw-bold ">S A L E S</span>
+                  ({{clientName ? clientName : "" +" - "+ phoneNumber ? phoneNumber : ""}}) - {{valueDate}}
+                </div>
                 <div class="card-body">
                    <div class="py-2">
                     <table class="table table-bordered">

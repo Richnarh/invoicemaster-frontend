@@ -10,6 +10,7 @@ import { SafePipe } from "./pipes/SafePipe";
 import { PdfViewerComponent } from "./pdf-viewer/pdf-viewer.component";
 import { BlockUIModule } from "ng-block-ui";
 import { UserLoginComponent } from "./user-login/user-login.component";
+import { FilterPipe } from "./pipes/filterPipe";
 
 
 
@@ -21,6 +22,7 @@ import { UserLoginComponent } from "./user-login/user-login.component";
     PageTitleComponent,
     PdfViewerComponent,
     SafePipe,
+    FilterPipe,
     UserLoginComponent
   ],
   imports: [
@@ -39,7 +41,8 @@ import { UserLoginComponent } from "./user-login/user-login.component";
     FooterComponent,
     PageTitleComponent,
     PdfViewerComponent,
-    SafePipe
+    SafePipe,
+    FilterPipe
   ]
 })
 export class SharedModule { }

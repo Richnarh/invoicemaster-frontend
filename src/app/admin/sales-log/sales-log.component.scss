@@ -5,3 +5,24 @@
         cursor: pointer;
     }
 }
+
+.invoice-table{
+    height: 60vh;
+    overflow-y: auto;
+}
+
+input,select{
+    font-size: 14px;
+}
+input[type=text]{
+    background-color: white;
+    background-image: url('../../../assets/img/searchicon.png');
+    background-position: 8px 8px;
+    background-repeat: no-repeat;
+    padding-left: 40px;
+}
+
+.bg-header{
+    background: #3c8dbc linear-gradient(180deg,#599ec6,#3c8dbc) repeat-x!important;
+    color: #fff;
+}

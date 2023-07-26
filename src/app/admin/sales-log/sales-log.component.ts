@@ -1,10 +1,10 @@
 import { Component, OnInit } from "@angular/core";
+import { BlockUI, NgBlockUI } from "ng-block-ui";
 import { firstValueFrom } from "rxjs";
 import { LookupItem } from "src/app/dto/LookupItem";
 import { Invoice, InvoiceItem } from "src/app/dto/Payload";
 import { InvoiceService } from "src/app/invoicemaster/services/invoice.service";
 import { LookupService } from "src/app/services/lookup.service";
-import { ToastService } from "src/app/utils/toast-service";
 
 @Component({
   selector: 'app-sales-log',
@@ -12,6 +12,7 @@ import { ToastService } from "src/app/utils/toast-service";
   styleUrls: ['./sales-log.component.scss']
 })
 export class SalesLogComponent implements OnInit{
+  @BlockUI('loading') loading: NgBlockUI;
   pageTitle:string = "Sales Log";
   
   invoiceList:Invoice[];
@@ -22,8 +23,12 @@ export class SalesLogComponent implements OnInit{
   toDate:Date;
   userId:string;
   branchId:string;
+  clientName:string;
+  phoneNumber:string;
+  valueDate:string;
+  filterText:string;
 
-  constructor(private toast:ToastService, private lookup:LookupService, private invoiceService:InvoiceService){}
+  constructor(private lookup:LookupService, private invoiceService:InvoiceService){}
 
   ngOnInit() {
     this.initLookups();
@@ -38,23 +43,50 @@ export class SalesLogComponent implements OnInit{
   }
 
   async searchByDate(){
+    this.loading.start("Loading...");
+    this.invoiceList = [];
+    console.log("fromDate: ", this.fromDate)
+    console.log("toDate: ", this.toDate)
     const result = await firstValueFrom(this.invoiceService.searchByDate(this.fromDate, this.toDate));
     this.invoiceList = result.data;
+    this.loading.stop();
   }
 
   async searchByBranch(event:any){
+    this.loading.start("Loading...");
+    this.invoiceList = [];
     const result = await firstValueFrom(this.invoiceService.searchByBranch(this.branchId));
     this.invoiceList = result.data;
+    this.loading.stop();
   }
 
   async searchByUser(event:any){
-    const result = await firstValueFrom(this.invoiceService.searchByBranch(this.userId));
+    this.loading.start("Loading...");
+    this.invoiceList = [];
+    const result = await firstValueFrom(this.invoiceService.searchByUser(this.userId));
     this.invoiceList = result.data;
+    this.loading.stop();
   }
 
-  async fetchDetails(invoiceId:string){
-    const result = await firstValueFrom(this.invoiceService.fetchInvoiceDetails(invoiceId));
+  async fetchDetails(invoice:Invoice){
+    this.clientName = invoice.client;
+    this.phoneNumber = invoice.phoneNumber;
+    this.valueDate = invoice.valueDate.toString();
+    const result = await firstValueFrom(this.invoiceService.fetchInvoiceDetails(invoice.id));
     this.invoiceItemList = result.data;
   }
 
+  searchByParam(){
+    
+  }
+
+  clearSearch(){
+    this.clientName = "";
+    this.phoneNumber = "";
+    this.userId = "";
+    this.branchId = "";
+    this.valueDate = "";
+    this.invoiceList = [];
+    this.invoiceItemList = [];
+  }
 }

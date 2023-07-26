@@ -3,11 +3,13 @@
     <div class="card-header">Add new {{pageTitle}}</div>
     <div *ngIf="pageView.listView">
         <div class="clearfix">
+          <button type="button" class="btn btn-light btn-border mx-2"><i class="fa fa-search"></i></button>
+          <button type="button" class="btn btn-primary btn-border m-2" (click)="fetchProducts()"><i class="fa fa-spinner"></i>&nbsp;Load Products</button>
             <div class="float-end">
             <a href="javascript:void(0)" class="mx-3" title="New Branch" (click)="initProduct()"><i class="fa fa-plus-circle fa-3x"></i></a>
             </div>
         </div>
-        <div class="p-2">
+        <div class="p-2" *blockUI="'loading'">
             <table class="table table-bordered table-striped">
                 <thead class="table-light">
                     <tr>

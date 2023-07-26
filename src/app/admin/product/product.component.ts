@@ -8,6 +8,7 @@ import { PageView } from "src/app/utils/page-view";
 import { ProductService } from "../services/product.service";
 import { SweetMessage } from "src/app/utils/sweet-message";
 import { ToastService } from "src/app/utils/toast-service";
+import { BlockUI, NgBlockUI } from "ng-block-ui";
 
 @Component({
   selector: 'app-product',
@@ -15,6 +16,8 @@ import { ToastService } from "src/app/utils/toast-service";
   styleUrls: ['./product.component.scss']
 })
 export class ProductComponent implements OnInit{
+  @BlockUI('loading') loading: NgBlockUI;
+
   pageTitle:string = "Products";
   pageView:PageView = PageView.listView();
 
@@ -32,7 +35,6 @@ export class ProductComponent implements OnInit{
   ngOnInit() {
     this.setupForm();
     this.initLookups();
-    this.fetchProducts();
   }
 
   initProduct(){
@@ -47,8 +49,10 @@ export class ProductComponent implements OnInit{
   }
 
   async fetchProducts(){
+    this.loading.start("Loading...");
     const result = await firstValueFrom(this.productService.fetchAllProducts());
     this.productList = result.data;
+    this.loading.stop();
   }
   async save() {
     if(this.productForm.invalid){

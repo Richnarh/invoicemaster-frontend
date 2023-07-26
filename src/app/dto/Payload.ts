@@ -77,6 +77,7 @@ export interface Invoice extends Base{
     expiryDate:Date;
     client:string;
     clientId:string;
+    phoneNumber:string;
     quotationNumber:string;
     totalAmount:number;
     subTotalAmount:number;
