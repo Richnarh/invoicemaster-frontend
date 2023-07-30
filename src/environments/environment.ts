@@ -5,8 +5,8 @@
 export const environment = {
   production: false,
   baseApi: 'api/v1',
-  endpoint: 'http://localhost:8080/invoice-master/api/v1',
-  lookupEndpoint: 'http://localhost:8080/invoice-master/api/v1/data'
+  endpoint: 'http://185.218.125.78:8080/invoicemaster/api/v1',
+  lookupEndpoint: 'http://185.218.125.78:8080/invoicemaster/api/v1/data'
   // endpoint: 'http://localhost:8080/invoice-master/api/v1',
   // lookupEndpoint: 'http://localhost:8080/invoice-master/api/v1/data'
 };
