@@ -45,7 +45,7 @@
       </div>
       
       <div class="modal fade" id="productImg" style="background: #6677;" tabindex="-1" data-bs-backdrop="false">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <h6 class="modal-title">{{productName}}</h6>
@@ -53,6 +53,9 @@
                 </div>
                 <div class="modal-body">
                     <img [src]="productImage" style="height: 300px;" alt="product Image" [title]="description">
+                    <p>
+                      <small>{{description}}</small>
+                    </p>
                 </div>
             </div>
         </div>

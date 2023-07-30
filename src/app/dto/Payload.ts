@@ -86,6 +86,7 @@ export interface Invoice extends Base{
     installationFee:number;
     description:string;
     converted:boolean;
+    invoiceItemList:InvoiceItem[];
 }
 
 export interface InvoiceItem extends Base{

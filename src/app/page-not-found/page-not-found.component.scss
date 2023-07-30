@@ -1,0 +1,20 @@
+main{
+    background-image: url("../../assets/img/login2.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: "Asap", sans-serif;
+    font-size: 14px !important;
+    height: 100vh;
+}
+.link-404-text{
+    color: #D6AB42;
+}
+.link-404{
+    border-radius: 5%;
+    padding: 0.5rem;
+    border-bottom: 1px solid #D6AB42;
+    color: #D6AB42;
+    &:hover{
+        box-shadow: 2px 4px 3px #edd19e;
+    }
+}

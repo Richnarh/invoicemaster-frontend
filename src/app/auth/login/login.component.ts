@@ -27,7 +27,6 @@ export class LoginComponent {
 
   async loginSubmit() {
     let payload = this.loginForm.value;
-    console.log(payload);
     try {
       this.loading.start("Logging In...");
       if(this.loginForm.invalid){

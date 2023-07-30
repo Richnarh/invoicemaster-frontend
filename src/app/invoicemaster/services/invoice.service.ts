@@ -20,7 +20,7 @@ export class InvoiceService {
     return this.http.post<ApiResponse<any>>(`${env.endpoint}/invoice/${invoiceId}`, {});
   }
   searchByDate(fromDate:Date, toDate:Date){
-    return this.http.get<ApiResponse<any>>(`${env.endpoint}/invoice?fromDate=${fromDate}&toDate=${toDate}`);
+    return this.http.get<ApiResponse<any>>(`${env.endpoint}/invoice/search?fromDate=${fromDate}&toDate=${toDate}`);
   }
   fetchInvoiceDetails(invoiceId: string){
     return this.http.get<ApiResponse<any>>(`${env.endpoint}/invoice/${invoiceId}`);

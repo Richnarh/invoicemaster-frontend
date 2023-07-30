@@ -17,7 +17,7 @@ export class SweetMessage {
       swal.fire("Warning", message, "warning");
     }
   
-    show(message: string, success: boolean) {
+    static show(message: string, success: boolean) {
       let type: SweetAlertIcon = success ? "success" : "error";
       swal.fire(type.toUpperCase(), message, type);
     }

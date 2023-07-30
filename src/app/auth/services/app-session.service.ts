@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
+import { Router } from "@angular/router";
 import { Subject } from 'rxjs';
+import { User } from "src/app/dto/Payload";
 import { StorageService } from 'src/app/services/storage.service';
 import { LocalKeys } from 'src/app/utils/LocalKeys';
 
@@ -12,25 +14,28 @@ export class AppSessionService {
   loggedIn$ = this.loggedInSource.asObservable()
 
   constructor(
-    private storage: StorageService
+    private storage: StorageService,
   ) { }
 
   public triggerLogin(isLoggedIn: boolean) {
-    console.log('initialised....')
+    console.log('initialised....');
     this.loggedInSource.next(isLoggedIn)
   }
 
   public isLoggedIn() {
-    console.log('!!this.currentUser => ',!!this.currentUser);
     return !!this.currentUser
   }
 
   public logout(): void {
-    this.currentUser = null
+    this.currentUser = null;
     localStorage.clear();
   }
 
-  public registerLogin(payload: any){
+  checkAccess(){
+    return this.currentUser !== undefined && this.currentUser?.accessLevel === "Super User";
+  }
+
+  public registerLogin(payload: User){
     this.storage.setLocalObject(LocalKeys.SessionId, btoa(payload.sessionId));
     this.storage.setLocalObject(LocalKeys.CurrenUserId, JSON.stringify(payload.id));
     this.storage.setLocalObject(LocalKeys.CurrenUser, JSON.stringify(payload));

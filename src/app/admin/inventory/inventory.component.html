@@ -16,7 +16,7 @@
                         <th scope="col">Product</th>
                         <th scope="col">Product Type</th>
                         <th scope="col">Qty</th>
-                        <th scope="col">Selling Price</th>
+                        <th scope="col" class="text-end">Selling Price</th>
                         <th class="text-end" scope="col">Action</th>
                     </tr>
                 </thead>
@@ -27,7 +27,7 @@
                         <td>{{inventory.product}}</td>
                         <td>{{inventory.productType}}</td>
                         <td>{{inventory.quantity}}</td>
-                        <td>{{inventory.sellingPrice}}</td>
+                        <td class="text-end">{{inventory.sellingPrice | number}}</td>
                         <td>
                             <div class="dropdown float-end">
                                 <button class="btn btn-secondary btn-sm dropdown-toggle btn-border" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -96,7 +96,7 @@
             <div class="row mb-3">
               <label class="col-sm-2 col-form-label">Description</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" formControlName="description">
+                <textarea class="form-control" formControlName="description"></textarea>
               </div>
             </div>
             

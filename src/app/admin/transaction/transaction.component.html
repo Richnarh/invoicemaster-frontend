@@ -17,29 +17,29 @@
                 <div class="row-field mb-3">
                         <div>
                             <span>Status</span>
-                            <select class="control-field mx-1" formControlName="paymentStatus">
-                                <option *ngFor="let payment of paymentStatusList" value={{payment?.id}}>{{payment?.itemName}}
-                                </option>
+                            <select class="form-control mx-1"  style="display: inline; width:auto" formControlName="paymentStatus">
+                                <option selected [ngValue]="'---'"></option>
+                                <option *ngFor="let payment of paymentStatusList" value={{payment?.id}}>{{payment?.itemName}}</option>
                             </select>
                         </div>
                         <div class="mx-2">
                             <span>From: </span>
-                            <input class="mx-1 control-field" type="date" formControlName="fromDate">
+                            <input class="mx-1 form-control" style="display: inline; width:auto" type="date" formControlName="fromDate">
                         </div>
                         <div>
                             <span>To: </span>
-                            <input class="mx-1 control-field" type="date" formControlName="toDate">
+                            <input class="mx-1 form-control" style="display: inline; width:auto" type="date" formControlName="toDate">
                         </div>
     
                         <div class="mx-2">
-                            <button class="btn btn-light btn-sm btn-border mx-2" type="submit"><i class="fa fa-check-circle"></i>&nbsp;Search</button>
-                            <button class="btn btn-secondary btn-sm" type="button" (click)="clear()"><i class="fa fa-remove"></i>&nbsp;Clear</button>
+                            <button class="btn btn-light btn-border mx-2" type="submit"><i class="fa fa-check-circle"></i>&nbsp;Search</button>
+                            <button class="btn btn-secondary" type="button" (click)="clear()"><i class="fa fa-remove"></i>&nbsp;Clear</button>
                         </div>
                         <div class="pt-0">
-                            <label class="faded-shade pb-2">Count: {{paymentDataList ? paymentDataList.length : 0}}</label>
+                            <label class="faded-shade pb-3">Count: {{paymentDataList ? paymentDataList.length : 0}}</label>
                         </div>
                         <div class="pt-0">
-                            <label class="faded-shade pb-2">Total Amt: {{sumTotalAmount ? (sumTotalAmount | number) : 0}}</label>
+                            <label class="faded-shade pb-3">Total Amt: {{sumTotalAmount ? (sumTotalAmount | number) : 0}}</label>
                         </div>
                     </div>
                 </form>
@@ -71,7 +71,7 @@
                                         <ul class="dropdown-menu">
                                           <li><a href="javascript:void(0)" class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#report" (click)="generateWaybill(payment)"><i class="fa fa-print"></i> Waybill</a></li>
                                           <!-- <li><a href="javascript:void(0)" class="dropdown-item" type="button"><i class="fa fa-envelope"></i> SMS</a></li> -->
-                                          <li><a href="javascript:void(0)" class="dropdown-item" type="button" data-bs-toggle="modal" (click)="editPaymentStatus(payment.id)" data-bs-target="#disablebackdrop"><i class="fa fa-edit"></i>Edit</a></li>
+                                          <li><a href="javascript:void(0)" class="dropdown-item" type="button" data-bs-toggle="modal" (click)="editPaymentStatus(payment.id)" data-bs-target="#paymentModal"><i class="fa fa-edit"></i>Edit</a></li>
                                           <li><a href="javascript:void(0)" class="dropdown-item text-danger" type="button" (click)="deletePaymentData(payment.id)"><i class="fa fa-remove"></i>Delete</a></li>
                                         </ul>
                                     </div>

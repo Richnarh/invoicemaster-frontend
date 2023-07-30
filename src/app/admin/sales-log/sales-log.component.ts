@@ -45,8 +45,6 @@ export class SalesLogComponent implements OnInit{
   async searchByDate(){
     this.loading.start("Loading...");
     this.invoiceList = [];
-    console.log("fromDate: ", this.fromDate)
-    console.log("toDate: ", this.toDate)
     const result = await firstValueFrom(this.invoiceService.searchByDate(this.fromDate, this.toDate));
     this.invoiceList = result.data;
     this.loading.stop();

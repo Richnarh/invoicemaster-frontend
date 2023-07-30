@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { AuthModule } from "./auth/auth.module";
 import { RouterModule } from "@angular/router";
 import { RequestInterceptor } from "./services/request.interceptor";
+import { AuthGuard } from "./services/auth.guard";
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import { RequestInterceptor } from "./services/request.interceptor";
     AuthModule,
     ToastrModule.forRoot(), 
   ],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi:true}],
+  providers: [AuthGuard,{provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
