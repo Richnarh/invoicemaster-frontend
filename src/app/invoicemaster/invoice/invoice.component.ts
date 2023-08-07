@@ -85,11 +85,11 @@ export class InvoiceComponent implements OnInit{
   }
   async generateInvoice(invoice:Invoice){
     const report = await firstValueFrom(this.invoiceService.invoiceReport(invoice.id));
-    this.pdfViewer.invoicePdf(report.data, invoice);
+    this.pdfViewer.viewPdf(report.data, invoice);
   }
   async generateReceipt(invoice:Invoice){
     const report = await firstValueFrom(this.invoiceService.invoiceReceipt(invoice.id));
-    this.pdfViewer.invoicePdf(report.data, invoice);
+    this.pdfViewer.viewPdf(report.data, invoice);
   }
 
   invoiceItem(invoice:Invoice){
