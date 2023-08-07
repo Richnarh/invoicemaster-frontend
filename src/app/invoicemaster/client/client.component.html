@@ -1,0 +1,105 @@
+<app-page-title [pageTitle]="pageTitle"></app-page-title>
+<div class="card">
+    <div class="card-header">Add new {{pageTitle}}</div>
+    <div *ngIf="pageView.listView">
+        <div class="clearfix">
+          <input [(ngModel)]="filterText" type="text" class="control-field m-2" placeholder="Search something...">
+            <button type="button" class="btn btn-primary btn-border m-2" (click)="fetchClient()"><i class="fa fa-spinner"></i>&nbsp;Load Clients</button>
+            <div class="float-end">
+              <button type="button" class="btn btn-primary m-2" (click)="initClient()"><i class="fa fa-plus-circle"></i>&nbsp;New Client</button>
+            </div>
+        </div>
+        <div class="p-2" *blockUI="'loading'">
+            <table class="table table-bordered table-striped">
+                <thead class="table-light">
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Client Name</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Email Address</th>
+                        <th scope="col">Address</th>
+                        <th class="text-end" scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let client of clientList | filterFilter:filterText; let i = index">
+                        <td><i class="fa fa-info"></i></td>
+                        <td>{{client.clientName}}</td>
+                        <td>{{client.phone}}</td>
+                        <td>{{client.emailAddress}}</td>
+                        <td>{{client.address}}</td>
+                        <td>
+                            <div class="dropdown float-end">
+                                <button class="btn btn-secondary dropdown-toggle btn-border" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                  Choose...
+                                </button>
+                                <ul class="dropdown-menu">
+                                  <li><a href="javascript:void(0)" class="dropdown-item" type="button" (click)="editClient(client)"><i class="fa fa-edit"></i>Edit</a></li>
+                                  <li><a href="javascript:void(0)" class="dropdown-item text-danger" type="button" (click)="deleteClient(client.id)"><i class="fa fa-remove"></i>Delete</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+      </div>
+      
+    <div *ngIf="pageView.createView">
+    <div class="card-body">
+        <form class="pt-2" [formGroup]="clientForm" (ngSubmit)="save()">
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">Client Type <span class="text-danger">*</span></label>
+                <div class="col-sm-10">
+                  <select class="control-field w-100" formControlName="clientType">
+                    <option value="" disabled>Choose...</option>
+                    <option selected *ngFor="let type of clientTypeList" value={{type?.id}}>{{type?.itemName}}</option>
+                </select>
+                </div>
+            </div>
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label">Client Name <span class="text-danger">*</span></label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" formControlName="clientName">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label">Business Name</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" formControlName="businessName">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label">Phone <span class="text-danger">*</span></label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" formControlName="phone">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label">Email Address</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" formControlName="emailAddress">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label">Address/Location</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" formControlName="address">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label">Description</label>
+              <div class="col-sm-10">
+                <textarea class="form-control" formControlName="description"></textarea>
+              </div>
+            </div>
+            
+            <div class="text-center">
+              <button type="submit" class="btn btn-success"><i class="fa fa-check-circle"></i> Save Changes</button>
+              <button type="reset" class="btn btn-secondary mx-3" (click)="clearPage()"><i class="fa fa-times"></i> Clear</button>
+              <button type="reset" class="btn btn-danger float-end" (click)="closePage()"><i class="fa fa-trash"></i> Close Page</button>
+            </div>
+          </form>
+    </div>
+</div>
+</div>

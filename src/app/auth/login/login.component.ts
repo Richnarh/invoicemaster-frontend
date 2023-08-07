@@ -36,7 +36,7 @@ export class LoginComponent {
       const result = await firstValueFrom(await this.authService.doLogin(payload));
 
       console.log('login response => ',result.data);
-      if (!result.success){
+      if (!result){
         this.toast.error('Login failed');
         return;
       }

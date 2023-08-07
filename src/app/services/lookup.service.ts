@@ -30,6 +30,12 @@ export class LookupService {
   employees(){
     return this.http.get<ApiResponse2<LookupItem>>(`${env.lookupEndpoint}/employees`);
   }
+  clients(){
+    return this.http.get<ApiResponse2<LookupItem>>(`${env.lookupEndpoint}/clients`);
+  }
+  paymentMethod(){
+    return this.http.get<ApiResponse2<LookupItem>>(`${env.lookupEndpoint}/payment-method`);
+  }
 
   // ENUMS
   paymentStatus(){
@@ -49,5 +55,8 @@ export class LookupService {
   }
   accessLevel(){
     return this.http.get<ApiResponse2<LookupItem>>(`${env.lookupEndpoint}/access-level`);
+  }
+  clientType(){
+    return this.http.get<ApiResponse2<LookupItem>>(`${env.lookupEndpoint}/client-type`);
   }
 }

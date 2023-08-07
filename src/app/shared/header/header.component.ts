@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
+import { AppSessionService } from "src/app/auth/services/app-session.service";
 import { User } from "src/app/dto/Payload";
 import { StorageService } from "src/app/services/storage.service";
 import { RouteNames } from "src/app/utils/app-routes";
@@ -15,13 +16,16 @@ export class HeaderComponent implements OnInit{
   appversion:string;
   loginUser:string;
   accessLevel:string;
+  isAdmin:boolean;
 
-  constructor(private storageService: StorageService,private router: Router,){}
+  constructor(private storageService: StorageService,private router: Router, private appSession:AppSessionService){}
 
   ngOnInit(){
     this.appversion = this.user.appVersion;
     this.loginUser = this.user.fullname;
     this.accessLevel = this.user.accessLevel;
+
+    this.isAdmin = this.appSession.checkAccess() ? true : false;
   }
 
   logout(){

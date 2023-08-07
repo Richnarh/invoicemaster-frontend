@@ -1,0 +1,53 @@
+<div class="modal fade" id="paymentInfo" style="background: #6677;" tabindex="-1" data-bs-backdrop="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title">Payment for {{clientName}}, GHS{{totalAmount | number}}</h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="pt-2" [formGroup]="paymentForm" (ngSubmit)="save()">
+                    <div class="row mb-3">
+                        <label class="col-sm-4 col-form-label">Payment Method</label>
+                        <div class="col-sm-8">
+                          <select class="control-field w-100" formControlName="paymentMethod">
+                            <option value="" disabled>Choose...</option>
+                            <option selected *ngFor="let data of paymentMethodList" value={{data?.id}}>{{data?.itemName}}</option>
+                        </select>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-4 col-form-label">Delivery Status <span class="text-danger">*</span></label>
+                        <div class="col-sm-8">
+                          <select class="control-field w-100" formControlName="deliveryStatus">
+                            <option value="" disabled>Choose...</option>
+                            <option selected *ngFor="let data of deliveryStatusList" value={{data?.id}}>{{data?.itemName}}</option>
+                        </select>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-4 col-form-label">Payment Status <span class="text-danger">*</span></label>
+                        <div class="col-sm-8">
+                          <select class="control-field w-100" formControlName="paymentStatus" (change)="checkPayment($event)">
+                            <option selected="true" value="" disabled>Choose...</option>
+                            <option *ngFor="let data of paymentStatusList" value={{data?.id}}>{{data?.itemName}}</option>
+                        </select>
+                        </div>
+                    </div>
+                    <div class="row mb-3" *ngIf="!fullyPaid">
+                      <label class="col-sm-4 col-form-label">Partial Amount</label>
+                      <div class="col-sm-8">
+                        <small>For partial payment, specify the amount paid.</small>
+                        <input type="text" class="form-control" formControlName="partialAmountPaid">
+                      </div>
+                    </div>
+                    
+                    <div class="text-center">
+                      <button *ngIf="paymentData?.paymentStatus !== 'FULLY_PAID'" type="submit" class="btn btn-success" data-bs-dismiss="modal" aria-label="Close"><i class="fa fa-check-circle"></i> Save Changes</button>
+                      <button type="reset" class="btn btn-secondary mx-3" (click)="clearPage()"><i class="fa fa-trash"></i> Clear</button>
+                    </div>
+                  </form>                
+            </div>
+        </div>
+    </div>
+</div>

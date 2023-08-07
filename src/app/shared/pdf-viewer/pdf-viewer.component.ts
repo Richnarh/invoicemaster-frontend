@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { PaymentData } from "src/app/dto/Payload";
+import { Invoice } from "./../../dto/Payload";
 
 @Component({
   selector: 'app-pdf-viewer',
@@ -14,8 +15,8 @@ export class PdfViewerComponent{
     this.pdfTitle = paymentData.clientName +"-"+paymentData.proformaInvoice +" (Waybill Report)";
     this.pdf = "data:application/pdf;base64,"+data;
   }
-  invoicePdf(data:any){
-    this.pdfTitle = "Report";
+  invoicePdf(data:any, invoice:Invoice){
+    this.pdfTitle = invoice.client + "-"+ invoice.quotationNumber;
     this.pdf = "data:application/pdf;base64,"+data;
   }
 }

@@ -12,15 +12,20 @@
     <div>
       <a href="javascript:void(0)" class="top-link">Transaction</a>
     </div> -->
-    <div>
-      <a href="javascript:void(0)" routerLink="/admin" class="top-link">Home</a>
-      <a href="javascript:void(0)" routerLink="/transaction" class="top-link">Transaction</a>
+    <a href="javascript:void(0)" routerLink="/a/index" class="top-link">Home</a>
+    <div *ngIf="isAdmin">
+      <a href="javascript:void(0)" routerLink="/transaction" class="top-link">Transactions</a>
       <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#disablebackdrop" class="top-link">Registrations</a>
       <a href="javascript:void(0)" routerLink="/inventory" class="top-link">Inventory</a>
       <a href="javascript:void(0)" routerLink="/product" class="top-link">Products</a>
       <a href="javascript:void(0)" routerLink="/saleslead" class="top-link">Sales Lead</a>
       <a href="javascript:void(0)" routerLink="/saleslog" class="top-link">Sales Log</a>
       <!-- <a href="javascript:void(0)" class="top-link">Inventory Listing</a> -->
+    </div>
+    <div>
+      <a href="javascript:void(0)" routerLink="/i/client" class="top-link">Client</a>
+      <a href="javascript:void(0)" routerLink="/i/invoice" class="top-link">Invoice</a>
+      <a *ngIf="!isAdmin" href="javascript:void(0)" routerLink="/i/invoice-sales" class="top-link">Transactions</a>
     </div>
     <app-user-login></app-user-login>
     <nav class="header-nav ms-auto">

@@ -15,6 +15,7 @@ export class AppconfigComponent implements OnInit{
   pageTitle:string = "Application Configuration";
   appConfigForm:FormGroup;
   appConfigList:AppConfig[];
+  filterText:string;
   
   constructor(private fb:FormBuilder, private toast:ToastService, private companyService:CompanyService){}
 

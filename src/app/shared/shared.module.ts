@@ -13,7 +13,6 @@ import { UserLoginComponent } from "./user-login/user-login.component";
 import { FilterPipe } from "./pipes/filterPipe";
 
 
-
 @NgModule({
   declarations: [
     HeaderComponent,

@@ -2,7 +2,6 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { BehaviorSubject, firstValueFrom, Subscription } from 'rxjs';
 import { ApiResponse } from '../utils/apiResponse';
 import { Observable } from 'rxjs';
-import { StorageService } from './storage.service';
 import { environment as env } from "src/environments/environment";
 import { HttpClient } from '@angular/common/http';
 
@@ -15,7 +14,7 @@ export class EventProxyService {
   firstComponent = new EventEmitter();
   subsVar: Subscription = new Subscription;
 
-  constructor(private storageService:StorageService,private http:HttpClient) { }
+  constructor(private http:HttpClient) { }
 
   sendEvent(param: any) {
     this.eventSubject.next(param);
@@ -38,10 +37,7 @@ export class EventProxyService {
   }
 
   async getModuleData(appModule:any){
-    console.log('passed module: ', appModule);
- 
     const result = await firstValueFrom(this.loadPages(appModule));
-
     console.log(result.data[0]);
   }
 }

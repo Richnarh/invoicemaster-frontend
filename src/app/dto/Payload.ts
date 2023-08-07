@@ -35,6 +35,17 @@ export interface CompanyBranch extends Base{
     companyProfileId:string;
 }
 
+export interface Client extends Base{
+    clientCode:string;
+    clientName:string;
+    businessName:string;
+    clientType:string;
+    phone:string;
+    emailAddress:string;
+    address:string;
+    description:string;
+}
+
 export interface CompanyProfile extends Base{
     currency:string;
     website:string;
