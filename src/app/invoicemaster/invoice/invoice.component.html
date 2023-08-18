@@ -143,3 +143,8 @@
     </div>
     <app-add-client></app-add-client>
 </div>
+
+<div *ngIf="pageView.detailView">
+    <hr>
+    <app-invoice-item [invoice]="invoice"></app-invoice-item>
+</div>

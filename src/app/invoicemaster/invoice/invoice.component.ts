@@ -102,6 +102,9 @@ export class InvoiceComponent implements OnInit{
   }
   async requestReversal(invoice:Invoice){
     const result = await firstValueFrom(this.invoiceService.reverseApproval(invoice.id));
+    if(result.data){
+      this.toast.success(result.data);
+    }
   }
   editInvoice(invoice:Invoice){
     console.log(invoice)

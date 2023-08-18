@@ -115,8 +115,8 @@
                                 <td>{{delivery.valueDate}}</td>
                                 <td>{{delivery.clientName}}</td>
                                 <td>{{delivery.deliveryAdress}}</td>
-                                <td *ngIf="delivery.deliveryStatus === 'Pending delivery'"><button class="btn btn-primary btn-sm float-end" type="button" (click)="updateDeliveryStatus(delivery.id)"><i class="fa fa-check-circle"></i>&nbsp;Update to delivered</button></td>
-                                <td *ngIf="delivery.deliveryStatus === 'Fully delivered'" class="text-end "><span class="text-success fw-bold">FULLY_DELIVERED</span></td>
+                                <td *ngIf="delivery.deliveryStatus === 'PENDING_DELIVERY'"><button class="btn btn-primary btn-sm float-end" type="button" (click)="updateDeliveryStatus(delivery.id)"><i class="fa fa-check-circle"></i>&nbsp;Update to delivered</button></td>
+                                <td *ngIf="delivery.deliveryStatus === 'FULLY_DELIVERED'" class="text-end "><span class="text-success fw-bold">FULLY_DELIVERED</span></td>
                             </tr>
                         </tbody>
                     </table>

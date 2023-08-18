@@ -112,6 +112,7 @@ export interface InvoiceItem extends Base{
     description:string;
     proformaInvoice:string;
     proformaInvoiceId:string;
+    invoiceId:string;
 }
 
 export interface Inventory extends Base{
