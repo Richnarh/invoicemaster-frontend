@@ -92,7 +92,12 @@ export class InvoiceComponent implements OnInit{
     this.pdfViewer.viewPdf(report.data, invoice);
   }
 
-  invoiceItem(invoice:Invoice){
+  async invoiceItem(invoice:Invoice){
+    this.loading.start("Loading...");
+    this.invoice=invoice;
+    const result = await firstValueFrom(this.invoiceService.manageInvoice(invoice.id));
+    this.loading.stop();
+    this.proxy.sendEvent(result.data);
     this.pageView.resetToDetailView();
   }
 

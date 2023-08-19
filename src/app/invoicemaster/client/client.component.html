@@ -9,40 +9,52 @@
               <button type="button" class="btn btn-primary m-2" (click)="initClient()"><i class="fa fa-plus-circle"></i>&nbsp;New Client</button>
             </div>
         </div>
-        <div class="p-2" *blockUI="'loading'">
-            <table class="table table-bordered table-striped">
-                <thead class="table-light">
-                    <tr>
-                        <th scope="col"></th>
-                        <th scope="col">Client Name</th>
-                        <th scope="col">Phone</th>
-                        <th scope="col">Email Address</th>
-                        <th scope="col">Address</th>
-                        <th class="text-end" scope="col">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let client of clientList | filterFilter:filterText; let i = index">
-                        <td><i class="fa fa-info"></i></td>
-                        <td>{{client.clientName}}</td>
-                        <td>{{client.phone}}</td>
-                        <td>{{client.emailAddress}}</td>
-                        <td>{{client.address}}</td>
-                        <td>
-                            <div class="dropdown float-end">
-                                <button class="btn btn-secondary dropdown-toggle btn-border" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                  Choose...
-                                </button>
-                                <ul class="dropdown-menu">
-                                  <li><a href="javascript:void(0)" class="dropdown-item" type="button" (click)="editClient(client)"><i class="fa fa-edit"></i>Edit</a></li>
-                                  <li><a href="javascript:void(0)" class="dropdown-item text-danger" type="button" (click)="deleteClient(client.id)"><i class="fa fa-remove"></i>Delete</a></li>
-                                </ul>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="p-2">
+        <ng-template [ngIf]="clientList" [ngIfElse]="loading">
+              <table class="table table-bordered table-striped">
+                  <thead class="table-light">
+                      <tr>
+                          <th scope="col"></th>
+                          <th scope="col">Client Name</th>
+                          <th scope="col">Phone</th>
+                          <th scope="col">Email Address</th>
+                          <th scope="col">Address</th>
+                          <th class="text-end" scope="col">Action</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor="let client of clientList | filterFilter:filterText; let i = index">
+                          <td><i class="fa fa-info"></i></td>
+                          <td>{{client.clientName}}</td>
+                          <td>{{client.phone}}</td>
+                          <td>{{client.emailAddress}}</td>
+                          <td>{{client.address}}</td>
+                          <td>
+                              <div class="dropdown float-end">
+                                  <button class="btn btn-secondary dropdown-toggle btn-border" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Choose...
+                                  </button>
+                                  <ul class="dropdown-menu">
+                                    <li><a href="javascript:void(0)" class="dropdown-item" type="button" (click)="editClient(client)"><i class="fa fa-edit"></i>Edit</a></li>
+                                    <li><a href="javascript:void(0)" class="dropdown-item text-danger" type="button" (click)="deleteClient(client.id)"><i class="fa fa-remove"></i>Delete</a></li>
+                                  </ul>
+                              </div>
+                          </td>
+                      </tr>
+                  </tbody>
+              </table>
+            </ng-template>
         </div>
+
+        <ng-container>
+          <ng-template #loading>
+            <app-nodata *ngIf="!loadContent; else elseTemplate"></app-nodata>
+          </ng-template>
+  
+          <ng-template #elseTemplate>
+            <ngx-skeleton-loader count="5" *ngIf="loadContent"/>
+          </ng-template>
+        </ng-container>
       </div>
       
     <div *ngIf="pageView.createView">
@@ -96,8 +108,8 @@
             
             <div class="text-center">
               <button type="submit" class="btn btn-success"><i class="fa fa-check-circle"></i> Save Changes</button>
-              <button type="reset" class="btn btn-secondary mx-3" (click)="clearPage()"><i class="fa fa-times"></i> Clear</button>
-              <button type="reset" class="btn btn-danger float-end" (click)="closePage()"><i class="fa fa-trash"></i> Close Page</button>
+              <button type="reset" class="btn btn-secondary mx-3" (click)="clearPage()"><i class="fa fa-trash"></i> Clear</button>
+              <button type="reset" class="btn btn-danger float-end" (click)="closePage()"><i class="fa fa-times"></i> Close Page</button>
             </div>
           </form>
     </div>

@@ -48,4 +48,7 @@ export class InvoiceService {
   invoiceReceipt(invoiceId:string){
     return this.http.get<ApiResponse<any>>(`${env.endpoint}/invoice/${invoiceId}/receipt`);
   }
+  manageInvoice(invoiceId:string){
+    return this.http.get<ApiResponse<any>>(`${env.endpoint}/invoice/${invoiceId}/manage`);
+  }
 }

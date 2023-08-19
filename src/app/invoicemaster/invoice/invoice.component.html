@@ -145,6 +145,9 @@
 </div>
 
 <div *ngIf="pageView.detailView">
+    <div *blockUI="'loading'"></div>
     <hr>
-    <app-invoice-item [invoice]="invoice"></app-invoice-item>
+    <app-invoice-item 
+    (closeEvt)="closePage()"
+    [invoice]="invoice"></app-invoice-item>
 </div>

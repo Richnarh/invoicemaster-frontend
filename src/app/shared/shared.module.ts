@@ -5,12 +5,15 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { FooterComponent } from './footer/footer.component';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
+import { BlockUIModule } from "ng-block-ui";
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+
 import { PageTitleComponent } from "./page-title/page-title.component";
 import { SafePipe } from "./pipes/SafePipe";
 import { PdfViewerComponent } from "./pdf-viewer/pdf-viewer.component";
-import { BlockUIModule } from "ng-block-ui";
 import { UserLoginComponent } from "./user-login/user-login.component";
 import { FilterPipe } from "./pipes/filterPipe";
+import { NodataComponent } from './nodata/nodata.component';
 
 
 @NgModule({
@@ -22,24 +25,28 @@ import { FilterPipe } from "./pipes/filterPipe";
     PdfViewerComponent,
     SafePipe,
     FilterPipe,
-    UserLoginComponent
+    UserLoginComponent,
+    NodataComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
+    NgxSkeletonLoaderModule,
     BlockUIModule.forRoot()
   ],
   exports:[
     FormsModule,
     BlockUIModule,
     ReactiveFormsModule,
+    NgxSkeletonLoaderModule,
     SidebarComponent,
     HeaderComponent, 
     FooterComponent,
     PageTitleComponent,
     PdfViewerComponent,
+    NodataComponent,
     SafePipe,
     FilterPipe
   ]

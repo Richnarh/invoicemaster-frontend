@@ -25,6 +25,8 @@ export class ClientComponent implements OnInit{
   clientForm:FormGroup;
   clientList:Client[];
 
+  loadContent:boolean;
+
   constructor(private fb:FormBuilder, private lookup:LookupService, private clientService:ClientService,private toast:ToastService){}
 
   ngOnInit(){
@@ -44,10 +46,10 @@ export class ClientComponent implements OnInit{
   }
 
   async fetchClient(){
-    this.loading.start("Loading...");
+    this.loadContent = true;
     const result = await firstValueFrom(this.clientService.fetchAllclients());
     this.clientList = result.data;
-    this.loading.stop();
+    this.loadContent = false;
   }
 
   async save() {

@@ -150,3 +150,24 @@ export interface AppConfig extends Base{
     configValue:string;
     configStatus:string;
 }
+
+export interface SalesTax extends Base{
+    salesTaxId:string;
+    taxName:string;
+    taxRate:number;
+    proformaInvoice:string;
+    proformaInvoiceId:string;
+    saleLead:string;
+    saleLeadId:string;
+    taxAmount:number;
+    reOrder:number;
+}
+
+export interface Sales extends Base{
+    actionType:string;
+    salesLeadId:string;
+    totalPayable:number;
+    subTotal:number;
+    invoiceItemList:InvoiceItem[];
+    salesTaxList:SalesTax[];
+}

@@ -1,0 +1,34 @@
+.field-shade{
+    font-family: cursive;
+    display: inline-block;
+    display: block;
+    min-height: 1em;
+    margin: 2px;
+    padding: 2px 5px 2px 5px;
+    background: #2A3F54;
+    border-bottom:solid 1px #CCC;
+    line-height: 20px;
+    color: #f9f9f9;
+}
+
+td{
+    padding-top: 0.5rem;
+    input,select{
+        margin-bottom: 0.5rem;
+        border: 1px solid #ddd;
+        font-size: 14px;
+    }
+}
+
+.display-box{
+    border: 1px solid #C51162; 
+    padding: 1%;
+    background: #2A3F54;
+    color: #f9f9f9;
+    box-shadow: 0 0 15px 0 lightgrey;
+    td span,label{
+        font-weight: 900;
+        background-color: inherit;
+        color: #f9f9f9;
+    }
+}

@@ -20,6 +20,9 @@ export class ProductService {
   fetchAllInventory(){
     return this.http.get<ApiResponse<any>>(`${env.endpoint}/inventory/list`);
   }
+  getInventoryById(inventoryId:string){
+    return this.http.get<ApiResponse<any>>(`${env.endpoint}/inventory/${inventoryId}`);
+  }
   deleteInventory(inventoryId: string){
     return this.http.delete<ApiResponse<any>>(`${env.endpoint}/inventory/${inventoryId}`);
   }

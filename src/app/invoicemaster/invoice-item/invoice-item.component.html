@@ -1,37 +1,37 @@
 <div class="row">
     <div class="col-md-4">
-        <form class="pt-2">
+        <form [formGroup]="invoiceItemForm" (ngSubmit)="addItem()" class="pt-2">
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Products <span class="text-danger">*</span></label>
                 <div class="col-sm-7">
-                    <input class="control-field w-100" list="inventoryList">
-                    <datalist id="inventoryList">
-                        <option *ngFor="let prod of inventoryList" [value]="prod.itemName">
-                    </datalist>
+                    <select class="control-field w-100" formControlName="inventoryId" (change)="fetchPrice($event.target)">
+                        <option value="" disabled>Choose...</option>
+                        <option selected *ngFor="let prod of inventoryList" value={{prod?.id}}>{{prod?.itemName}}</option>
+                    </select>
                 </div>
             </div>
             <div class="row mb-3">
               <label class="col-sm-3 col-form-label">Quantity <span class="text-danger">*</span></label>
               <div class="col-sm-7">
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" formControlName="quantity">
               </div>
             </div>
             <div class="row mb-3">
               <label class="col-sm-3 col-form-label">Unit price <span class="text-danger">*</span></label>
               <div class="col-sm-7">
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" formControlName="unitPrice">
               </div>
             </div>
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Description</label>
                 <div class="col-sm-7">
-                  <textarea class="form-control"></textarea>
+                  <textarea class="form-control" formControlName="description"></textarea>
                 </div>
             </div>
             
             <div class="text-center">
               <button type="submit" class="btn btn-outline-success mx-2"><i class="fa fa-plus-circle"></i> Add to table</button>
-              <button type="reset" class="btn btn-light btn-border"><i class="fa fa-trash"></i> Clear</button>
+              <button type="button" class="btn btn-light btn-border" (click)="resetForm()"><i class="fa fa-trash"></i> Clear</button>
             </div>
           </form>
     </div>
@@ -42,78 +42,76 @@
                     <tr>
                         <th scope="col"></th>
                         <th scope="col">System</th>
-                        <th scope="col">Qty</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Total</th>
+                        <th scope="col" class="text-end">Qty</th>
+                        <th scope="col" class="text-end">Price</th>
+                        <th scope="col" class="text-end">Total</th>
                         <th class="text-end" scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr *ngFor="let invoiceItem of invoiceItemList">
                         <td><i class="fa fa-info"></i></td>
-                        <td>{{2}}</td>
-                        <td>{{3}}</td>
-                        <td>{{4}}</td>
-                        <td>{{5}}</td>
-                        <td class="text-end"><button type="button" class="btn btn-sm btn-light btn-border"><i class="fa fa-trash"></i>&nbsp; Remove</button></td>
+                        <td>{{invoiceItem.productName}}</td>
+                        <td class="text-end">{{invoiceItem.quantity}}</td>
+                        <td class="text-end">{{invoiceItem.unitPrice | number}}</td>
+                        <td class="text-end">{{(invoiceItem.quantity * invoiceItem.unitPrice) | number}}</td>
+                        <td class="text-end"><button type="button" class="btn btn-sm btn-light btn-border" (click)="remove(invoiceItem.inventoryId)"><i class="fa fa-trash"></i>&nbsp; Remove</button></td>
                     </tr>
                 </tbody>
             </table>
         </div>
         <div class="row">
             <div class="col">
-                <button class="btn btn-success mx-3"><i class="fa fa-check"></i> &nbsp;Save All</button>
-                <button type="button" class="btn btn-danger"><i class="fa fa-times"></i>&nbsp; Close Page</button>
+                <button class="btn btn-success mx-3" (click)="saveAll()"><i class="fa fa-check"></i> &nbsp;Save All</button>
+                <button type="button" class="btn btn-danger" (click)="closePage()">Close Page</button>
             </div>
-            <div class="col-md-6 shadow-sm mb-2 bg-white" style="width:65%">
-                <table class="table">
+            <div class="col-md-6 shadow-sm mb-2 bg-white" style="width:65%; padding: 1em;">
+                <table class="table table-bordered y-2">
                     <tr>
                         <td><span>Sub Total</span></td>
-                        <td  class="text-right"> 
-                            <input type="text" class="control-field">
+                        <td class="text-end"> 
+                            <input type="text" value="GHS {{sales.subTotal | number}}" disabled="true" class="form-control text-end">
                         </td>
                     </tr>
                     <tr>
                         <td><span>Total Amount</span></td>
-                        <td  class="text-right"> 
-                            <label class="faded-shade">4565</label>
+                        <td class="text-end"> 
+                            <label class="field-shade">GHS {{invoice.totalAmount | number}}</label>
                         </td>
                     </tr>
                     <tr>
                         <td><span>Discount(%)</span></td>
                         <td class="text-end">
-                            <input type="text" class="control-field">
+                            <input type="text" [value]="invoice.discountRate" class="control-field w-100 text-end">
                         </td>
                     </tr>
                     <tr>
                         <td><span>Extra Discount</span></td>
                         <td>
-                            <select class="control-field">
+                            <select class="control-field w-100">
                                 <option value=""></option>
                                 <option value="">Good</option>
                             </select>
                         </td>
                     </tr>
 
-                    <div>
-                        <tr>
-                            <td>tax Name</td>
-                            <td class="text-end">
-                                <label>5443</label>
-                            </td>
-                        </tr>
-                    </div>
+                    <tr *ngFor="let salesTax of salesTaxList">
+                        <td><span>{{salesTax.taxName}} ({{salesTax.taxRate}}%)</span></td>
+                        <td class="text-end">
+                            <label>{{salesTax.taxAmount | number}}</label>
+                        </td>
+                    </tr>
 
                     <tr>
                         <td>Installation Fee</td>
                         <td class="text-end">
-                            <input type="text" class="control-field">
+                            <input type="text" [value]="invoice.installationFee" class="control-field w-100 text-end">
                         </td>
                     </tr>
-                    <tr class="bg-gradient-gray">
-                        <td><span class="text-uppercase font-weight-bold">Total Payable</span></td>
-                        <td class="text-right"> 
-                            <label class="faded-shade">5634</label>
+                    <tr class="display-box">
+                        <td><span>TOTAL PAYABLE</span></td>
+                        <td class="text-end"> 
+                            <label style="font-family: cursive;">GHS<h2>{{sales.totalPayable | number}}</h2></label>
                         </td>
                     </tr>
                 </table>
