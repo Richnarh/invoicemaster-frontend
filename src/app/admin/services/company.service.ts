@@ -79,6 +79,12 @@ export class CompanyService {
   findAppConfigById(appConfigId:string){
     return this.http.get<ApiResponse<any>>(`${env.endpoint}/app-config/${appConfigId}`);
   }
+  findByConfigName(configName:string){
+    return this.http.get<ApiResponse<any>>(`${env.endpoint}/app-config/${configName}/config`);
+  }
+  updateByConfigName(configName:string, configValue:string){
+    return this.http.put<ApiResponse<any>>(`${env.endpoint}/app-config/${configName}/${configValue}`,{});
+  }
   appConfigList(){
     return this.http.get<ApiResponse<any>>(`${env.endpoint}/app-config/list`);
   }

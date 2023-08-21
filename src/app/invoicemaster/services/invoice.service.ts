@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from '@angular/core';
 import { Observable } from "rxjs";
-import { Invoice, PaymentData } from "src/app/dto/Payload";
+import { Invoice, PaymentData, Sales } from "src/app/dto/Payload";
 import { ApiResponse } from "src/app/utils/apiResponse";
 import { environment as env } from "src/environments/environment"
 
@@ -12,16 +12,22 @@ export class InvoiceService {
   
   constructor(private http:HttpClient) { }
 
-  searchByInvoiceNo(invoiceNo:string):Observable<ApiResponse<Invoice>>{
+  searchByInvoiceNo(invoiceNo:string){
     return this.http.get<ApiResponse<any>>(`${env.endpoint}/invoice?q=${invoiceNo}`);
   }
-  reverseInvoice(invoiceId:string):Observable<ApiResponse<any>>{
+  reverseInvoice(invoiceId:string){
     return this.http.post<ApiResponse<any>>(`${env.endpoint}/invoice/${invoiceId}`, {});
   }
-  reverseApproval(invoiceId:string):Observable<ApiResponse<any>>{
+  saveInvoice(invoice:Invoice){
+    return this.http.post<ApiResponse<any>>(`${env.endpoint}/invoice/`, invoice);
+  }
+  saveAll(sales:Sales){
+    return this.http.post<ApiResponse<any>>(`${env.endpoint}/invoice/save-all`, sales);
+  }
+  reverseApproval(invoiceId:string){
     return this.http.get<ApiResponse<any>>(`${env.endpoint}/invoice/${invoiceId}/reverse`,);
   }
-  savePaymentData(paymentData:PaymentData, invoiceId:string):Observable<ApiResponse<any>>{
+  savePaymentData(paymentData:PaymentData, invoiceId:string){
     return this.http.post<ApiResponse<any>>(`${env.endpoint}/invoice/${invoiceId}/payment-data`, paymentData);
   }
   searchByDate(fromDate:Date, toDate:Date){

@@ -70,7 +70,7 @@
                     <tr>
                         <td><span>Sub Total</span></td>
                         <td class="text-end"> 
-                            <input type="text" value="GHS {{sales.subTotal | number}}" disabled="true" class="form-control text-end">
+                            <input [(ngModel)]="subTotal" type="text" value="GHS {{sales.subTotal | number}}" disabled="true" class="form-control text-end">
                         </td>
                     </tr>
                     <tr>
@@ -82,15 +82,15 @@
                     <tr>
                         <td><span>Discount(%)</span></td>
                         <td class="text-end">
-                            <input type="text" [value]="invoice.discountRate" class="control-field w-100 text-end">
+                            <input [(ngModel)]="discountRate" type="text" [value]="invoice.discountRate" class="control-field w-100 text-end">
                         </td>
                     </tr>
                     <tr>
                         <td><span>Extra Discount</span></td>
                         <td>
-                            <select class="control-field w-100">
-                                <option value=""></option>
-                                <option value="">Good</option>
+                            <select class="control-field w-100" [(ngModel)]="salesLeadId">
+                                <option value="">Lead discount</option>
+                                <option *ngFor="let lead of salesleadList" [value]="lead.id">{{lead.itemName}}</option>
                             </select>
                         </td>
                     </tr>
@@ -105,13 +105,13 @@
                     <tr>
                         <td>Installation Fee</td>
                         <td class="text-end">
-                            <input type="text" [value]="invoice.installationFee" class="control-field w-100 text-end">
+                            <input [(ngModel)]="installationFee" type="text" [value]="invoice.installationFee" class="control-field w-100 text-end">
                         </td>
                     </tr>
                     <tr class="display-box">
                         <td><span>TOTAL PAYABLE</span></td>
                         <td class="text-end"> 
-                            <label style="font-family: cursive;">GHS<h2>{{sales.totalPayable | number}}</h2></label>
+                            <label style="font-family: cursive;">GHS<h3>{{sales.totalPayable | number}}</h3></label>
                         </td>
                     </tr>
                 </table>

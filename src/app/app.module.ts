@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { DatePipe } from "@angular/common";
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
@@ -24,7 +25,7 @@ import { AuthGuard } from "./services/auth.guard";
     AuthModule,
     ToastrModule.forRoot(), 
   ],
-  providers: [AuthGuard,{provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi:true}],
+  providers: [AuthGuard,DatePipe,{provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

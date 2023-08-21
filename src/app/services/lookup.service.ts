@@ -36,6 +36,9 @@ export class LookupService {
   paymentMethod(){
     return this.http.get<ApiResponse2<LookupItem>>(`${env.lookupEndpoint}/payment-method`);
   }
+  saleslead(){
+    return this.http.get<ApiResponse2<LookupItem>>(`${env.lookupEndpoint}/saleslead`);
+  }
 
   // ENUMS
   paymentStatus(){

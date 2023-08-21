@@ -30,6 +30,7 @@
               "src/assets"
             ],
             "styles": [
+               "node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
               "node_modules/ngx-toastr/toastr.css",
               "src/assets/vendor/bootstrap/css/bootstrap.min.css",
               "src/assets/vendor/boxicons/css/boxicons.min.css",

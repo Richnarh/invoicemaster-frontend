@@ -7,6 +7,10 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { BlockUIModule } from "ng-block-ui";
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { PopoverModule } from "ngx-bootstrap/popover";
+import { TooltipModule  } from 'ngx-bootstrap/tooltip';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+
 
 import { PageTitleComponent } from "./page-title/page-title.component";
 import { SafePipe } from "./pipes/SafePipe";
@@ -34,11 +38,17 @@ import { NodataComponent } from './nodata/nodata.component';
     ReactiveFormsModule,
     RouterModule,
     NgxSkeletonLoaderModule,
+    PopoverModule,
+    TooltipModule,
+    BsDatepickerModule.forRoot(),
     BlockUIModule.forRoot()
   ],
   exports:[
     FormsModule,
     BlockUIModule,
+    PopoverModule,
+    TooltipModule,
+    BsDatepickerModule,
     ReactiveFormsModule,
     NgxSkeletonLoaderModule,
     SidebarComponent,

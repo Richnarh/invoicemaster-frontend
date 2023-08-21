@@ -10,6 +10,9 @@ import { LookupItem } from "src/app/dto/LookupItem";
 import { LookupService } from "src/app/services/lookup.service";
 import { EventProxyService } from "./../../services/event-proxy.service";
 import { PdfViewerComponent } from "src/app/shared/pdf-viewer/pdf-viewer.component";
+import { CompanyService } from "src/app/admin/services/company.service";
+import { Config } from "src/app/dto/constant";
+import { DatePipe } from "@angular/common";
 
 @Component({
   selector: 'app-invoice',
@@ -32,14 +35,22 @@ export class InvoiceComponent implements OnInit{
   toDate:any = "";
 
   filterText:string;
+  limitValue:string;
 
-  constructor(private proxy:EventProxyService, private fb:FormBuilder, private invoiceService:InvoiceService, private toast:ToastService, private lookups:LookupService){}
+  bsValue = new Date();
+
+  constructor(
+    private proxy:EventProxyService, private companyService:CompanyService, private fb:FormBuilder, 
+    private invoiceService:InvoiceService, private toast:ToastService, private lookups:LookupService,
+    private datePipe: DatePipe){
+  }
   
   ngOnInit() {
     this.setupForm();
     this.initLookups();
 
     this.invoicesToday();
+    this.fetchPageLimit();
   }
 
   initInvoice(){
@@ -51,6 +62,19 @@ export class InvoiceComponent implements OnInit{
   refreshClient(){
     this.initLookups();
     this.toast.info("Client updated");
+  }
+
+  async fetchPageLimit(){
+    const result = await firstValueFrom(this.companyService.findByConfigName(Config.PAGE_LIMIT));
+    this.limitValue = result.data?.configValue;
+  }
+
+  async savePageLimit(){
+    const result = await firstValueFrom(this.companyService.updateByConfigName(Config.PAGE_LIMIT, this.limitValue));
+    if(result.data){
+      this.limitValue = result.data?.configValue;
+      this.toast.success(result.message);
+    }
   }
 
   async initLookups(){
@@ -81,7 +105,20 @@ export class InvoiceComponent implements OnInit{
   }
   
   async save(){
-    
+    if(this.invoiceForm.invalid){
+      this.toast.error("Please fill out required fields");
+      return;
+    }
+    let payload = this.invoiceForm.value;
+    payload.issuedDate = this.datePipe.transform(this.invoiceForm.get("issuedDate")?.value,"dd/MM/yyyy");
+    payload.expiryDate = this.datePipe.transform(this.invoiceForm.get("expiryDate")?.value,"dd/MM/yyyy");
+    console.log("invoice: ", payload);
+    const result = await firstValueFrom(this.invoiceService.saveInvoice(payload));
+    if(result.success){
+      this.toast.success(result.message);
+    }else{
+      this.toast.error(result.message);
+    }
   }
   async generateInvoice(invoice:Invoice){
     const report = await firstValueFrom(this.invoiceService.invoiceReport(invoice.id));
@@ -147,7 +184,7 @@ export class InvoiceComponent implements OnInit{
       id:[null],
       issuedDate:[new Date(), Validators.required],
       expiryDate:[new Date(), Validators.required],
-      clientId:[null],
+      clientId:[null, Validators.required],
       phoneNumber:[null],
       quotationNumber:[null],
       totalAmount:[0],

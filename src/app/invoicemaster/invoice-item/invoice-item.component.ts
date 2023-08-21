@@ -24,8 +24,17 @@ export class InvoiceItemComponent implements OnInit{
   invoiceItemList:InvoiceItem[]=[];
   salesTaxList:SalesTax[]=[];
   inventoryList:LookupItem[];
+  salesleadList:LookupItem[];
 
-  constructor(private proxy:EventProxyService, private fb:FormBuilder, private toast:ToastService, private productService:ProductService, private invoiceService:InvoiceService, private lookup:LookupService){}
+  subTotal:number;
+  totalAmount:number;
+  discountRate:number;
+  installationFee:number;
+  salesLeadId:string;
+
+  constructor(
+    private proxy:EventProxyService, private fb:FormBuilder, private toast:ToastService, 
+    private productService:ProductService, private invoiceService:InvoiceService, private lookup:LookupService){}
 
   ngOnInit(){
     this.setupForm();
@@ -40,10 +49,15 @@ export class InvoiceItemComponent implements OnInit{
  async initLookups(){
     const result = await firstValueFrom(this.lookup.inventory());
     this.inventoryList = result.data;
+    const saleslead = await firstValueFrom(this.lookup.saleslead());
+    this.salesleadList = saleslead.data;
   }
 
   saveAll(){
-    console.log(this.invoice);
+    this.sales.invoiceId = this.invoice.id;
+    this.sales.salesLeadId = this.salesLeadId;
+    this.sales.installationFee = this.installationFee;
+    this.sales.invoiceItemList = this.invoiceItemList;
   }
 
   addItem(){
@@ -87,7 +101,6 @@ export class InvoiceItemComponent implements OnInit{
   }
 
   manageInvoice(sales:Sales){
-    console.log("sales: ", sales);
     this.sales = sales;
     this.invoiceItemList = sales.invoiceItemList;
     this.salesTaxList = sales.salesTaxList;
