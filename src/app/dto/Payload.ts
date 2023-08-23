@@ -168,6 +168,7 @@ export interface Sales extends Base{
     salesLeadId:string;
     totalPayable:number;
     installationFee:number;
+    discountRate:number;
     subTotal:number;
     invoiceId:string;
     invoiceItemList:InvoiceItem[];

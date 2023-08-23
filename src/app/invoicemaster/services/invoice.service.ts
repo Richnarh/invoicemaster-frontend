@@ -12,6 +12,9 @@ export class InvoiceService {
   
   constructor(private http:HttpClient) { }
 
+  invoiceParams(){
+    return this.http.get<ApiResponse<any>>(`${env.endpoint}/invoice/invoice-params`);
+  }
   searchByInvoiceNo(invoiceNo:string){
     return this.http.get<ApiResponse<any>>(`${env.endpoint}/invoice?q=${invoiceNo}`);
   }
@@ -19,7 +22,7 @@ export class InvoiceService {
     return this.http.post<ApiResponse<any>>(`${env.endpoint}/invoice/${invoiceId}`, {});
   }
   saveInvoice(invoice:Invoice){
-    return this.http.post<ApiResponse<any>>(`${env.endpoint}/invoice/`, invoice);
+    return this.http.post<ApiResponse<any>>(`${env.endpoint}/invoice`, invoice);
   }
   saveAll(sales:Sales){
     return this.http.post<ApiResponse<any>>(`${env.endpoint}/invoice/save-all`, sales);

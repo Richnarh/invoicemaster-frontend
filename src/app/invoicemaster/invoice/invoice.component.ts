@@ -13,6 +13,7 @@ import { PdfViewerComponent } from "src/app/shared/pdf-viewer/pdf-viewer.compone
 import { CompanyService } from "src/app/admin/services/company.service";
 import { Config } from "src/app/dto/constant";
 import { DatePipe } from "@angular/common";
+import { DateUtils } from "src/app/utils/dateUtils";
 
 @Component({
   selector: 'app-invoice',
@@ -37,7 +38,8 @@ export class InvoiceComponent implements OnInit{
   filterText:string;
   limitValue:string;
 
-  bsValue = new Date();
+  issuedDate:Date;
+  expiryDate:Date;
 
   constructor(
     private proxy:EventProxyService, private companyService:CompanyService, private fb:FormBuilder, 
@@ -53,9 +55,13 @@ export class InvoiceComponent implements OnInit{
     this.fetchPageLimit();
   }
 
-  initInvoice(){
+  async initInvoice(){
     this.invoiceForm.reset();
     this.invoiceForm.patchValue({});
+    const result = await firstValueFrom(this.invoiceService.invoiceParams());
+    this.issuedDate = new Date();
+    this.expiryDate = DateUtils.daysFrom2Day(7);
+    this.invoiceForm.controls["quotationNumber"].setValue(result.data.quotationNumber);
     this.pageView.resetToCreateView();
   }
 

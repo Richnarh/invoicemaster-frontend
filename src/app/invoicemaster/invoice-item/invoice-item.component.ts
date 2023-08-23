@@ -53,11 +53,14 @@ export class InvoiceItemComponent implements OnInit{
     this.salesleadList = saleslead.data;
   }
 
-  saveAll(){
+  async saveAll(){
     this.sales.invoiceId = this.invoice.id;
     this.sales.salesLeadId = this.salesLeadId;
     this.sales.installationFee = this.installationFee;
+    this.sales.discountRate = this.discountRate;
     this.sales.invoiceItemList = this.invoiceItemList;
+    
+    const result = await firstValueFrom(this.invoiceService.saveAll(this.sales));
   }
 
   addItem(){

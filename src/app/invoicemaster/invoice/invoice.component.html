@@ -100,19 +100,29 @@
         <div class="card-body">
             <form class="pt-2" [formGroup]="invoiceForm" (ngSubmit)="save()">
                 <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">Quotation Number</label>
+                    <div class="col-sm-10">
+                      <input type="text" placeholder="Enter quotation number" class="control-field" formControlName="quotationNumber">
+                    </div>
+                </div>
+                <div class="row mb-3">
                   <label class="col-sm-2 col-form-label">Issued Date <span class="text-danger">*</span></label>
                   <div class="col-sm-10">
                     <input type="text" placeholder="Enter issue date" class="control-field" 
                     bsDatepicker 
                     [bsConfig]="{ isAnimated: true, dateInputFormat: 'DD/MM/YYYY' }" 
-                    [(ngModel)]="bsValue"
+                    [(ngModel)]="issuedDate"
                     formControlName="issuedDate">
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label class="col-sm-2 col-form-label">Expiry Date <span class="text-danger">*</span></label>
                   <div class="col-sm-10">
-                    <input type="text" placeholder="Enter expiry date" class="control-field" bsDatepicker [bsConfig]="{ isAnimated: true }" formControlName="expiryDate">
+                    <input type="text" placeholder="Enter expiry date" class="control-field"
+                     bsDatepicker 
+                     [(ngModel)]="expiryDate"
+                     [bsConfig]="{ isAnimated: true, dateInputFormat: 'DD/MM/YYYY' }" 
+                     formControlName="expiryDate">
                   </div>
                 </div>
                 <div class="row mb-3">
