@@ -32,7 +32,8 @@ export class TransactionComponent implements OnInit{
   deliveryStatusList:LookupItem[];
   paymentDataList:PaymentData[];
   
-
+  pageSize = 10;
+  page = 1;
   sumTotalAmount:number;
 
   constructor(private toast: ToastService, private lookup:LookupService,private transactionService:TransactionService, private fb:FormBuilder){}

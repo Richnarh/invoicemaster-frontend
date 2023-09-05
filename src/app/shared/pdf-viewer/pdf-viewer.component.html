@@ -2,11 +2,34 @@
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">{{pdfTitle}}</h5>
+                <h5 class="modal-title">{{pdfTitle || defaultTitle}}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <iframe type="text/pdf" width="1100" height="560" [src]="pdf | safe:'resourceUrl'"></iframe>
+                <ngx-extended-pdf-viewer
+                    *ngIf="pdf2"
+                    [base64Src]="pdf2"
+                    [height]="'85vh'"
+                    [useBrowserLocale]="true"
+                    [handTool]="false"
+                    [showHandToolButton]="true"
+                    >
+                    </ngx-extended-pdf-viewer>
+                <ngx-extended-pdf-viewer
+                    *ngIf="pdf3"
+                    [base64Src]="pdf3"
+                    [height]="'85vh'"
+                    [useBrowserLocale]="true"
+                    [handTool]="false"
+                    [showHandToolButton]="true"
+                    >
+                    </ngx-extended-pdf-viewer>
+
+                <div *ngIf="pdf">
+                    <iframe type="text/pdf" width="1100" height="560" *ngFor="let p of pdf" [src]="p | safe:'resourceUrl'"></iframe>
+                </div>
+                <!-- <iframe type="text/pdf" width="1100" height="560" [src]="pdf2 | safe:'resourceUrl'"></iframe>
+                <iframe *ngIf="pdf3" type="text/pdf" width="1100" height="560" [src]="pdf3 | safe:'resourceUrl'"></iframe> -->
             </div>
         </div>
     </div>

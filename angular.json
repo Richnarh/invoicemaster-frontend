@@ -27,10 +27,15 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/assets/img/logo.png",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "node_modules/ngx-extended-pdf-viewer/assets/",
+                "output": "/assets/"
+              }
             ],
             "styles": [
-               "node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
+              "node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
               "node_modules/ngx-toastr/toastr.css",
               "src/assets/vendor/bootstrap/css/bootstrap.min.css",
               "src/assets/vendor/boxicons/css/boxicons.min.css",

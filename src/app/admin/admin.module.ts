@@ -19,6 +19,7 @@ import { ProductTypeComponent } from './product-type/product-type.component';
 import { SaleleadComponent } from './salelead/salelead.component';
 import { AppconfigComponent } from './appconfig/appconfig.component';
 import { SalesLogComponent } from './sales-log/sales-log.component';
+import { ComponentsModule } from "../components/components.module";
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { SalesLogComponent } from './sales-log/sales-log.component';
   imports: [
     CommonModule,
     AdminRoutingModule,
-    SharedModule
+    SharedModule,
+    ComponentsModule
   ]
 })
 export class AdminModule { }

@@ -32,7 +32,7 @@
                         </div>
     
                         <div class="mx-2">
-                            <button class="btn btn-light btn-border mx-2" type="submit"><i class="fa fa-check-circle"></i>&nbsp;Search</button>
+                            <button class="btn btn-success mx-2" type="submit"><i class="fa fa-check-circle"></i>&nbsp;Search</button>
                             <button class="btn btn-secondary" type="button" (click)="clear()"><i class="fa fa-remove"></i>&nbsp;Clear</button>
                         </div>
                         <div class="pt-2">
@@ -57,7 +57,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let payment of paymentDataList; let i = index">
+                            <tr *ngFor="let payment of paymentDataList | paginate:{itemsPerPage:pageSize, currentPage:page, totalItems: paymentDataList?.length}; let i = index">
                                 <td>{{payment.valueDate}}</td>
                                 <td>{{payment.clientName +'-'+ payment.proformaInvoice}}</td>
                                 <td class="text-end">{{payment.totalAmount | number}}</td>
@@ -79,6 +79,7 @@
                             </tr>
                         </tbody>
                     </table>
+                    <pagination-controls *ngIf="paymentDataList && paymentDataList.length > 0" previousLabel="Prev" nextLabel="Next" (pageChange)="page = $event"></pagination-controls>
                 </div>
             </div>
             <div *blockUI="'loading'" class="tab-pane fade" id="bordered-profile" role="tabpanel" aria-labelledby="profile-tab">

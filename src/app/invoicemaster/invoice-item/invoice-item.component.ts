@@ -60,7 +60,21 @@ export class InvoiceItemComponent implements OnInit{
     this.sales.discountRate = this.discountRate;
     this.sales.invoiceItemList = this.invoiceItemList;
     
+    console.log("sales: ", this.sales);
     const result = await firstValueFrom(this.invoiceService.saveAll(this.sales));
+    if(result.success){
+      console.log("result: ", result.data);
+      this.installationFee = result.data.installationFee;
+      this.discountRate = result.data.discountRate;
+      this.subTotal = result.data.subTotal;
+      this.sales.totalPayable = result.data.totalPayable;
+      this.salesLeadId = result.data.salesLeadId;
+      this.invoice.totalAmount = result.data.totalAmount;
+      this.invoiceItemList = result.data.invoiceItemList;
+      this.salesTaxList = result.data.salesTaxList;
+
+      this.toast.success(result.message);
+    }
   }
 
   addItem(){
@@ -78,6 +92,7 @@ export class InvoiceItemComponent implements OnInit{
     });
     this.invoiceItem.inventoryId = inventoryId;
     this.invoiceItem.productName = productName;
+    this.invoiceItem.proformaInvoiceId = this.invoice.id;
     const exist = this.invoiceItemList.some(item => item.inventoryId === inventoryId);
     if(exist){
       this.toast.error("Product already added");
@@ -104,7 +119,12 @@ export class InvoiceItemComponent implements OnInit{
   }
 
   manageInvoice(sales:Sales){
+    console.log("sales: ", sales);
     this.sales = sales;
+    this.installationFee = this.sales.installationFee;
+    this.discountRate = this.sales.discountRate;
+    this.subTotal = this.sales.subTotal;
+    this.salesLeadId = this.sales.salesLeadId;
     this.invoiceItemList = sales.invoiceItemList;
     this.salesTaxList = sales.salesTaxList;
   }

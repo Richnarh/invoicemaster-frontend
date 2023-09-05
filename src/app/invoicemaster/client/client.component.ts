@@ -26,6 +26,8 @@ export class ClientComponent implements OnInit{
   clientList:Client[];
 
   loadContent:boolean;
+  pageSize = 10;
+  page = 1;
 
   constructor(private fb:FormBuilder, private lookup:LookupService, private clientService:ClientService,private toast:ToastService){}
 

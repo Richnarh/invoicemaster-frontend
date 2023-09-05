@@ -22,6 +22,9 @@ export class InventoryComponent implements OnInit{
   inventoryList:Inventory[];
   products:LookupItem[];
 
+  pageSize = 10;
+  page = 1;
+
   constructor(private fb:FormBuilder, private lookup:LookupService, private productService:ProductService,private toast:ToastService){}
 
   ngOnInit(){

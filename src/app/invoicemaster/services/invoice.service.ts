@@ -1,6 +1,5 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from '@angular/core';
-import { Observable } from "rxjs";
 import { Invoice, PaymentData, Sales } from "src/app/dto/Payload";
 import { ApiResponse } from "src/app/utils/apiResponse";
 import { environment as env } from "src/environments/environment"
@@ -22,7 +21,10 @@ export class InvoiceService {
     return this.http.post<ApiResponse<any>>(`${env.endpoint}/invoice/${invoiceId}`, {});
   }
   saveInvoice(invoice:Invoice){
-    return this.http.post<ApiResponse<any>>(`${env.endpoint}/invoice`, invoice);
+    if (!invoice.id)
+      return this.http.post<ApiResponse<any>>(`${env.endpoint}/invoice`, invoice);
+    else
+      return this.http.put<ApiResponse<any>>(`${env.endpoint}/invoice`, invoice);
   }
   saveAll(sales:Sales){
     return this.http.post<ApiResponse<any>>(`${env.endpoint}/invoice/save-all`, sales);
@@ -52,7 +54,7 @@ export class InvoiceService {
     return this.http.get<ApiResponse<any>>(`${env.endpoint}/invoice/${invoiceId}/payment-data`);
   }
   invoiceReport(invoiceId:string){
-    return this.http.get<ApiResponse<any>>(`${env.endpoint}/invoice/${invoiceId}/report`);
+    return this.http.get<ApiResponse<any>>(`${env.endpoint}/invoice/${invoiceId}/report`,);
   }
   invoiceReceipt(invoiceId:string){
     return this.http.get<ApiResponse<any>>(`${env.endpoint}/invoice/${invoiceId}/receipt`);

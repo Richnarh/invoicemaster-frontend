@@ -38,7 +38,7 @@
     <ng-template #pageLimitForm>
         <div class="row-field">
             <input type="text" [(ngModel)]="limitValue" class="form-control">
-            <button class="btn btn-sm btn-success mx-2" type="button" (click)="savePageLimit()">Update</button>
+            <button class="btn btn-sm btn-success mx-2" type="button" (click)="savePageLimit()">OK</button>
         </div>
     </ng-template>
     
@@ -56,7 +56,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let invoice of invoiceList | filterFilter:filterText; let i = index">
+                <tr *ngFor="let invoice of invoiceList | paginate:{itemsPerPage:limitValue, currentPage:page, totalItems: invoiceList.length} | filterFilter:filterText; let i = index">
                     <td><i [tooltip]="'Date: '+invoice.valueDate" [placement]="'left'" style="font-size: 1.5rem;" class="bx bxs-message-rounded-dots"></i></td>
                     <td>{{invoice.quotationNumber}}</td>
                     <td>{{invoice.issuedDate}}</td>
@@ -81,6 +81,7 @@
                 </tr>
             </tbody>
         </table>
+        <pagination-controls *ngIf="invoiceList && invoiceList.length > 0" previousLabel="Prev" nextLabel="Next" (pageChange)="page = $event"></pagination-controls>
     </div>
     
     <div *ngIf="!invoiceList || invoiceList.length < 1">
@@ -98,9 +99,9 @@
     <div class="card">
         <div class="card-header">Proforma Invoice Processing</div>
         <div class="card-body">
-            <form class="pt-2" [formGroup]="invoiceForm" (ngSubmit)="save()">
+            <form class="pt-2" [formGroup]="invoiceForm" (ngSubmit)="saveInvoice()">
                 <div class="row mb-3">
-                    <label class="col-sm-2 col-form-label">Quotation Number</label>
+                    <label class="col-sm-2 col-form-label">Quotation Number <span class="text-danger">*</span></label>
                     <div class="col-sm-10">
                       <input type="text" placeholder="Enter quotation number" class="control-field" formControlName="quotationNumber">
                     </div>
@@ -120,6 +121,8 @@
                   <div class="col-sm-10">
                     <input type="text" placeholder="Enter expiry date" class="control-field"
                      bsDatepicker 
+                     [tooltip]="'A week from today.'"
+                     [placement]="'right'"
                      [(ngModel)]="expiryDate"
                      [bsConfig]="{ isAnimated: true, dateInputFormat: 'DD/MM/YYYY' }" 
                      formControlName="expiryDate">
@@ -134,7 +137,7 @@
                         </select>
                     </div>
                     <button data-bs-toggle="modal" data-bs-target="#addClient" class="col btn btn-light btn-sm mx-2 btn-border"><i class="fa fa-plus-circle"></i> &nbsp; Add Client</button>
-                    <button class="col btn btn-light btn-sm mx-2 btn-border" (click)="refreshClient()"><i class="fa fa-refresh"></i> &nbsp;Refresh</button>
+                    <button class="col btn btn-light btn-sm mx-2 btn-border" type="button" (click)="refreshClient()"><i class="fa fa-refresh"></i> &nbsp;Refresh</button>
                 </div>
                 <div class="row mb-3">
                   <label class="col-sm-2 col-form-label">Total Amount</label>

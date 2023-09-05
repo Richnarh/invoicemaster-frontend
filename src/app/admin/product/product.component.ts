@@ -26,9 +26,12 @@ export class ProductComponent implements OnInit{
   productList:Product[];
   productTypeList:LookupItem[];
 
+  filterText:string;
   productName:string;
   description:string;
   productImage:any;
+  pageSize = 10;
+  page = 1;
 
   constructor(private lookup:LookupService, private productService:ProductService, private fb:FormBuilder, private toast:ToastService){}
 

@@ -2,12 +2,12 @@
 <div class="card">
     <div class="card-header">Add new {{pageTitle}}</div>
     <div *ngIf="pageView.listView">
-        <div class="clearfix">
-          <button type="button" class="btn btn-light btn-border mx-2"><i class="fa fa-search"></i></button>
+        <div class="clearfix">           
+          <input [(ngModel)]="filterText" type="text" class="control-field mx-2" placeholder="Search something...">
           <button type="button" class="btn btn-primary btn-border m-2" (click)="fetchProducts()"><i class="fa fa-spinner"></i>&nbsp;Load Products</button>
             <div class="float-end">
-            <a href="javascript:void(0)" class="mx-3" title="New Branch" (click)="initProduct()"><i class="fa fa-plus-circle fa-3x"></i></a>
-            </div>
+            <button type="button" class="btn btn-primary m-2" (click)="initProduct()"><i class="fa fa-plus-circle"></i>&nbsp;New Product</button>
+          </div>
         </div>
         <div class="p-2" *blockUI="'loading'">
             <table class="table table-bordered table-striped">
@@ -21,7 +21,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let product of productList; let i = index">
+                    <tr *ngFor="let product of productList | paginate:{itemsPerPage:pageSize, currentPage:page, totalItems: productList?.length} | filterFilter:filterText; let i = index">
                         <td>{{product.productCode}}</td>
                         <td>{{product.productName}}</td>
                         <td>{{product.reorderLevel}}</td>
@@ -41,6 +41,7 @@
                     </tr>
                 </tbody>
             </table>
+         <pagination-controls *ngIf="productList && productList.length > 0" previousLabel="Prev" nextLabel="Next" (pageChange)="page = $event"></pagination-controls>
         </div>
       </div>
       

@@ -6,7 +6,6 @@ import { LookupService } from "src/app/services/lookup.service";
 import { ToastService } from "src/app/utils/toast-service";
 import { InvoiceService } from "../services/invoice.service";
 import { Invoice, PaymentData } from "src/app/dto/Payload";
-import { EventProxyService } from "src/app/services/event-proxy.service";
 
 @Component({
   selector: 'app-add-payment',
@@ -26,21 +25,12 @@ export class AddPaymentComponent implements OnInit{
   clientName:string;
   totalAmount:number;
   
-  constructor(private proxy:EventProxyService, private fb:FormBuilder, private invoiceService:InvoiceService, private toast:ToastService, private lookups:LookupService){}
+  constructor(private fb:FormBuilder, private invoiceService:InvoiceService, private toast:ToastService, private lookups:LookupService){}
   
   ngOnInit() {
     this.setupForm();
     this.initLookups();
     this.fullyPaid = false;
-    this.proxy.getEventSubject().subscribe((param: any) => {
-      this.invoice = param;
-      if (param !== undefined) {
-        this.clientName = param.client;
-        this.totalAmount = param.totalAmount;
-
-        this.fetchPaymentInfo(param.id);
-      }
-    });
   }
   async initLookups(){
     const delivery = await firstValueFrom(this.lookups.deliveryStatus());
@@ -60,6 +50,9 @@ export class AddPaymentComponent implements OnInit{
     let payload:PaymentData = this.paymentForm.value;
     payload.clientId = this.invoice.clientId;
     payload.proformaInvoiceId = this.invoice.id;
+    if(payload.partialAmountPaid == null || payload.partialAmountPaid == undefined){
+      payload.partialAmountPaid = 0.0;
+    }
     console.log("payload: ", payload);
     const result = await firstValueFrom(this.invoiceService.savePaymentData(payload, this.invoice.id));
     if(result.success){
@@ -70,12 +63,13 @@ export class AddPaymentComponent implements OnInit{
     }
   }
 
-  async fetchPaymentInfo(invoiceId:string){
+  async fetchPaymentInfo(invoice:Invoice){
     this.paymentData = {} as PaymentData;
     this.paymentForm.reset();
     this.paymentForm.patchValue({});
-    console.log("invoiceId: ", invoiceId);
-    const result = await firstValueFrom(this.invoiceService.fetchPaymentInfo(invoiceId));
+    this.clientName = invoice.client;
+    this.totalAmount = invoice.totalAmount;
+    const result = await firstValueFrom(this.invoiceService.fetchPaymentInfo(invoice.id));
     console.log("result: ", result);
     this.paymentData = result.data;
     if(result.data){
@@ -95,18 +89,12 @@ export class AddPaymentComponent implements OnInit{
   setupForm(){
     this.paymentForm = this.fb.group({
       id:[null],
-      paymentCode:[null],
-      clientName:[null],
       clientId:[null],
-      proformaInvoice:[null],
       proformaInvoiceId:[null],
       paymentMethod:[null],
       deliveryStatus:[null, Validators.required],
-      deliveryAdress:[null],
       paymentStatus:[null, Validators.required],
       partialAmountPaid:[0],
-      totalAmount:[0],
-      paymentMessage:[false]
     });
   }
 }

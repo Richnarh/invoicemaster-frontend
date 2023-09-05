@@ -23,7 +23,7 @@ import { AuthGuard } from "./services/auth.guard";
     HttpClientModule,
     RouterModule,
     AuthModule,
-    ToastrModule.forRoot(), 
+    ToastrModule.forRoot(),
   ],
   providers: [AuthGuard,DatePipe,{provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi:true}],
   bootstrap: [AppComponent]

@@ -23,7 +23,7 @@
                       </tr>
                   </thead>
                   <tbody>
-                      <tr *ngFor="let client of clientList | filterFilter:filterText; let i = index">
+                      <tr *ngFor="let client of clientList | paginate:{itemsPerPage:pageSize, currentPage:page, totalItems: clientList.length} | filterFilter:filterText; let i = index">
                           <td><i class="fa fa-info"></i></td>
                           <td>{{client.clientName}}</td>
                           <td>{{client.phone}}</td>
@@ -43,6 +43,7 @@
                       </tr>
                   </tbody>
               </table>
+              <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="page = $event"></pagination-controls>
             </ng-template>
         </div>
 

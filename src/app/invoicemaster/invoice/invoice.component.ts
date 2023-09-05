@@ -14,6 +14,9 @@ import { CompanyService } from "src/app/admin/services/company.service";
 import { Config } from "src/app/dto/constant";
 import { DatePipe } from "@angular/common";
 import { DateUtils } from "src/app/utils/dateUtils";
+import { SweetMessage } from "src/app/utils/sweet-message";
+import { AddPaymentComponent } from "../add-payment/add-payment.component";
+import { PageChangedEvent } from "ngx-bootstrap/pagination";
 
 @Component({
   selector: 'app-invoice',
@@ -22,9 +25,13 @@ import { DateUtils } from "src/app/utils/dateUtils";
 })
 export class InvoiceComponent implements OnInit{
   @BlockUI('loading') loading: NgBlockUI;
+  
   @ViewChild(PdfViewerComponent, { static: false })
   private pdfViewer:PdfViewerComponent;
-
+  
+  @ViewChild(AddPaymentComponent, { static: false })
+  private addPayment:AddPaymentComponent;
+  
   pageView:PageView = PageView.listView();
   pageTitle:string = "Proforma Invoice";
   invoiceList:Invoice[];
@@ -37,6 +44,8 @@ export class InvoiceComponent implements OnInit{
 
   filterText:string;
   limitValue:string;
+  pageSize = 2;
+  page = 1;
 
   issuedDate:Date;
   expiryDate:Date;
@@ -110,33 +119,43 @@ export class InvoiceComponent implements OnInit{
     this.loading.stop();
   }
   
-  async save(){
+  async saveInvoice(){
     if(this.invoiceForm.invalid){
       this.toast.error("Please fill out required fields");
       return;
     }
     let payload = this.invoiceForm.value;
-    payload.issuedDate = this.datePipe.transform(this.invoiceForm.get("issuedDate")?.value,"dd/MM/yyyy");
-    payload.expiryDate = this.datePipe.transform(this.invoiceForm.get("expiryDate")?.value,"dd/MM/yyyy");
-    console.log("invoice: ", payload);
+    payload.issuedDate = this.datePipe.transform(this.invoiceForm.get("issuedDate")?.value,"yyyy-MM-dd");
+    payload.expiryDate = this.datePipe.transform(this.invoiceForm.get("expiryDate")?.value,"yyyy-MM-dd");
+    if(payload.totalAmount == null || payload.totalAmount == undefined){
+      payload.totalAmount = 0.0;
+    }
     const result = await firstValueFrom(this.invoiceService.saveInvoice(payload));
     if(result.success){
+      this.invoiceList.push(result.data);
       this.toast.success(result.message);
+      this.pageView.resetToListView();
     }else{
       this.toast.error(result.message);
     }
   }
   async generateInvoice(invoice:Invoice){
+    let reportArray = [];
+    
     const report = await firstValueFrom(this.invoiceService.invoiceReport(invoice.id));
-    this.pdfViewer.viewPdf(report.data, invoice);
+    reportArray.push(report.data.invoiceCover);
+    reportArray.push(report.data.invoiceReport)
+    
+    console.log("report: ", reportArray);
+    this.pdfViewer.viewPdf(reportArray, invoice);
   }
   async generateReceipt(invoice:Invoice){
     const report = await firstValueFrom(this.invoiceService.invoiceReceipt(invoice.id));
-    this.pdfViewer.viewPdf(report.data, invoice);
+    this.pdfViewer.receiptPdf(report.data, invoice);
   }
 
   async invoiceItem(invoice:Invoice){
-    this.loading.start("Loading...");
+    this.loading.start("Please wait...");
     this.invoice=invoice;
     const result = await firstValueFrom(this.invoiceService.manageInvoice(invoice.id));
     this.loading.stop();
@@ -146,16 +165,17 @@ export class InvoiceComponent implements OnInit{
 
   paymentInfo(invoice:Invoice){
     this.invoice = invoice;
-    this.proxy.sendEvent(invoice);
+    this.addPayment.fetchPaymentInfo(invoice);
   }
   async requestReversal(invoice:Invoice){
+    const confirm = await SweetMessage.confirm("Reverse Invoice", "Do you want to request reversal?");
+    if (!confirm.value) return;
     const result = await firstValueFrom(this.invoiceService.reverseApproval(invoice.id));
     if(result.data){
       this.toast.success(result.data);
     }
   }
   editInvoice(invoice:Invoice){
-    console.log(invoice)
     this.invoiceForm.reset();
     this.invoiceForm.patchValue({});
     this.invoiceForm.patchValue(invoice);
@@ -191,16 +211,10 @@ export class InvoiceComponent implements OnInit{
       issuedDate:[new Date(), Validators.required],
       expiryDate:[new Date(), Validators.required],
       clientId:[null, Validators.required],
-      phoneNumber:[null],
-      quotationNumber:[null],
-      totalAmount:[0],
-      subTotalAmount:[0],
+      quotationNumber:[null, Validators.required],
+      totalAmount:0.0,
       modeOfPayment:[null],
-      discountRate:[0],
-      installationFee:[0],
       description:[null],
-      converted:[false],
-      invoiceItemList:[[]],
     });
   }
 }

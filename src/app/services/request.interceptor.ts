@@ -25,7 +25,7 @@ export class RequestInterceptor implements HttpInterceptor{
 
             const user = currentUser ? JSON.parse(currentUser) : null;
             const branch = branchId ? JSON.parse(branchId) : null;
-            requestClone = req.clone({setHeaders: { token: `${atob(token)}`, userAccountId:user?.id, branchId:branch}});
+            requestClone = req.clone({setHeaders: { token:token, userAccountId:user?.id, branchId:branch}});
         
             // console.log('intercepted Request => ', requestClone);
         }

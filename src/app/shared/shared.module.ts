@@ -10,7 +10,8 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { PopoverModule } from "ngx-bootstrap/popover";
 import { TooltipModule  } from 'ngx-bootstrap/tooltip';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-
+import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { PageTitleComponent } from "./page-title/page-title.component";
 import { SafePipe } from "./pipes/SafePipe";
@@ -18,7 +19,6 @@ import { PdfViewerComponent } from "./pdf-viewer/pdf-viewer.component";
 import { UserLoginComponent } from "./user-login/user-login.component";
 import { FilterPipe } from "./pipes/filterPipe";
 import { NodataComponent } from './nodata/nodata.component';
-
 
 @NgModule({
   declarations: [
@@ -30,7 +30,7 @@ import { NodataComponent } from './nodata/nodata.component';
     SafePipe,
     FilterPipe,
     UserLoginComponent,
-    NodataComponent
+    NodataComponent,
   ],
   imports: [
     CommonModule,
@@ -40,6 +40,8 @@ import { NodataComponent } from './nodata/nodata.component';
     NgxSkeletonLoaderModule,
     PopoverModule,
     TooltipModule,
+    NgxExtendedPdfViewerModule, 
+    NgxPaginationModule,
     BsDatepickerModule.forRoot(),
     BlockUIModule.forRoot()
   ],
@@ -50,7 +52,9 @@ import { NodataComponent } from './nodata/nodata.component';
     TooltipModule,
     BsDatepickerModule,
     ReactiveFormsModule,
+    NgxExtendedPdfViewerModule,
     NgxSkeletonLoaderModule,
+    NgxPaginationModule,
     SidebarComponent,
     HeaderComponent, 
     FooterComponent,

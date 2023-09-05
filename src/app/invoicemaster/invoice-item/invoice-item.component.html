@@ -22,12 +22,12 @@
                 <input type="text" class="form-control" formControlName="unitPrice">
               </div>
             </div>
-            <div class="row mb-3">
+            <!-- <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Description</label>
                 <div class="col-sm-7">
                   <textarea class="form-control" formControlName="description"></textarea>
                 </div>
-            </div>
+            </div> -->
             
             <div class="text-center">
               <button type="submit" class="btn btn-outline-success mx-2"><i class="fa fa-plus-circle"></i> Add to table</button>
@@ -70,7 +70,7 @@
                     <tr>
                         <td><span>Sub Total</span></td>
                         <td class="text-end"> 
-                            <input [(ngModel)]="subTotal" type="text" value="GHS {{sales.subTotal | number}}" disabled="true" class="form-control text-end">
+                            <input type="text" value="GHS {{subTotal | number}}" disabled="true" class="form-control text-end">
                         </td>
                     </tr>
                     <tr>
@@ -82,7 +82,7 @@
                     <tr>
                         <td><span>Discount(%)</span></td>
                         <td class="text-end">
-                            <input [(ngModel)]="discountRate" type="text" [value]="invoice.discountRate" class="control-field w-100 text-end">
+                            <input [(ngModel)]="discountRate" type="text" class="control-field w-100 text-end">
                         </td>
                     </tr>
                     <tr>
@@ -105,7 +105,7 @@
                     <tr>
                         <td>Installation Fee</td>
                         <td class="text-end">
-                            <input [(ngModel)]="installationFee" type="text" [value]="invoice.installationFee" class="control-field w-100 text-end">
+                            <input [(ngModel)]="installationFee" type="text" class="control-field w-100 text-end">
                         </td>
                     </tr>
                     <tr class="display-box">
