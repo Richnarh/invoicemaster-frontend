@@ -1,10 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-clear-button',
+  selector: 'clear-button',
   templateUrl: './clear-button.component.html',
   styleUrls: ['./clear-button.component.scss']
 })
 export class ClearButtonComponent {
+  @Output() evtListener = new EventEmitter<void>();
 
+  fireEvent(){
+    this.evtListener.emit();
+  }
 }

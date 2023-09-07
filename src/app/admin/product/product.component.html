@@ -4,9 +4,9 @@
     <div *ngIf="pageView.listView">
         <div class="clearfix">           
           <input [(ngModel)]="filterText" type="text" class="control-field mx-2" placeholder="Search something...">
-          <button type="button" class="btn btn-primary btn-border m-2" (click)="fetchProducts()"><i class="fa fa-spinner"></i>&nbsp;Load Products</button>
-            <div class="float-end">
-            <button type="button" class="btn btn-primary m-2" (click)="initProduct()"><i class="fa fa-plus-circle"></i>&nbsp;New Product</button>
+          <app-button btnType="button" btnStyle="btn btn-primary btn-border m-2" btnText="Load Products" iconType="fa fa-spinner" (evtListener)="fetchProducts()"></app-button>    
+          <div class="float-end">
+              <add-new-button (evtListener)="initProduct()" btnText="New Product"/>
           </div>
         </div>
         <div class="p-2" *blockUI="'loading'">
@@ -106,9 +106,9 @@
             </div>
             
             <div class="text-center">
-              <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-check-circle"></i> Save Changes</button>
-              <button type="reset" class="btn btn-secondary btn-sm mx-3" (click)="clearPage()"><i class="fa fa-timex"></i> Clear</button>
-              <button type="reset" class="btn btn-danger btn-sm float-end" (click)="closePage()"><i class="fa fa-times"></i> Close Page</button>
+              <save-button btnType="submit"/>
+              <clear-button (evtListener)="clearPage()"/>
+              <close-button (evtListener)="closePage()"/>
             </div>
           </form>
     </div>

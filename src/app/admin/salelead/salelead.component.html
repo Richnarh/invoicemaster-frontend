@@ -4,7 +4,7 @@
     <div *ngIf="pageView.listView">
         <div class="clearfix">
             <div class="float-end">
-            <button type="button" class="btn btn-primary m-2" (click)="initSalesLead()"><i class="fa fa-plus-circle"></i>&nbsp;New Lead</button>
+              <add-new-button (evtListener)="initSalesLead()" btnText="New Lead"/>
           </div>
         </div>
         <div class="p-2">
@@ -28,7 +28,7 @@
                         <td class="text-end">{{salesLead.rate | number}}</td>
                         <td>
                             <div class="dropdown float-end">
-                                <button class="btn btn-secondary btn-sm dropdown-toggle btn-border" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <button class="btn btn-secondary dropdown-toggle btn-border" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                   Choose...
                                 </button>
                                 <ul class="dropdown-menu">
@@ -96,9 +96,9 @@
             </div>
             
             <div class="text-center">
-              <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-check-circle"></i> Save Changes</button>
-              <button type="reset" class="btn btn-secondary btn-sm mx-3" (click)="clearPage()"><i class="fa fa-timex"></i> Clear</button>
-              <button type="reset" class="btn btn-danger btn-sm float-end" (click)="closePage()"><i class="fa fa-times"></i> Close Page</button>
+              <save-button btnType="submit"/>
+              <clear-button (evtListener)="clearPage()"/>
+              <close-button (evtListener)="closePage()"/>
             </div>
           </form>
     </div>

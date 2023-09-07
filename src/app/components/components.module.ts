@@ -5,6 +5,7 @@ import { CloseButtonComponent } from './close-button/close-button.component';
 import { SaveButtonComponent } from './save-button/save-button.component';
 import { ClearButtonComponent } from './clear-button/clear-button.component';
 import { SearchButtonComponent } from './search-button/search-button.component';
+import { AppButtonComponent } from './app-button/app-button.component';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { SearchButtonComponent } from './search-button/search-button.component';
     CloseButtonComponent,
     SaveButtonComponent,
     ClearButtonComponent,
-    SearchButtonComponent
+    SearchButtonComponent,
+    AppButtonComponent
   ],
   imports: [
     CommonModule,
@@ -23,7 +25,8 @@ import { SearchButtonComponent } from './search-button/search-button.component';
     CloseButtonComponent,
     SaveButtonComponent,
     ClearButtonComponent,
-    SearchButtonComponent
+    SearchButtonComponent,
+    AppButtonComponent
   ]
 })
 export class ComponentsModule { }

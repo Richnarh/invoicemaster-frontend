@@ -32,8 +32,8 @@
                         </div>
     
                         <div class="mx-2">
-                            <button class="btn btn-success mx-2" type="submit"><i class="fa fa-check-circle"></i>&nbsp;Search</button>
-                            <button class="btn btn-secondary" type="button" (click)="clear()"><i class="fa fa-remove"></i>&nbsp;Clear</button>
+                            <search-button btnType="submit" btnText="Search" iconType="fa fa-search"/>
+                            <clear-button (evtListener)="clear()"/>
                         </div>
                         <div class="pt-2">
                             <label class="faded-shade pb-2 py-2">Count: {{paymentDataList ? paymentDataList.length : 2}}</label>
@@ -94,8 +94,8 @@
                     </div>
 
                     <div class="mx-2">
-                        <button class="btn btn-light btn-border mx-2" type="button" (click)="fetchByDeliveryStatus()"><i class="fa fa-check-circle"></i>&nbsp;Search</button>
-                        <button class="btn btn-secondary" type="button" (click)="clearDelivery()"><i class="fa fa-remove"></i>&nbsp;Clear</button>
+                        <search-button btnType="button" btnText="Search" (evtListener)="fetchByDeliveryStatus()" iconType="fa fa-search"/>
+                        <clear-button (evtListener)="clearDelivery()"/>
                     </div>
                     <div class="pt-2">
                         <label class="faded-shade pb-2 py-2">Count: {{paymentDataDeliveryList ? paymentDataDeliveryList.length : 0}}</label>

@@ -6,7 +6,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./add-new-button.component.scss']
 })
 export class AddNewButtonComponent {
-  @Input() textTitle = "Add new";
+  @Input() btnText = "Add new";
   @Output() evtListener = new EventEmitter<void>();
 
   fireEvent(){

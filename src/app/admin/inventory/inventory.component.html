@@ -2,8 +2,11 @@
 <div class="card">
     <div class="card-header">Add new {{pageTitle}}</div>
     <div *ngIf="pageView.listView">
-      <add-new-button [textTitle]="'New Inventory'" (evtListener)="initInventory()"></add-new-button>
-
+      <div class="clearfix">
+        <div class="float-end">
+            <add-new-button btnText="New Inventory" (evtListener)="initInventory()"/>
+          </div>
+        </div>
         <div class="p-2">
             <table class="table table-bordered table-striped">
                 <thead class="table-light">
@@ -99,9 +102,9 @@
             </div>
             
             <div class="text-center">
-              <save-button [buttonType]="'submit'"></save-button>
-              <button type="reset" class="btn btn-secondary btn-sm mx-3" (click)="clearPage()"><i class="fa fa-timex"></i> Clear</button>
-              <button type="reset" class="btn btn-danger btn-sm float-end" (click)="closePage()"><i class="fa fa-times"></i> Close Page</button>
+              <save-button btnType="submit"></save-button>
+              <clear-button (evtListener)="clearPage()"/>
+              <close-button (evtListener)="closePage()"/>
             </div>
           </form>
     </div>

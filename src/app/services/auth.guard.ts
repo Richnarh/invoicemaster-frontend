@@ -31,6 +31,9 @@ export class AuthGuard implements CanActivate,CanActivateChild {
     if((state.url == "/admin") && this.appSession.checkAccess()){
       return true;
     }
+    if((state.url == "/accounts") && this.appSession.checkAccess()){
+      return true;
+    }
     else if((state.url == "/branch") && this.appSession.checkAccess()){
       return true;
     }

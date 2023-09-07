@@ -32,6 +32,9 @@ export class AppSessionService {
   }
 
   checkAccess(){
+    if(this.currentUser === undefined){
+      this.currentUser = JSON.parse(this.storage.getLocalObject(LocalKeys.CurrenUser)!);
+    }
     return this.currentUser !== undefined && this.currentUser?.accessLevel === "Super User";
   }
 

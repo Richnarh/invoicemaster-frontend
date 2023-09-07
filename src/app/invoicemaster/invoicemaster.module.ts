@@ -10,22 +10,24 @@ import { ClientComponent } from './client/client.component';
 import { InvoiceItemComponent } from './invoice-item/invoice-item.component';
 import { AddClientComponent } from './add-client/add-client.component';
 import { AddPaymentComponent } from './add-payment/add-payment.component';
+import { ComponentsModule } from "../components/components.module";
 
 
 @NgModule({
-  declarations: [
-    InvoicemasterLayoutComponent,
-    DashboardComponent,
-    InvoiceComponent,
-    ClientComponent,
-    InvoiceItemComponent,
-    AddClientComponent,
-    AddPaymentComponent
-  ],
-  imports: [
-    CommonModule,
-    InvoicemasterRoutingModule,
-    SharedModule
-  ]
+    declarations: [
+        InvoicemasterLayoutComponent,
+        DashboardComponent,
+        InvoiceComponent,
+        ClientComponent,
+        InvoiceItemComponent,
+        AddClientComponent,
+        AddPaymentComponent
+    ],
+    imports: [
+        CommonModule,
+        InvoicemasterRoutingModule,
+        SharedModule,
+        ComponentsModule
+    ]
 })
 export class InvoicemasterModule { }

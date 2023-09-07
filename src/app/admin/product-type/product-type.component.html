@@ -9,9 +9,8 @@
                       <label>Product Type Name <span class="fw-100 text-danger">*</span></label>
                       <input type="text" class="form-control" formControlName="productTypeName">
                     </div>
-                    <div class="text-center">
-                      <button type="submit" class="btn btn-success btn-sm mx-2"><i class="fa fa-check-circle"></i> Save Changes</button>
-                      <button class="btn btn-secondary btn-sm" type="reset" (click)="clear()"><i class="fa fa-remove"></i>&nbsp;Clear</button>
+                    <div>
+                      <save-button btnType="submit"/>
                     </div>
                   </form>
             </div>
@@ -28,7 +27,7 @@
                             <td>{{type.productTypeName}}</td>
                             <td>
                                 <div class="dropdown float-end">
-                                    <button class="btn btn-secondary btn-sm dropdown-toggle btn-border" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <button class="btn btn-secondary dropdown-toggle btn-border" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                       Choose...
                                     </button>
                                     <ul class="dropdown-menu">

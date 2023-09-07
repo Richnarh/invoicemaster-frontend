@@ -4,7 +4,7 @@
     <div *ngIf="pageView.listView">
         <div class="clearfix">
             <div class="float-end">
-            <a href="javascript:void(0)" class="mx-3" title="New Branch" (click)="initBranch()"><i class="fa fa-plus-circle fa-3x"></i></a>
+              <add-new-button (click)="initBranch()" btnText="New Branch"/>
             </div>
         </div>
         <div class="p-2">
@@ -80,8 +80,9 @@
               </div>
             </div>
             <div class="text-center">
-              <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-check-circle"></i> Save Changes</button>
-              <button type="reset" class="btn btn-danger btn-sm float-end" (click)="closePage()"><i class="fa fa-times"></i> Close Page</button>
+              <save-button btnType="submit"/>
+              <clear-button/>
+              <close-button (evtListener)="closePage()"/>
             </div>
           </form>
     </div>

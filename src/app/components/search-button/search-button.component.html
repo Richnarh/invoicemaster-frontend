@@ -1,1 +1,1 @@
-<button [ngClass]="btnStyle" [type]="btnType"><i class="fa fa-check-circle"></i>&nbsp;{{textTitle}}</button>
+<button class="btn btn-light btn-border mx-2" [type]="btnType" (click)="fireEvent()"><i [ngClass]="iconType"></i>&nbsp;{{btnText}}</button>

@@ -7,7 +7,7 @@ import { InvoiceComponent } from "./invoice/invoice.component";
 
 const routes: Routes = [
   {
-    path: 'i', component: InvoicemasterLayoutComponent,
+    path: '', component: InvoicemasterLayoutComponent,
     children: [
       { path: 'invoicemaster', component: DashboardComponent },
       { path: 'client', component: ClientComponent },

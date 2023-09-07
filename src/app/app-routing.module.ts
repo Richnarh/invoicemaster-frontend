@@ -9,6 +9,7 @@ const routes: Routes = [
   { path: '', loadChildren: () => import('./welcome/welcome.module').then(m => m.WelcomeModule) },
   { path: '', loadChildren: () => import('./invoicemaster/invoicemaster.module').then(m => m.InvoicemasterModule)},
   { path: '', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule), canActivateChild:[AuthGuard] },
+  { path: '', loadChildren: () => import('./account/account.module').then(m => m.AccountModule), canActivateChild:[AuthGuard] },
   { path: '**', component: PageNotFoundComponent },
 ];
 

@@ -7,7 +7,6 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class SaveButtonComponent {
   @Input() textTitle = "Save Changes";
-  @Input() buttonType = "button";
   @Output() evtListener = new EventEmitter<void>();
 
   fireEvent(){

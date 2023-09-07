@@ -20,6 +20,8 @@ import { SaleleadComponent } from './salelead/salelead.component';
 import { AppconfigComponent } from './appconfig/appconfig.component';
 import { SalesLogComponent } from './sales-log/sales-log.component';
 import { ComponentsModule } from "../components/components.module";
+import { PermissionsComponent } from './permissions/permissions.component';
+import { TaxManagementComponent } from './tax-management/tax-management.component';
 
 
 @NgModule({
@@ -40,6 +42,8 @@ import { ComponentsModule } from "../components/components.module";
     SaleleadComponent,
     AppconfigComponent,
     SalesLogComponent,
+    PermissionsComponent,
+    TaxManagementComponent,
   ],
   imports: [
     CommonModule,
