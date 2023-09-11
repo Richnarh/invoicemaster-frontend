@@ -67,6 +67,27 @@ export class AuthGuard implements CanActivate,CanActivateChild {
     else if((state.url == "/saleslog") && this.appSession.checkAccess()){
       return true;
     }
+    else if((state.url == "/message-template") && this.appSession.checkAccess()){
+      return true;
+    }
+    else if((state.url == "/group-contact") && this.appSession.checkAccess()){
+      return true;
+    }
+    else if((state.url == "/single-message") && this.appSession.checkAccess()){
+      return true;
+    }
+    else if((state.url == "/bulk-message") && this.appSession.checkAccess()){
+      return true;
+    }
+    else if((state.url == "/sms-group") && this.appSession.checkAccess()){
+      return true;
+    }
+    else if((state.url == "/permissions") && this.appSession.checkAccess()){
+      return true;
+    }
+    else if((state.url == "/tax-management") && this.appSession.checkAccess()){
+      return true;
+    }
     else{
       // this.router.navigate([RouteNames.Login]);
       SweetMessage.error("ACCESS DENIED !!");

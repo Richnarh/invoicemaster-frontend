@@ -22,6 +22,14 @@ import { SalesLogComponent } from './sales-log/sales-log.component';
 import { ComponentsModule } from "../components/components.module";
 import { PermissionsComponent } from './permissions/permissions.component';
 import { TaxManagementComponent } from './tax-management/tax-management.component';
+import { GroupContactComponent } from "./sms/group-contact/group-contact.component";
+import { MessageTemplateComponent } from "./sms/message-template/message-template.component";
+import { SingleMessageComponent } from "./sms/single-message/single-message.component";
+import { BulkMessageComponent } from './sms/bulk-message/bulk-message.component';
+import { SmsGroupComponent } from './sms/sms-group/sms-group.component';
+import { GroupFormComponent } from './sms/group-form/group-form.component';
+import { TaxComponent } from './tax/tax.component';
+import { MessageFormComponent } from './sms/message-form/message-form.component';
 
 
 @NgModule({
@@ -44,6 +52,15 @@ import { TaxManagementComponent } from './tax-management/tax-management.componen
     SalesLogComponent,
     PermissionsComponent,
     TaxManagementComponent,
+
+    SingleMessageComponent,
+    MessageTemplateComponent,
+    GroupContactComponent,
+    BulkMessageComponent,
+    SmsGroupComponent,
+    GroupFormComponent,
+    TaxComponent,
+    MessageFormComponent,
   ],
   imports: [
     CommonModule,

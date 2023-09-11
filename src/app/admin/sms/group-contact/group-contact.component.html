@@ -1,0 +1,83 @@
+<app-page-title [pageTitle]="pageTitle"></app-page-title>
+<div class="card">
+    <div class="card-header">Create {{pageTitle}}</div>
+    <div class="p-3">
+        <div class="row">
+            <div class="col-md-4">
+                <form [formGroup]="groupContactForm" (ngSubmit)="save()">
+                    
+                    <div class="row mb-3">
+                        <label class="col-form-label">Group Name &nbsp;<span class="fw-100 text-danger">*</span></label>
+                        <div class="col">
+                            <select class="control-field mx-1" formControlName="smsGrupId">
+                                <option *ngFor="let group of smsGroupList" value={{group?.id}}>{{group?.itemName}}</option>
+                            </select>
+                            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#groupModal" 
+                            class="top-link" tooltip="Add new group" placement="right"> <i class="fa fa-plus-circle"></i> Add</a>
+                        </div>
+                      </div>
+                    <div class="row mb-3" *ngIf="groupContactForm.get('smsGrupId')?.value !== '383f2e8329754f9d98714da74b777e9d' else contacts">
+                      <label class="col-form-label">Contacts &nbsp;<span class="fw-100 text-danger">*</span></label>
+                      <div class="col">
+                        <select class="control-field mx-1" formControlName="clientId">
+                            <option *ngFor="let client of clientList" value={{client?.id}}>{{client?.itemName}}</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div>
+                      <save-button btnType="submit"/>
+                      <clear-button (evtListener)="clear()"/>
+                    </div>
+                </form>
+                <ng-template #contacts>
+                    <div class="py-3 alert alert-info">
+                        <b class="text-success">Click save to add all contacts</b>
+                    </div>
+                </ng-template>
+            </div>
+            <div class="col-md-8">
+                <table class="table table-bordered">
+                    <thead class="table-light">
+                        <tr>
+                            <th scope="col">Full Name</th>
+                            <th scope="col">Phone Number</th>
+                            <th scope="col">Group</th>
+                            <th class="text-end" scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let groupContact of groupContactList; let i = index">
+                            <td>{{groupContact.client}}</td>
+                            <td>{{groupContact.phoneNumber}}</td>
+                            <td>{{groupContact.smsGrup}}</td>
+                            <td>
+                                <div class="dropdown float-end">
+                                    <button class="btn btn-secondary dropdown-toggle btn-border" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                      Choose...
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                      <li><a href="javascript:void(0)" class="dropdown-item" type="button" (click)="editGroupContact(groupContact)"><i class="fa fa-edit"></i>Edit</a></li>
+                                      <li><a href="javascript:void(0)" class="dropdown-item text-danger" type="button" (click)="deleteGroupContact(groupContact.id)"><i class="fa fa-remove"></i>Delete</a></li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="modal fade" id="groupModal" style="background: #6677;" tabindex="-1" data-bs-backdrop="false">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h6 class="modal-title">Add Group</h6>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <app-group-form (groupEvt)="pushToGroups($event)"></app-group-form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

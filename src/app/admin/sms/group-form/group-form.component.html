@@ -1,0 +1,7 @@
+<div>
+    <span>Group Name <span class="text-danger">*</span></span>
+    <input type="text" class="form-control" [(ngModel)]="groupName">
+    <div class="py-3">
+        <app-button btnType="button" (evtListener)="saveGroup()" btnStyle="btn btn-success" btnText="Save Changes" iconType="fa fa-check-circle"/>
+    </div>
+</div>

@@ -30,6 +30,18 @@
         border-color: #ddd;
     }
 }
+.ktable-td{
+    padding: 1em;
+    &:hover{
+        background-color: #f6f6f6;
+        cursor: pointer;
+    }
+}
+
+.ktable-table{
+    height: 60vh;
+    overflow-y: auto;
+}
 
 .faded-shade {
     font-family: cursive;

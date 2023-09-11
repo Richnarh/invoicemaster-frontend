@@ -33,11 +33,17 @@ export class LookupService {
   clients(){
     return this.http.get<ApiResponse2<LookupItem>>(`${env.lookupEndpoint}/clients`);
   }
+  smsGroup(){
+    return this.http.get<ApiResponse2<LookupItem>>(`${env.lookupEndpoint}/sms-group`);
+  }
   paymentMethod(){
     return this.http.get<ApiResponse2<LookupItem>>(`${env.lookupEndpoint}/payment-method`);
   }
   saleslead(){
     return this.http.get<ApiResponse2<LookupItem>>(`${env.lookupEndpoint}/saleslead`);
+  }
+  messageTemplates(){
+    return this.http.get<ApiResponse2<LookupItem>>(`${env.lookupEndpoint}/message-template`);
   }
 
   // ENUMS
@@ -61,5 +67,8 @@ export class LookupService {
   }
   clientType(){
     return this.http.get<ApiResponse2<LookupItem>>(`${env.lookupEndpoint}/client-type`);
+  }
+  messageType(){
+    return this.http.get<ApiResponse2<LookupItem>>(`${env.lookupEndpoint}/message-type`);
   }
 }

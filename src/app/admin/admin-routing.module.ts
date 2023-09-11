@@ -13,6 +13,12 @@ import { ProductTypeComponent } from "./product-type/product-type.component";
 import { SaleleadComponent } from "./salelead/salelead.component";
 import { AppconfigComponent } from "./appconfig/appconfig.component";
 import { SalesLogComponent } from "./sales-log/sales-log.component";
+import { GroupContactComponent } from "./sms/group-contact/group-contact.component";
+import { MessageTemplateComponent } from "./sms/message-template/message-template.component";
+import { SingleMessageComponent } from "./sms/single-message/single-message.component";
+import { BulkMessageComponent } from "./sms/bulk-message/bulk-message.component";
+import { SmsGroupComponent } from "./sms/sms-group/sms-group.component";
+import { PermissionsComponent } from "./permissions/permissions.component";
 
 
 const routes: Routes = [
@@ -31,6 +37,13 @@ const routes: Routes = [
       { path: 'saleslead', component: SaleleadComponent },
       { path: 'appconfig', component: AppconfigComponent },
       { path: 'saleslog', component: SalesLogComponent },
+      { path: 'permissions', component: PermissionsComponent },
+
+      { path: 'message-template', component: MessageTemplateComponent },
+      { path: 'group-contact', component: GroupContactComponent },
+      { path: 'single-message', component: SingleMessageComponent },
+      { path: 'bulk-message', component: BulkMessageComponent },
+      { path: 'sms-group', component: SmsGroupComponent },
     ]
  }
 ];

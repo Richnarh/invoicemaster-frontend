@@ -22,11 +22,11 @@
               <div class="py-3">
                 <div class="text-center fw-bold"><u>I N V O I C E</u></div>
                 <input [(ngModel)]="filterText" type="text" class="control-field w-100" placeholder="Search...">
-              <div *blockUI="'loading'" class="invoice-table">
+              <div *blockUI="'loading'" class="ktable-table">
                 <table class="table">
                     <tbody>
                         <tr *ngFor="let invoice of invoiceList | filterFilter:filterText; let i = index">
-                            <td class="invoice-td" (click)="fetchDetails(invoice)">{{invoice.quotationNumber}} - {{invoice.totalAmount | number}}</td>
+                            <td class="ktable-td" (click)="fetchDetails(invoice)">{{invoice.quotationNumber}} - {{invoice.totalAmount | number}}</td>
                         </tr>
                     </tbody>
                   </table>

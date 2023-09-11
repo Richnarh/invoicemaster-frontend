@@ -1,0 +1,34 @@
+<div>
+    <div class="faded-shade">
+        Selected Client: <b>{{ client !== undefined ? client.clientName : '' }} - {{client !== undefined ? client.phone : ''}}</b>
+    </div>
+    <div class="row mb-3">
+        <div class="col-form-label">
+            <select class="control-field" [(ngModel)]="messageType" [name]="messageType" (change)="restTemplate($event)">
+                <option *ngFor="let messageType of messsageTypeList" value={{messageType?.id}}>{{messageType?.itemName}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="row mb-3" *ngIf="messageType === 'TEXT_MESSAGING' else messageTemplate">
+        <div class="col-form-label">
+            <textarea [(ngModel)]="textMessage" class="form-control shadow-sm" rows="7" placeholder="Type message."></textarea>
+        </div>
+    </div>
+    
+    <div class="row mb-3">
+        <div class="col-form-label">
+            <app-button btnText="Send Message" btnStyle="btn btn-success" (evtListener)="sendMessage()"/>
+            <app-button btnType="button" btnText="Clear" btnStyle="btn btn-secondary mx-3" iconType="fa fa-trash" (evtListener)="clear()"/>
+        </div>
+    </div>
+</div>
+
+<ng-template #messageTemplate>
+    <div class="row mb-3">
+        <div class="col-form-label">
+            <select class="control-field" [(ngModel)]="messageTemplateId">
+                <option *ngFor="let template of messsageTemplateList" value={{template?.id}}>{{template?.itemName}}</option>
+            </select>
+        </div>
+    </div>
+</ng-template>

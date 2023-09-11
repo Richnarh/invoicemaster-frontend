@@ -1,16 +1,3 @@
-.invoice-td{
-    padding: 1em;
-    &:hover{
-        background-color: #f6f6f6;
-        cursor: pointer;
-    }
-}
-
-.invoice-table{
-    height: 60vh;
-    overflow-y: auto;
-}
-
 input,select{
     font-size: 14px;
 }
