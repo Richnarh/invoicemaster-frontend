@@ -17,6 +17,8 @@ import { DateUtils } from "src/app/utils/dateUtils";
 import { SweetMessage } from "src/app/utils/sweet-message";
 import { AddPaymentComponent } from "../add-payment/add-payment.component";
 import { PageChangedEvent } from "ngx-bootstrap/pagination";
+import { StorageService } from "src/app/services/storage.service";
+import { LocalKeys } from "src/app/utils/LocalKeys";
 
 @Component({
   selector: 'app-invoice',
@@ -44,6 +46,7 @@ export class InvoiceComponent implements OnInit{
 
   filterText:string;
   limitValue:string;
+  userId:string;
   pageSize = 2;
   page = 1;
 
@@ -53,7 +56,7 @@ export class InvoiceComponent implements OnInit{
   constructor(
     private proxy:EventProxyService, private companyService:CompanyService, private fb:FormBuilder, 
     private invoiceService:InvoiceService, private toast:ToastService, private lookups:LookupService,
-    private datePipe: DatePipe){
+    private datePipe: DatePipe, private storageService: StorageService){
   }
   
   ngOnInit() {
@@ -62,6 +65,7 @@ export class InvoiceComponent implements OnInit{
 
     this.invoicesToday();
     this.fetchPageLimit();
+    this.userId = JSON.parse(this.storageService.getLocalObject(LocalKeys.CurrenUserId)!);
   }
 
   async initInvoice(){
@@ -140,14 +144,17 @@ export class InvoiceComponent implements OnInit{
     }
   }
   async generateInvoice(invoice:Invoice){
-    let reportArray = [];
+    const url = Config.REPORT_URL+"?id="+invoice.quotationNumber;
+    console.log("url: ", url);
+    window.open(url, "_blank");
+    // let reportArray = [];
     
-    const report = await firstValueFrom(this.invoiceService.invoiceReport(invoice.id));
-    reportArray.push(report.data.invoiceCover);
-    reportArray.push(report.data.invoiceReport)
+    // const report = await firstValueFrom(this.invoiceService.invoiceReport(invoice.id));
+    // reportArray.push(report.data.invoiceCover);
+    // reportArray.push(report.data.invoiceReport)
     
-    console.log("report: ", reportArray);
-    this.pdfViewer.viewPdf(reportArray, invoice);
+    // console.log("report: ", reportArray);
+    // this.pdfViewer.viewPdf(reportArray, invoice);
   }
   async generateReceipt(invoice:Invoice){
     const report = await firstValueFrom(this.invoiceService.invoiceReceipt(invoice.id));

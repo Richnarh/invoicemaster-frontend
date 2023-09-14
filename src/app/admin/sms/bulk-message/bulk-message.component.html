@@ -4,7 +4,9 @@
     <div class="p-3">
         <div class="row">
             <div class="col-md-4">
-                <input [(ngModel)]="filterText" type="text" class="control-field w-100" placeholder="Search...">
+                <select class="control-field w-100" [(ngModel)]="smsGrupId" (change)="groupValueChange($event)">
+                    <option *ngFor="let group of smsGroupList" value={{group?.id}}>{{group?.itemName}}</option>
+                </select>
                 <div *blockUI="'loading'" class="ktable-table">
                     <table class="table">
                         <tbody>
@@ -16,7 +18,7 @@
                 </div>
             </div>
             <div class="col-md-8">
-               <app-message-form/>
+               <app-message-form [clientList]="clientList" [isBulkSMS]="true"/>
             </div>
         </div>
     </div>

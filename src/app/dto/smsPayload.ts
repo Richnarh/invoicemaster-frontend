@@ -1,3 +1,4 @@
+import { Client } from "./Payload";
 import { Base } from "./base";
 
 export interface MessageTemplate extends Base{
@@ -26,4 +27,5 @@ export interface SmsMessage extends Base{
     messageTemplateId:string;
     messagingType:string;
     textMessage:string;
+    clientList:Client[];
 }

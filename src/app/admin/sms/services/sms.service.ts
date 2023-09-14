@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from '@angular/core';
-import { MessageTemplate, SmsGroup, SmsMessage } from "src/app/dto/smsPayload";
+import { GroupContact, MessageTemplate, SmsGroup, SmsMessage } from "src/app/dto/smsPayload";
 import { ApiResponse } from "src/app/utils/apiResponse";
 import { environment as env } from "src/environments/environment"
 
@@ -24,6 +24,10 @@ export class SmsService {
     else
       return this.http.put<ApiResponse<any>>(`${env.endpoint}/sms-group`, smsGroup);
   }
+  
+  createGroupContact(groupContact:GroupContact) {
+    return this.http.post<ApiResponse<any>>(`${env.endpoint}/group-contact`, groupContact);
+  }
 
   fetchSmsGroups(){
     return this.http.get<ApiResponse<any>>(`${env.endpoint}/sms-group/list`);
@@ -32,7 +36,7 @@ export class SmsService {
   findAllContactgroups(){
     return this.http.get<ApiResponse<any>>(`${env.endpoint}/group-contact/list`);
   }
-  findContactByGroup(groupId:string){
+  fetchContactByGroup(groupId:string){
     return this.http.get<ApiResponse<any>>(`${env.endpoint}/group-contact/list/${groupId}`);
   }
 

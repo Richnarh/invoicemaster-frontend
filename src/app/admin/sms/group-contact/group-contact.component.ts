@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { GroupContact, SmsGroup } from "src/app/dto/smsPayload";
 import { ToastService } from "src/app/utils/toast-service";
 import { SmsService } from "../services/sms.service";
@@ -50,8 +50,15 @@ export class GroupContactComponent implements OnInit{
     this.groupContactList = result.data;
   }
 
-  save(){
-    
+  async save(){
+    if(this.groupContactForm.invalid){
+      this.toast.error("Please provide for required fields");
+      return;
+    }
+    const payload = this.groupContactForm.value;
+    const result = await firstValueFrom(this.smsService.createGroupContact(payload));
+    console.log("result: ", result);
+    this.groupContactList = result.data;
   }
 
   editGroupContact(groupContact:GroupContact){
@@ -69,7 +76,7 @@ export class GroupContactComponent implements OnInit{
     this.groupContactForm = this.fb.group({
       id:[null],
       contactGroupId:[null],
-      smsGrupId:[null],
+      smsGrupId:[null, Validators.required],
       smsGrup:[null],
       clientId:[null],
       client:[null],

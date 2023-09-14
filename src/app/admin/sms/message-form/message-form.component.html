@@ -1,7 +1,12 @@
 <div>
-    <div class="faded-shade">
-        Selected Client: <b>{{ client !== undefined ? client.clientName : '' }} - {{client !== undefined ? client.phone : ''}}</b>
+    <div class="faded-shade" *ngIf="!isBulkSMS else bulkSMS">
+        Selected Client: <b>{{client !== undefined ? client.clientName : '' }} - {{client !== undefined ? client.phone : ''}}</b>
     </div>
+    <ng-template #bulkSMS>
+        <div class="faded-shade">
+            Selected Client: <b>{{clientList !== undefined ? clientList.length : 0}}</b>
+        </div>
+    </ng-template>
     <div class="row mb-3">
         <div class="col-form-label">
             <select class="control-field" [(ngModel)]="messageType" [name]="messageType" (change)="restTemplate($event)">

@@ -13,6 +13,9 @@ import { ToastService } from "src/app/utils/toast-service";
   styleUrls: ['./message-form.component.scss']
 })
 export class MessageFormComponent implements OnInit{
+  @Input() clientList:Client[];
+  @Input() isBulkSMS:boolean;
+
   messageType:string;
   messageTemplateId:any;
   textMessage:any;
@@ -20,6 +23,7 @@ export class MessageFormComponent implements OnInit{
   messsageTypeList:LookupItem[];
   client:Client;
   sms:SmsMessage;
+
 
   constructor(private lookup:LookupService, private smsService:SmsService, private toast:ToastService){}
  
@@ -46,7 +50,11 @@ export class MessageFormComponent implements OnInit{
   }
 
   async sendMessage(){
-    if(this.client === undefined){
+    console.log("isBulkSMS", this.isBulkSMS)
+    console.log("client", this.client)
+    console.log("messageType", this.messageType)
+    console.log("textMessage", this.textMessage)
+    if(!this.isBulkSMS && this.client?.id === undefined){
       this.toast.error("Please select a client");
       return;
     }
@@ -54,24 +62,35 @@ export class MessageFormComponent implements OnInit{
       this.toast.error("Please select a template");
       return;
     }
-    if(this.messageType === "TEXT_MESSAGING" && this.textMessage === null || this.textMessage == ""){
+    if(this.messageType === "TEXT_MESSAGING" && this.textMessage === undefined){
       this.toast.error("Please type a message");
       return;
     }
     this.sms = {} as SmsMessage;
-    this.sms.clientId = this.client.id;
     this.sms.messagingType = this.messageType;
     this.sms.messageTemplateId = this.messageTemplateId;
     this.sms.textMessage = this.textMessage;
 
-    console.log("SMS: ", this.sms);
-    const result = await firstValueFrom(this.smsService.sendSingleSms(this.sms));
-    console.log(result);
+    let result:any;
+    if(!this.isBulkSMS){
+      this.sms.clientId = this.client.id;
+      result = await firstValueFrom(this.smsService.sendSingleSms(this.sms));
+    }else{
+      console.log("this.clientList: ", this.clientList)
+      if(!this.clientList){
+        this.toast.error("Please load some contacts.");
+        return;
+      }
+      this.sms.clientList = this.clientList;
+      result = await firstValueFrom(this.smsService.sendBulkSms(this.sms));
+    }
+    
+    this.toast.success(result.data);
   }
 
   clear(){
     this.client = {} as Client;
     this.messageType = "TEXT_MESSAGING";
-    this.textMessage = null;
+    this.textMessage = undefined;
   }
 }
