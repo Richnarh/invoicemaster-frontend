@@ -1,1 +1,113 @@
-<p>tax-management works!</p>
+<app-page-title [pageTitle]="pageTitle"></app-page-title>
+<div class="card">
+    <div class="card-header">Create {{pageTitle}}</div>
+    <div class="p-3">
+        <div class="row">
+            <div class="col-md-4">
+                <fieldset class="scheduler-border">
+                    <legend class="scheduler-border pt-0 pb-2 ml-0"><u>Tax Group Form</u></legend>
+                    <form [formGroup]="taxGroupForm" (ngSubmit)="saveTaxGroup()">
+                        <div class="row mb-3">
+                          <label>Group Name <span class="fw-100 text-danger">*</span></label>
+                          <input type="text" class="form-control" formControlName="groupName">
+                        </div>
+                        <div class="row mb-3">
+                          <label>Group Status <span class="fw-100 text-danger">*</span></label>
+                          <select formControlName="groupStatus" class="control-field">
+                            <option selected *ngFor="let status of statusList" value={{status?.id}}>{{status?.itemName}}</option>
+                          </select>
+                        </div>
+                        <div class="row mb-3">
+                          <label>Group Description</label>
+                          <textarea class="form-control" formControlName="groupDescription"></textarea>
+                        </div>
+                        <div>
+                          <save-button btnType="submit"/>
+                          <clear-button (evtListener)="clearTaxGroup()"/>
+                        </div>
+                      </form>
+                </fieldset>
+
+                  <hr>
+
+                  <div>
+                    <table class="table table-bordered">
+                        <thead class="table-light">
+                            <tr>
+                                <th scope="col">Product Type</th>
+                                <th class="text-end" scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let group of taxGroupList; let i = index">
+                                <td>{{group.groupStatus}}</td>
+                                <td class="ktable-td" (click)="selectTax(group)">{{group.groupName}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-6 mx-auto" *ngIf="taxList.length > 0">
+                <fieldset class="scheduler-border">
+                    <legend class="scheduler-border pt-0 pb-2 ml-0"><u>Tax Form</u></legend>
+                    <form [formGroup]="taxForm" (ngSubmit)="saveTax()">
+                        <div class="row mb-3">
+                            <div class="faded-shade">
+                                Selected Group: <b>{{selectedName}}</b>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                          <label>Tax Name <span class="fw-100 text-danger">*</span></label>
+                          <input type="text" class="form-control" formControlName="taxName">
+                        </div>
+                        <div class="row mb-3">
+                          <label>Tax Rate <span class="fw-100 text-danger">*</span></label>
+                          <input type="text" class="form-control" formControlName="taxRate">
+                        </div>
+                        <div class="row mb-3">
+                            <label>Reorder</label>
+                            <input type="text" class="form-control" formControlName="reOrder">
+                        </div>
+                        <div>
+                          <save-button btnType="submit"/>
+                          <app-button btnText="clear/Hide" (evtListener)="clearTax()"/>
+                        </div>
+                    </form>
+                </fieldset>
+
+                  <hr>
+
+                <div>
+                    <table class="table table-bordered">
+                        <thead class="table-light">
+                            <tr>
+                                <th scope="col">Tax Name</th>
+                                <th scope="col">Tax Rate</th>
+                                <th scope="col">Reorder</th>
+                                <th class="text-end" scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let tax of taxList; let i = index">
+                                <td>{{tax.taxName}}</td>
+                                <td>{{tax.taxRate}}</td>
+                                <td>{{tax.reOrder}}</td>
+                                <td>
+                                    <div class="dropdown float-end">
+                                        <button class="btn btn-secondary dropdown-toggle btn-border" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                          Choose...
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                          <li><a href="javascript:void(0)" class="dropdown-item" type="button" (click)="editTax(tax)"><i class="fa fa-edit"></i>Edit</a></li>
+                                          <li><a href="javascript:void(0)" class="dropdown-item text-danger" type="button" (click)="deleteTax(tax.id)"><i class="fa fa-remove"></i>Delete</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

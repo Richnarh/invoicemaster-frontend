@@ -22,13 +22,12 @@
                 </div>
         
                 <div class="mx-2">
-                    <button class="btn btn-success mx-2" type="button" (click)="searchInvoice()"><i class="fa fa-check-circle"></i>&nbsp;Search Invoice</button>
+                    <button class="btn btn-success mx-2" type="button" (click)="searchInvoice()"><i class="fa fa-check-circle"></i>&nbsp;Search Invoice <span *ngIf="invoiceList !== undefined" class="badge bg-white text-success">{{invoiceList.length}}</span></button>
                     <button class="btn btn-light btn-border" type="button" (click)="reset()"><i class="fa fa-trash"></i>&nbsp;Reset</button>
                 </div>
             </div>
         </div>
         <div class="col-md-2">
-            <!-- <span class="text-primary">Count: {{invoiceList ? invoiceList.length : 0}}</span> -->
             <div class="float-end">
                 <button class="btn btn-primary" type="button"(click)="initInvoice()"><i class="fa fa-plus-circle"></i> New Invoice</button>
             </div>
@@ -57,13 +56,13 @@
             </thead>
             <tbody>
                 <tr *ngFor="let invoice of invoiceList | paginate:{itemsPerPage:limitValue, currentPage:page, totalItems: invoiceList.length} | filterFilter:filterText; let i = index">
-                    <td><i [tooltip]="'Date: '+invoice.valueDate" [placement]="'left'" style="font-size: 1.5rem;" class="bx bxs-message-rounded-dots"></i></td>
-                    <td>{{invoice.quotationNumber}}</td>
-                    <td>{{invoice.issuedDate}}</td>
-                    <td>{{invoice.expiryDate}}</td>
-                    <td>{{invoice.client}}</td>
-                    <td class="text-end">{{invoice.totalAmount | number}}</td>
-                    <td>
+                    <td [ngClass]="invoice.converted ? 'converted': ''"><i [tooltip]="'Date: '+invoice.valueDate" [placement]="'left'" style="font-size: 1.5rem;" class="bx bxs-message-rounded-dots"></i></td>
+                    <td [ngClass]="invoice.converted ? 'converted': ''">{{invoice.quotationNumber}}</td>
+                    <td [ngClass]="invoice.converted ? 'converted': ''">{{invoice.issuedDate}}</td>
+                    <td [ngClass]="invoice.converted ? 'converted': ''">{{invoice.expiryDate}}</td>
+                    <td [ngClass]="invoice.converted ? 'converted': ''">{{invoice.client}}</td>
+                    <td [ngClass]="invoice.converted ? 'converted': ''" class="text-end">{{invoice.totalAmount | number}}</td>
+                    <td [ngClass]="invoice.converted ? 'converted': ''">
                         <div class="dropdown float-end">
                             <button class="btn btn-secondary dropdown-toggle btn-border" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                               Choose...

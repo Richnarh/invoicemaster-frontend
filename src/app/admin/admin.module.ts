@@ -28,8 +28,8 @@ import { SingleMessageComponent } from "./sms/single-message/single-message.comp
 import { BulkMessageComponent } from './sms/bulk-message/bulk-message.component';
 import { SmsGroupComponent } from './sms/sms-group/sms-group.component';
 import { GroupFormComponent } from './sms/group-form/group-form.component';
-import { TaxComponent } from './tax/tax.component';
 import { MessageFormComponent } from './sms/message-form/message-form.component';
+import { TaxComponent } from './tax/tax.component';
 
 
 @NgModule({
@@ -52,6 +52,7 @@ import { MessageFormComponent } from './sms/message-form/message-form.component'
     SalesLogComponent,
     PermissionsComponent,
     TaxManagementComponent,
+    TaxComponent,
 
     SingleMessageComponent,
     MessageTemplateComponent,
@@ -59,7 +60,6 @@ import { MessageFormComponent } from './sms/message-form/message-form.component'
     BulkMessageComponent,
     SmsGroupComponent,
     GroupFormComponent,
-    TaxComponent,
     MessageFormComponent,
   ],
   imports: [

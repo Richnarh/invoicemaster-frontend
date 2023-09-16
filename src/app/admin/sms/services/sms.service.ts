@@ -44,6 +44,10 @@ export class SmsService {
     return this.http.delete<ApiResponse<any>>(`${env.endpoint}/sms-group/${smsGroupId}`);
   }
 
+  deleteGroupContact(groupContactId: string){
+    return this.http.delete<ApiResponse<any>>(`${env.endpoint}/group-contact/${groupContactId}`);
+  }
+
   fetchTemplates(){
     return this.http.get<ApiResponse<any>>(`${env.endpoint}/message-template/list`);
   }

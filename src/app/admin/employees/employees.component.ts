@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { LookupService } from "src/app/services/lookup.service";
 import { PageView } from "src/app/utils/page-view";
 import { ToastService } from "src/app/utils/toast-service";
 import { CompanyService } from "../services/company.service";
@@ -8,6 +7,7 @@ import { User } from "src/app/dto/Payload";
 import { firstValueFrom } from "rxjs";
 import { LookupItem } from "src/app/dto/LookupItem";
 import { SweetMessage } from "src/app/utils/sweet-message";
+import { LookupService } from 'src/app/services/lookup.service';
 
 @Component({
   selector: 'app-employees',
@@ -94,7 +94,6 @@ export class EmployeesComponent implements OnInit{
     this.userForm.controls['width'].setValue(user.width);
     this.userForm.patchValue(user);
 
-    console.log("formData: ", this.userForm.value);
     this.pageView.resetToCreateView();
   }
   async deleteUser(userId:string) {

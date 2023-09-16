@@ -7,8 +7,6 @@ import { BlockUI, NgBlockUI } from "ng-block-ui";
 import { PageView } from "src/app/utils/page-view";
 import { ToastService } from "src/app/utils/toast-service";
 import { LookupItem } from "src/app/dto/LookupItem";
-import { LookupService } from "src/app/services/lookup.service";
-import { EventProxyService } from "./../../services/event-proxy.service";
 import { PdfViewerComponent } from "src/app/shared/pdf-viewer/pdf-viewer.component";
 import { CompanyService } from "src/app/admin/services/company.service";
 import { Config } from "src/app/dto/constant";
@@ -16,9 +14,10 @@ import { DatePipe } from "@angular/common";
 import { DateUtils } from "src/app/utils/dateUtils";
 import { SweetMessage } from "src/app/utils/sweet-message";
 import { AddPaymentComponent } from "../add-payment/add-payment.component";
-import { PageChangedEvent } from "ngx-bootstrap/pagination";
-import { StorageService } from "src/app/services/storage.service";
 import { LocalKeys } from "src/app/utils/LocalKeys";
+import { EventProxyService } from 'src/app/services/event-proxy.service';
+import { StorageService } from 'src/app/services/storage.service';
+import { LookupService } from 'src/app/services/lookup.service';
 
 @Component({
   selector: 'app-invoice',
@@ -119,6 +118,7 @@ export class InvoiceComponent implements OnInit{
   async searchInvoice(){
     this.loading.start("Loading...");
     const result = await firstValueFrom(this.invoiceService.searchByDate(this.fromDate, this.toDate));
+    console.log("result: ", result.data);
     this.invoiceList = result.data;
     this.loading.stop();
   }
@@ -145,7 +145,6 @@ export class InvoiceComponent implements OnInit{
   }
   async generateInvoice(invoice:Invoice){
     const url = Config.REPORT_URL+"?id="+invoice.quotationNumber;
-    console.log("url: ", url);
     window.open(url, "_blank");
     // let reportArray = [];
     

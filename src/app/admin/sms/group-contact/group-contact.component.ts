@@ -1,11 +1,12 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { GroupContact, SmsGroup } from "src/app/dto/smsPayload";
 import { ToastService } from "src/app/utils/toast-service";
 import { SmsService } from "../services/sms.service";
 import { LookupItem } from "src/app/dto/LookupItem";
 import { firstValueFrom } from "rxjs";
-import { LookupService } from "src/app/services/lookup.service";
+import { LookupService } from 'src/app/services/lookup.service';
+import { SweetMessage } from 'src/app/utils/sweet-message';
 
 @Component({
   selector: 'app-group-contact',
@@ -21,6 +22,10 @@ export class GroupContactComponent implements OnInit{
 
   smsGroupList:LookupItem[];
   clientList:LookupItem[];
+
+  pageSize = 10;
+  page = 1;
+  sumTotalAmount:number;
 
   constructor(private fb:FormBuilder, private toast:ToastService, private smsService:SmsService, private lookup:LookupService){}
 
@@ -57,7 +62,6 @@ export class GroupContactComponent implements OnInit{
     }
     const payload = this.groupContactForm.value;
     const result = await firstValueFrom(this.smsService.createGroupContact(payload));
-    console.log("result: ", result);
     this.groupContactList = result.data;
   }
 
@@ -66,8 +70,17 @@ export class GroupContactComponent implements OnInit{
     this.groupContactForm.patchValue(groupContact);
   }
 
-  deleteGroupContact(groupContactId:string){
-
+  async deleteGroupContact(groupContactId:string){
+    const confirm = await SweetMessage.deleteConfirm();
+    if (!confirm.value) return;
+    const result = await firstValueFrom(this.smsService.deleteGroupContact(groupContactId));
+    if(result.data){
+      this.toast.success(result.message);
+      const found = this.groupContactList.findIndex(item => item.id === groupContactId);
+      if(found > -1){
+        this.groupContactList.splice(found,1);
+      }
+    }
   }
 
   clear(){}

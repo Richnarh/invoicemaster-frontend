@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { TransactionService } from "./../services/transaction-service";
-import { LookupService } from "src/app/services/lookup.service";
 import { LookupItem } from "src/app/dto/LookupItem";
 import { firstValueFrom } from "rxjs";
 import { FormBuilder, FormGroup } from "@angular/forms";
@@ -9,6 +8,7 @@ import { BlockUI, NgBlockUI } from "ng-block-ui";
 import { ToastService } from "src/app/utils/toast-service";
 import { SweetMessage } from "src/app/utils/sweet-message";
 import { PaymentData } from "src/app/dto/Payload";
+import { LookupService } from 'src/app/services/lookup.service';
 
 @Component({
   selector: 'app-transaction',

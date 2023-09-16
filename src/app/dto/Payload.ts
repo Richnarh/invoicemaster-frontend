@@ -174,3 +174,18 @@ export interface Sales extends Base{
     invoiceItemList:InvoiceItem[];
     salesTaxList:SalesTax[];
 }
+
+export interface TaxGroup extends Base{
+    groupName:string;
+    groupStatus:string;
+    groupDescription:string;
+}
+
+export interface Tax extends Base{
+    taxId:string;
+    taxGroupName:string;
+    taxGroupId:string;
+    taxName:string;
+    taxRate:string;
+    reOrder:string;
+}

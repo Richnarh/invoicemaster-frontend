@@ -19,6 +19,7 @@ import { SingleMessageComponent } from "./sms/single-message/single-message.comp
 import { BulkMessageComponent } from "./sms/bulk-message/bulk-message.component";
 import { SmsGroupComponent } from "./sms/sms-group/sms-group.component";
 import { PermissionsComponent } from "./permissions/permissions.component";
+import { TaxManagementComponent } from './tax-management/tax-management.component';
 
 
 const routes: Routes = [
@@ -38,6 +39,7 @@ const routes: Routes = [
       { path: 'appconfig', component: AppconfigComponent },
       { path: 'saleslog', component: SalesLogComponent },
       { path: 'permissions', component: PermissionsComponent },
+      { path: 'tax-management', component: TaxManagementComponent },
 
       { path: 'message-template', component: MessageTemplateComponent },
       { path: 'group-contact', component: GroupContactComponent },

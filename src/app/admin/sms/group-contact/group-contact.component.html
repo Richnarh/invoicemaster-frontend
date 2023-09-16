@@ -46,7 +46,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let groupContact of groupContactList; let i = index">
+                        <tr *ngFor="let groupContact of groupContactList | paginate:{itemsPerPage:pageSize, currentPage:page, totalItems: groupContactList?.length}; let i = index">
                             <td>{{groupContact.client}}</td>
                             <td>{{groupContact.phoneNumber}}</td>
                             <td>{{groupContact.smsGrup}}</td>
@@ -64,6 +64,7 @@
                         </tr>
                     </tbody>
                 </table>
+                <pagination-controls *ngIf="groupContactList !== undefined && groupContactList.length > 0" previousLabel="Prev" nextLabel="Next" (pageChange)="page = $event"></pagination-controls>
             </div>
         </div>
         <div class="modal fade" id="groupModal" style="background: #6677;" tabindex="-1" data-bs-backdrop="false">

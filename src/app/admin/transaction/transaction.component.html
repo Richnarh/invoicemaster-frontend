@@ -32,12 +32,13 @@
                         </div>
     
                         <div class="mx-2">
-                            <search-button btnType="submit" btnText="Search" iconType="fa fa-search"/>
+                            <button class="btn btn-success mx-2" type="submit"><i class="fa fa-search"></i>&nbsp;Search <span *ngIf="paymentDataList !== undefined" class="badge bg-white text-success">{{paymentDataList.length}}</span></button>
+                            
                             <clear-button (evtListener)="clear()"/>
                         </div>
-                        <div class="pt-2">
+                        <!-- <div class="pt-2">
                             <label class="faded-shade pb-2 py-2">Count: {{paymentDataList ? paymentDataList.length : 2}}</label>
-                        </div>
+                        </div> -->
                         <div class="pt-2">
                             <label class="faded-shade pb-2 py-2">Total Amt: {{sumTotalAmount ? (sumTotalAmount | number) : 0}}</label>
                         </div>
